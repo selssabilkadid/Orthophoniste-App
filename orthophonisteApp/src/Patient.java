@@ -1,14 +1,20 @@
+import java.text.DateFormat;
 
 public class Patient {
     private String nom;
     private String prenom;
     private int age;
+    private DateFormat datenaissance;
+    private String lieunaissance;
+    private String adresse;
 
     // Constructor
-    public Patient(String nom, String prenom) {
+    public Patient(String nom, String prenom, String lieu , DateFormat date, String adresse) {
         this.nom = nom;
         this.prenom = prenom;
-        this.age = age;
+        lieunaissance =lieu;
+        datenaissance = date;
+        this.adresse = adresse ;
     }
 
     // Getter and setter methods
