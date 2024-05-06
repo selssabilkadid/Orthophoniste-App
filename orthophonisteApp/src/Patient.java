@@ -1,9 +1,11 @@
 import java.text.DateFormat;
+import java.util.ArrayList;
 
 public class Patient {
     private String nom;
     private String prenom;
     private int age;
+    private ArrayList<Trouble> troubles ;
     private DateFormat datenaissance;
     private String lieunaissance;
     private String adresse;
