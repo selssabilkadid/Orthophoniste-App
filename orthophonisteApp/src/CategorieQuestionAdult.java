@@ -1,5 +1,4 @@
 public enum CategorieQuestionAdult {
-    CAT1,
-    CAT2,
-    CAT3,
+    HISTOIRE_MALADIE,
+    SUIVI_MEDICAL,
 }

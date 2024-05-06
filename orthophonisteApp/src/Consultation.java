@@ -1,5 +1,3 @@
-import java.time.LocalDateTime;
-
 public class Consultation extends RendezVous {
     public Consultation(Patient patient) {
         super(patient);
