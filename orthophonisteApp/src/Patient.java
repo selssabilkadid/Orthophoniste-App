@@ -1,6 +1,6 @@
 import java.text.DateFormat;
 
-public class Patient {
+public abstract class Patient {
     private String nom;
     private String prenom;
     private int age;
