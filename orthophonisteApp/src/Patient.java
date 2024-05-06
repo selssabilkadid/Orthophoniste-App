@@ -48,4 +48,7 @@ public abstract class Patient {
                 ",  age=" + age +
                 '}';
     }
+    public void ajouterTrouble( Trouble t){
+        troubles.add(t);
+    }
 }
