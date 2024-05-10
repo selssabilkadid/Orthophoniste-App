@@ -10,4 +10,5 @@ public class Dossier {
         this.id = id;
         info_personnel = patient;
     }
+    
 }

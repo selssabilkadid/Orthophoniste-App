@@ -1,4 +1,4 @@
-public class TestExercice implements Calculable {
+public class TestExercice {
     private Exercice[] exercices;
 
     public TestExercice( Exercice[] exercices) {
@@ -16,6 +16,5 @@ public class TestExercice implements Calculable {
     public void setExercice(int i, Exercice exercice) {
         exercices[i] = exercice;
     }
-    public int calculerScore() {
-        return 0;}
+    
 }
