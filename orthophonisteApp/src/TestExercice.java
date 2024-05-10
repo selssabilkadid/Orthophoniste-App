@@ -1,7 +1,8 @@
-public class TestExercice implements Calculable {
+public class TestExercice extends Exercice {
     private Exercice[] exercices;
 
-    public TestExercice( Exercice[] exercices) {
+    public TestExercice(String consigne, String[] materiels, Exercice[] exercices) {
+        super(consigne, materiels);
         this.exercices = exercices;
     }
     public Exercice[] getExercices() {
@@ -16,6 +17,4 @@ public class TestExercice implements Calculable {
     public void setExercice(int i, Exercice exercice) {
         exercices[i] = exercice;
     }
-    public int calculerScore() {
-        return 0;}
 }
