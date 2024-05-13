@@ -38,7 +38,7 @@ public class SignUpController {
         if(firstName.getText().toString().equals("Assia") && lastName.getText().toString().equals("Kheddia") && phoneNumber.getText().toString().equals("123456789") && e_mail.getText().toString().equals("assia@gmail.com") && userAddress.getText().toString().equals("alger") && userPassword.getText().toString().equals("hello")) {
             wrongInfo.setText("Success!");
 
-            m.changeScene("AfterSignUp.fxml");
+           // m.changeScene("AfterSignUp.fxml");
         }
 
         else if(firstName.getText().isEmpty() && lastName.getText().isEmpty() && e_mail.getText().isEmpty() && userAddress.getText().isEmpty() & phoneNumber.getText().isEmpty() && userPassword.getText().isEmpty()) {

@@ -10,24 +10,20 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private static Stage stg;
+    public static Stage stg;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         stg = primaryStage;
         primaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FicheDeSuivi.fxml"));
 
         primaryStage.setTitle("SIGN UP");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 891.33333333334, 566));
         primaryStage.show();
 
     }
-    public void changeScene(String fxml) throws IOException {
-        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-        stg.getScene().setRoot(pane);
-    }
-
+   
     public static void main(String[] args) {
         launch(args);
     }
