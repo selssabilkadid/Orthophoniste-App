@@ -1,3 +1,4 @@
+package Classes;
 public class QuestionAnamneseEnfant extends Question {
     private CategorieQuestionEnfant categorie;
 

@@ -1,3 +1,4 @@
+package Classes;
 public class Question {
     private String enonce;
 

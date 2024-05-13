@@ -1,4 +1,4 @@
-
+package Classes;
 public class AtelierGrp
         extends RendezVous {
     public AtelierGrp(Patient patient) {

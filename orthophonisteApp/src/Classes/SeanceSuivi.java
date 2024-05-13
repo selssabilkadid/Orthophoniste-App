@@ -1,4 +1,4 @@
-
+package Classes;
 public class SeanceSuivi extends RendezVous {
     //objectif map objectif note
     public SeanceSuivi(Patient patient) {

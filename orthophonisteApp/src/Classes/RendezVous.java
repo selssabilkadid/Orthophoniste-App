@@ -1,4 +1,4 @@
-
+package Classes;
 public abstract class RendezVous {
     private int duration;
     private String observation;

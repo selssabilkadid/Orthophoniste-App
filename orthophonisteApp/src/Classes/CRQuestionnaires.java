@@ -1,3 +1,4 @@
+package Classes;
 public class CRQuestionnaires extends CompteRendu {
 
     CRQuestionnaires(int scoretotal, String conclusion, Test test) {

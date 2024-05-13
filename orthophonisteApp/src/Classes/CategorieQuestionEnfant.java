@@ -1,3 +1,4 @@
+package Classes;
 public enum CategorieQuestionEnfant {
    STRUCTURE_FAMILIALE,
    DYNAMIQUE_FAMILIALE,

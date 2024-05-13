@@ -1,3 +1,4 @@
+package Classes;
 public class Objectif {
     private String nom;
     private TypeObjectif typeObjectif;

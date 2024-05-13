@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package Classes;
 
 public class CompteRendu {
     private int scoretotal;

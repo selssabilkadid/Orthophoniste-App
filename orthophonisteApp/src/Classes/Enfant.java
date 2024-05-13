@@ -1,3 +1,4 @@
+package Classes;
 import java.text.DateFormat;
 
 public class Enfant extends Patient{

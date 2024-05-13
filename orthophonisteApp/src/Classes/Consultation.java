@@ -1,3 +1,4 @@
+package Classes;
 public class Consultation extends RendezVous {
     public Consultation(Patient patient) {
         super(patient);
