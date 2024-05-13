@@ -1,12 +1,10 @@
+package Controllers;
+
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -16,7 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         stg = primaryStage;
         primaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Layouts/SignUp.fxml"));
 
         primaryStage.setTitle("SIGN UP");
         primaryStage.setScene(new Scene(root, 600, 400));
@@ -25,7 +23,9 @@ public class Main extends Application {
     }
     public void changeScene(String fxml) throws IOException {
         Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-        stg.getScene().setRoot(pane);
+        stg.setScene(new Scene(pane, 1100, 600));
+        //stg.getScene().setRoot(pane);
+        //stg.setScene(new Scene(pane, 1100, 600));
     }
 
     public static void main(String[] args) {
