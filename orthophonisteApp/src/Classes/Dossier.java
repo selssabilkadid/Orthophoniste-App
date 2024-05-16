@@ -1,15 +1,34 @@
 package Classes;
-import java.util.ArrayList;
+
+import java.util.Set;
 
 public class Dossier {
-    private int id;
-    private Patient info_personnel;
-    private ArrayList<FichedeSuivi> fichedeSuivis;
-    private ArrayList<RendezVous> rendezvous;
-    //private ArrayList<BilanO> Bilans;
-    Dossier(int id, Patient patient){
-        this.id = id;
-        info_personnel = patient;
+     static int id;
+     Patient patient;
+     Set<FichedeSuivi> fichedeSuivis;
+     Set<RendezVous> rendezvous;
+     Set<BilanO> Bilans;
+    Dossier(Patient patient){
+        this.patient = patient;
+        id++;
+    }
+    public void ajouterRDV (RendezVous RDV){
+        rendezvous.add(RDV);
+    }
+    public void annulerRDV(RendezVous RDV){
+        rendezvous.remove(RDV);
+    }
+    public void ajouterBO(BilanO BO){
+        Bilans.add(BO);
+    }
+    public void supprimerBO (BilanO BO){
+        Bilans.remove(BO);
+    }
+    public void ajouterfichedesuivi(FichedeSuivi fiche){
+        fichedeSuivis.add(fiche);
+    }
+    public void supprimerfiche (FichedeSuivi fiche){
+        fichedeSuivis.remove(fiche);
     }
     
 }

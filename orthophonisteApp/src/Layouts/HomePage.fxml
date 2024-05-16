@@ -36,7 +36,7 @@
                                                           <children>
                                                               <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                                                                   <image>
-                                                                      <Image url="@../images/Group 8736 (2).png" />
+                                                                      <Image url="@images/Group%208736.png" />
                                                                   </image>
                                                               </ImageView>
                                                               <Text fill="WHITE" fontSmoothingType="LCD" layoutX="76.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointements">
@@ -112,7 +112,7 @@
                                               </AnchorPane>
                                               <AnchorPane layoutY="173.0" prefHeight="387.0" prefWidth="891.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="173.0">
                                                   <children>
-                                                      <AnchorPane layoutY="14.0" prefHeight="382.0" prefWidth="520.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="362.0" AnchorPane.topAnchor="0.0">
+                                                      <AnchorPane layoutY="14.0" prefHeight="382.0" prefWidth="520.0" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="362.0" AnchorPane.topAnchor="0.0">
                                                           <children>
                                                               <TableView layoutY="53.0" prefHeight="315.0" prefWidth="529.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="14.333333333333314" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                                                                   <columns>
@@ -139,8 +139,9 @@
                                                   </children>
                                               </AnchorPane>
                                           </children>
+
                                       </AnchorPane>
-                  <AnchorPane prefHeight="560.0" prefWidth="890.0" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane prefHeight="560.0" prefWidth="890.0" stylesheets="@../Design/MainFormDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label layoutX="22.0" layoutY="14.0" text="My Patients">
                            <font>

@@ -1,19 +1,19 @@
 package Classes;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-public class Orthophoniste {
-    private final String password = "1230orth";
-    private ArrayList<RendezVous> Rendezvous;
-    private ArrayList<Patient> patients;
-   // private ArrayList<Test> mestests;
-   // set questions
-   //set exercices
-   // set tests
+import java.util.HashMap;
+import java.util.Set;
+
+public class  Orthophoniste {
+    private Compte moncompte;
+    private Set<RendezVous> Rendezvous;
+    private Set<Patient> patients;
+    private Set<Test> mes_tests;
+    private Set<Exercice> mes_exercices;
+    private Set<Question> mes_questions;
     private HashMap<Integer, Dossier> dossierMap = new HashMap<>(); 
    
-    public boolean seconnecter(String username, String password){
-          if (this.password == password){
+    public boolean seconnecter(String password, String email){
+          if (moncompte.getPassword()== password || moncompte.getEmail()==email){
             return true;
           }
           else return false;
@@ -22,10 +22,20 @@ public class Orthophoniste {
            
     }
     public void ajouterconsultation (Consultation consultation){
+
         Rendezvous.add(consultation);
     }
-    public void ajouterpatient(Patient P){
+    public void ajouternouveaupatient(Patient P){
+
         patients.add(P);
+    }
+    public void creerdossier(Patient P){
+        Dossier folder = new Dossier(P);
+        dossierMap.put(folder.id,folder);
+    }
+    public void ajouterRDV (Dossier folder, RendezVous RDV){
+        folder.ajouterRDV(RDV);
+        Rendezvous.add(RDV);
     }
 
 }

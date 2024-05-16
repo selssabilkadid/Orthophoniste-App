@@ -1,9 +1,19 @@
 package Classes;
-public class CRQuestionnaires extends CompteRendu {
 
-    CRQuestionnaires(int scoretotal, String conclusion, Test test) {
+import java.util.Set;
+
+public class CRQuestionnaires extends CompteRendu implements Calculable {
+    Set<Integer> notes;
+    CRQuestionnaires(int scoretotal, String conclusion, Test test, Set<Integer> notes) {
         super(scoretotal, conclusion, test);
-        //TODO Auto-generated constructor stub
+        this.notes = notes;
     }
-    //private Set<Integer> notes;
+    public void ajouternote (int note){
+        notes.add(note);
+    }
+    public int calculerScore(){
+
+        return 0;
+    }
+
 }

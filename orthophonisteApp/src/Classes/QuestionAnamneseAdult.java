@@ -12,6 +12,7 @@ public class QuestionAnamneseAdult extends Question {
         return categorie;
     }
     public void setCategorie(CategorieQuestionAdult cat){
+
         categorie = cat ;
     }
 
