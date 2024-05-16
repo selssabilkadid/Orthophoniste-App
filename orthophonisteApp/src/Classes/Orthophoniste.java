@@ -13,7 +13,7 @@ public class  Orthophoniste {
     private HashMap<Integer, Dossier> dossierMap = new HashMap<>(); 
    
     public boolean seconnecter(String password, String email){
-          if (moncompte.getPassword()== password || moncompte.getEmail()==email){
+          if (moncompte.getPassword().equals(password) || moncompte.getEmail().equals(email)){
             return true;
           }
           else return false;

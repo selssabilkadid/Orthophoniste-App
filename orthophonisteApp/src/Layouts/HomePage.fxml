@@ -36,7 +36,7 @@
                                                           <children>
                                                               <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                                                                   <image>
-                                                                      <Image url="@images/Group%208736.png" />
+                                                                      <Image url="@../images/Group 8736.png" />
                                                                   </image>
                                                               </ImageView>
                                                               <Text fill="WHITE" fontSmoothingType="LCD" layoutX="76.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointements">
