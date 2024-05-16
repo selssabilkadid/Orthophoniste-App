@@ -1,15 +1,25 @@
 {
-    "java.project.sourcePaths": ["src"],
+    "java.project.sourcePaths": [
+        "src"
+    ],
     "java.project.outputPath": "bin",
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.base.jar",
-        "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.controls.jar",
-        "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.fxml.jar",
-        "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.graphics.jar",
-        "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.media.jar",
-        "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.swing.jar",
-        "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.web.jar",
-        "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx-swt.jar"
-    ]
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.base.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.controls.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.fxml.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.graphics.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.media.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.swing.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.web.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx-swt.jar"
+        ],
+        "exclude": [
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.base.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.fxml.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.swing.jar",
+            "d:\\tings\\javafx-sdk-22.0.1\\lib\\javafx.web.jar"
+        ]
+    }
 }
