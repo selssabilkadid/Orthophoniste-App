@@ -1,38 +1,36 @@
 package Classes;
+
+import java.sql.Time;
+import java.util.Date;
+
 public abstract class RendezVous {
-    private int duration;
-    private String observation;
-    private Patient patient;
+    Date date;
+    Time heur_debut;
+    Time heur_fin;
+    String observation;
 
     // Constructor
-    public RendezVous(Patient patient) {
-        this.patient = patient;
-        this.duration = calculateDuration();
+    public RendezVous(Date date,Time heur_debut, Time heur_fin) {
+        this.date= date;
+        this.heur_debut=heur_debut;
+        this.heur_fin = heur_fin;
     }
 
-    // Abstract method to be implemented by subclasses
-    protected abstract int calculateDuration();
 
     // Getters and setters
- 
-
-    public int getDuration() {
-        return duration;
-    }
+//    public Time getDuration() {
+//
+//        return ;
+//    }
 
     public String getObservation() {
+
         return observation;
     }
 
     public void setObservation(String observation) {
+
         this.observation = observation;
     }
 
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
 }
