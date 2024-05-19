@@ -2,6 +2,8 @@ package Controllers;
 
 import java.io.IOException;
 
+import Classes.AccountManager;
+import Classes.UserAccount;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,25 +36,34 @@ public class SignUpController {
     private PasswordField userPassword;
     @FXML
     private Label wrongInfo;
+    @FXML
+    private Button iHaveAccbtn;
 
     public void signUpClicked(ActionEvent event) throws IOException {
         checkSignUp();
     }
     private void checkSignUp() throws IOException {
         Main m = new Main();
-        if(firstName.getText().toString().equals("Assia") && lastName.getText().toString().equals("Kheddia") && phoneNumber.getText().toString().equals("123456789") && e_mail.getText().toString().equals("assia@gmail.com") && userAddress.getText().toString().equals("alger") && userPassword.getText().toString().equals("hello")) {
+        String fName = firstName.getText();
+        String lName = lastName.getText();
+        String email = e_mail.getText();
+        String phone = phoneNumber.getText();
+        String address = userAddress.getText();
+        String password = userPassword.getText();
+
+        if(fName.isEmpty() || lName.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || password.isEmpty()) {
+            wrongInfo.setText("Please enter your data.");
+        } else {
+            UserAccount account = new UserAccount(fName, lName, email, phone, address, password);
+            AccountManager.addAccount(account);
             wrongInfo.setText("Success!");
             m.changeScene("/Layouts/HomePage.fxml");
         }
-
-        else if(firstName.getText().isEmpty() && lastName.getText().isEmpty() && e_mail.getText().isEmpty() && userAddress.getText().isEmpty() & phoneNumber.getText().isEmpty() && userPassword.getText().isEmpty()) {
-            wrongInfo.setText("Please enter your data.");
-        }
-
-
-        else {
-            wrongInfo.setText("Wrong username or password!");
-        }
+    }
+    @FXML
+    private void goToSignIn(ActionEvent event) throws IOException {
+        Main m = new Main();
+        m.changeScene("/Layouts/SignIn.fxml");
     }
 
 }
