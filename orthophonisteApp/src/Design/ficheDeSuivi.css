@@ -6,3 +6,8 @@
     -fx-background-color: #FEEFAD;
     --block-text-color: #FEEFAD;
 }
+.list-cell {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
