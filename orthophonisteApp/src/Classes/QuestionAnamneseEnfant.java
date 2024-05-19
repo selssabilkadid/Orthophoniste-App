@@ -2,8 +2,8 @@ package Classes;
 public class QuestionAnamneseEnfant extends Question {
     private CategorieQuestionEnfant categorie;
 
-    public QuestionAnamneseEnfant(String enonce, CategorieQuestionEnfant categorie) {
-        super(enonce);
+    public QuestionAnamneseEnfant(String id,String enonce, CategorieQuestionEnfant categorie) {
+        super(id,enonce);
         this.categorie = categorie;
     }
 

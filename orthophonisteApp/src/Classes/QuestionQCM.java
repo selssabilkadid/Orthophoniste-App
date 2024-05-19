@@ -4,8 +4,8 @@ import java.util.Set;
 public class QuestionQCM extends Question{
     private Set<String> bonneReponse;
     private Set<String> propositions;
-    public QuestionQCM(String enonce, Set<String> bonneReponse, Set<String> propositions) {
-        super(enonce);
+    public QuestionQCM(String id,String enonce, Set<String> bonneReponse, Set<String> propositions) {
+        super(id,enonce);
         this.bonneReponse = bonneReponse;
         this.propositions = propositions;
     }

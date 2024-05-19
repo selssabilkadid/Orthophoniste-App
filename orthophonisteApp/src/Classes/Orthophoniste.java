@@ -7,9 +7,9 @@ public class  Orthophoniste {
     private Compte moncompte;
     private Set<RendezVous> Rendezvous;
     private Set<Patient> patients;
-    private Set<Test> mes_tests;
-    private Set<Exercice> mes_exercices;
-    private Set<Question> mes_questions;
+     static Set<Test> mes_tests;
+     static Set<Exercice> mes_exercices;
+     static Set<Question> mes_questions;
     private HashMap<Integer, Dossier> dossierMap = new HashMap<>(); 
    
     public boolean seconnecter(String password, String email){
@@ -36,6 +36,9 @@ public class  Orthophoniste {
     public void ajouterRDV (Dossier folder, RendezVous RDV){
         folder.ajouterRDV(RDV);
         Rendezvous.add(RDV);
+    }
+    public static void ajouterquestion(Question Q){
+        mes_questions.add(Q);
     }
 
 }

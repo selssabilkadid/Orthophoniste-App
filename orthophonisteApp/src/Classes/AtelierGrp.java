@@ -1,13 +1,22 @@
 package Classes;
-public class AtelierGrp
-        extends RendezVous {
-    public AtelierGrp(Patient patient) {
-        super(patient);
+
+import java.sql.Time;
+import java.util.Date;
+import java.util.Set;
+
+public class AtelierGrp extends RendezVous {
+    private Set<Integer> patientlist;
+
+    public AtelierGrp(Date date, Time heur_debut, Time heur_fin,Set<Integer> patientlist) {
+        super(date, heur_debut, heur_fin);
+        this.patientlist=patientlist;
     }
 
-    @Override
-    protected int calculateDuration() {
+    public Set<Integer> getPatientlist() {
+        return patientlist;
+    }
 
-        return 60;
+    public void setPatientlist(Set<Integer> patientlist) {
+        this.patientlist = patientlist;
     }
 }
