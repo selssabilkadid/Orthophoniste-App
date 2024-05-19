@@ -1,82 +1,75 @@
 package Controllers;
 
+import Classes.ObjectifEvalue;
+import Classes.TypeObjectif;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.converter.IntegerStringConverter;
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.util.Callback;
 
-import Classes.Objectif;
-import Classes.TypeObjectif;
+public class FicheDeSuiviController {
 
-public class FicheDeSuiviController implements Initializable {
     @FXML
-    private Button addGoalButton;
+    private ListView<ObjectifEvalue> ficheListView;
+
+    private final ObservableList<ObjectifEvalue> goals = FXCollections.observableArrayList();
+
     @FXML
-    private TableView<Objectif> table;
-    @FXML
-    private TableColumn<Objectif, String> goalNameClm;
-    @FXML
-    private TableColumn<Objectif, TypeObjectif> goalTypeClm;
-    @FXML
-    private TableColumn<Objectif, Integer> goalScoreClm;
-    ObservableList<Objectif> listF;
+    public void initialize() {
+        // Set custom cell factory
+        ficheListView.setCellFactory(new Callback<ListView<ObjectifEvalue>, ListCell<ObjectifEvalue>>() {
+            @Override
+            public ListCell<ObjectifEvalue> call(ListView<ObjectifEvalue> listView) {
+                return new GoalCell();
+            }
+        });
 
-    // Create sample data
-    ObservableList<Objectif> data = FXCollections.observableArrayList(
-            new Objectif("Goal 1", TypeObjectif.COURT),
-            new Objectif("Goal 2", TypeObjectif.COURT));
+        // Bind the observable list to the ListView
+        ficheListView.setItems(goals);
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-        goalNameClm.setCellValueFactory(new PropertyValueFactory<Objectif, String>("nom"));
-        goalTypeClm.setCellValueFactory(new PropertyValueFactory<Objectif, TypeObjectif>("typeObjectif"));
-        /*
-         * goalScoreClm.setCellValueFactory(new PropertyValueFactory<Objectif,
-         * Integer>("note"));
-         * goalScoreClm.setCellFactory(TextFieldTableCell.forTableColumn(new
-         * IntegerStringConverter()));
-         * goalScoreClm.setOnEditCommit(event -> {
-         * try {
-         * // Get the edited value
-         * Integer newValue = event.getNewValue();
-         * 
-         * Objectif objectif = event.getRowValue();
-         * 
-         * if (newValue < 1 || newValue > 5) {
-         * // Display an alert or handle the invalid input
-         * throw new IllegalArgumentException("Score must be between 1 and 5");
-         * }
-         * 
-         * // Update the score of the Objectif
-         * objectif.setNote(newValue);
-         * } catch (Exception e) {
-         * // Handle the exception (e.g., display an error message)
-         * System.out.println("Invalid input: " + e.getMessage());
-         * 
-         * table.refresh();
-         * }
-         * });
-         */
-        // Enable table editing
-        table.setEditable(true);
-
-        table.setItems(data);
-
+        // Add some sample goals (you can replace this with actual data)
+        goals.add(new ObjectifEvalue("Read Book", TypeObjectif.COURT, 3));
+        goals.add(new ObjectifEvalue("Exercise", TypeObjectif.LONG, 4));
+        goals.add(new ObjectifEvalue("Learn JavaFX", TypeObjectif.COURT, 5));
     }
 
     @FXML
-    private void addGoal(ActionEvent event) {
-        // Implementation goes here
+    private void addGoal() {
+        // Your code to add a goal
     }
-
+    @FXML
+    private void createFiche() {
+        // Your code to add a goal
+    }
+    @FXML
+    private void saveFiche() {
+        // Your code to add a goal
+    }
+    @FXML
+    private void showGoalList() {
+        // Your code to show the goal list
+    }
+    @FXML
+    private void showEvaluatedGoals() {
+        // Your code to show the goal list
+    }
+    @FXML
+    private void goToSheet() {
+        // Your code to show the goal list
+    }
+    // Custom ListCell implementation for displaying Objectif objects
+    static class GoalCell extends ListCell<ObjectifEvalue> {
+        @Override
+        protected void updateItem(ObjectifEvalue objectif, boolean empty) {
+            super.updateItem(objectif, empty);
+            if (empty || objectif == null) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                setText("Name: " + objectif.getNom() + ", Type: " + objectif.getTypeObjectif() + ", Score: " + objectif.getNote());
+            }
+        }
+    }
 }

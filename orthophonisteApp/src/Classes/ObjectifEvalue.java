@@ -2,15 +2,13 @@ package Classes;
 import java.util.ArrayList;
 
 public class ObjectifEvalue extends Objectif {
-    private ArrayList<Integer> notes;
-    ObjectifEvalue(String nom, TypeObjectif typeObjectif, ArrayList<Integer> notes ){
+    private int note;
+    public ObjectifEvalue(String nom, TypeObjectif typeObjectif, int note){
         super(nom, typeObjectif);
-        this.notes = notes;
+        this.note = note;
     }
-   public void ajouternote(int note){
-    if (note < 1 || note > 5) {
-        throw new IllegalArgumentException("La note doit être comprise entre 1 et 5.");
-    }
-     notes.add(note);
+
+   public int getNote() {
+        return note;
    }
 }
