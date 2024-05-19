@@ -1,12 +1,12 @@
 package Classes;
-import java.util.ArrayList;
+
 import java.util.Set;
 
 public class QuestionQCU extends Question {
     private String bonneReponse;
     private Set<String> propositions;
-    public QuestionQCU(String enonce, String bonneReponse, Set<String> propositions) {
-        super(enonce);
+    public QuestionQCU(String id,String enonce, String bonneReponse, Set<String> propositions) {
+        super(id,enonce);
         this.bonneReponse = bonneReponse;
         this.propositions = propositions;
     }

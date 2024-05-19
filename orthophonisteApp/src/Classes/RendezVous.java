@@ -1,5 +1,6 @@
 package Classes;
 
+
 import java.sql.Time;
 import java.util.Date;
 
@@ -15,13 +16,6 @@ public abstract class RendezVous {
         this.heur_debut=heur_debut;
         this.heur_fin = heur_fin;
     }
-
-
-    // Getters and setters
-//    public Time getDuration() {
-//
-//        return ;
-//    }
 
     public String getObservation() {
 

@@ -1,8 +1,19 @@
-.sidebar{
-    -fx-background-color: #CDE8E5;
-    -fx-background-radius: 0px, 50px, 0px, 0px;
+/* Style for cells with odd row index */
+.table-row-cell:odd {
+    -fx-background-color: #e2bdab; /* Light gray background */
+    -fx-font-size: 14px; /* Set font size to 14 pixels */
+    -fx-padding: 7px; /* Add padding around the cell content */
 }
-.text{
-    -fx-background-color: #FEEFAD;
-    --block-text-color: #FEEFAD;
+
+/* Style for cells with even row index */
+.table-row-cell:even {
+    -fx-background-color: #e2bdab; /* White background */
+    -fx-font-size: 14px; /* Set font size to 14 pixels */
+    -fx-padding: 5px; /* Add padding around the cell content */
+}
+
+/* Style for selected cells */
+.table-row-cell:selected {
+    -fx-background-color: #add8e6; /* Light blue background for selected cells */
+    -fx-text-fill: black; /* Black text color for selected cells */
 }
