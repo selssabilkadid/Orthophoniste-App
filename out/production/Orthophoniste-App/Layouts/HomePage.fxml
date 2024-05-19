@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane layoutY="61.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+                              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="890.0" styleClass="bg-color-3" stylesheets="@../Design/MainFormDesign.css" BorderPane.alignment="CENTER">
+                                  <children>
+                                      <AnchorPane layoutY="76.0" prefHeight="566.0" prefWidth="891.3333333333334" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <children>
+                                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Have a nice day and a great work" AnchorPane.bottomAnchor="504.6306664148966" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="703.5093129475912" AnchorPane.topAnchor="41.33333333333328">
+                                                  <font>
+                                                      <Font name="Product Sans Light" size="12.0" />
+                                                  </font>
+                                              </Text>
+                                              <Text id="welcome" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 16;" text="Welcome Dr. Assia" AnchorPane.bottomAnchor="527.6186672846476" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="742.6773579915365" AnchorPane.topAnchor="13.333333333333258">
+                                                  <font>
+                                                      <Font name="Product Sans Italic" size="14.0" />
+                                                  </font>
+                                              </Text>
+                                              <AnchorPane layoutY="64.0" prefHeight="100.0" prefWidth="891.0">
+                                                  <children>
+                                                      <AnchorPane layoutX="27.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #7A6EFE; -fx-background-radius: 8;" styleClass="nav-btn-1" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="0.0">
+                                                          <children>
+                                                              <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                  <image>
+                                                                      <Image url="@../images/Group 8736.png" />
+                                                                  </image>
+                                                              </ImageView>
+                                                              <Text fill="WHITE" fontSmoothingType="LCD" layoutX="76.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointements">
+                                                                  <font>
+                                                                      <Font name="Product Sans" size="12.0" />
+                                                                  </font>
+                                                              </Text>
+                                                              <Text id="nbappoint" fill="WHITE" layoutX="76.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10.7k">
+                                                                  <font>
+                                                                      <Font name="Product Sans Bold" size="16.0" />
+                                                                  </font>
+                                                              </Text>
+                                                          </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane layoutX="235.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FF5363; -fx-background-radius: 8;" styleClass="nav-btn-1" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="236.33" AnchorPane.topAnchor="0.0">
+                                                          <children>
+                                                              <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                  <image>
+                                                                      <Image url="@../images/Group 8736 (1).png" />
+                                                                  </image>
+                                                              </ImageView>
+                                                              <Text fill="WHITE" layoutX="76.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient">
+                                                                  <font>
+                                                                      <Font name="Product Sans" size="12.0" />
+                                                                  </font>
+                                                              </Text>
+                                                              <Text id="nbpatients" fill="WHITE" layoutX="76.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10.7k">
+                                                                  <font>
+                                                                      <Font name="Product Sans Bold" size="16.0" />
+                                                                  </font>
+                                                              </Text>
+                                                          </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane layoutX="446.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #FFA901; -fx-background-radius: 8;" styleClass="nav-btn-1" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="454.66" AnchorPane.topAnchor="0.0">
+                                                          <children>
+                                                              <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                  <image>
+                                                                      <Image url="@../images/Group 8736 (2).png" />
+                                                                  </image>
+                                                              </ImageView>
+                                                              <Text fill="WHITE" layoutX="76.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group session">
+                                                                  <font>
+                                                                      <Font name="Product Sans" size="12.0" />
+                                                                  </font>
+                                                              </Text>
+                                                              <Text fill="WHITE" layoutX="76.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10.7k">
+                                                                  <font>
+                                                                      <Font name="Product Sans Bold" size="16.0" />
+                                                                  </font>
+                                                              </Text>
+                                                          </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane layoutX="659.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #24A8FA; -fx-background-radius: 8;" styleClass="nav-btn-1" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="0.0">
+                                                          <children>
+                                                              <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                                                                  <image>
+                                                                      <Image url="@../images/Group 8736 (3).png" />
+                                                                  </image>
+                                                              </ImageView>
+                                                              <Text fill="WHITE" layoutX="76.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Therapy project">
+                                                                  <font>
+                                                                      <Font name="Product Sans" size="12.0" />
+                                                                  </font>
+                                                              </Text>
+                                                              <Text fill="WHITE" layoutX="76.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="10.7k">
+                                                                  <font>
+                                                                      <Font name="Product Sans Bold" size="16.0" />
+                                                                  </font>
+                                                              </Text>
+                                                          </children>
+                                                      </AnchorPane>
+                                                  </children>
+                                              </AnchorPane>
+                                              <AnchorPane layoutY="173.0" prefHeight="387.0" prefWidth="891.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="173.0">
+                                                  <children>
+                                                      <AnchorPane layoutY="14.0" prefHeight="382.0" prefWidth="520.0" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="362.0" AnchorPane.topAnchor="0.0">
+                                                          <children>
+                                                              <TableView layoutY="53.0" prefHeight="315.0" prefWidth="529.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="14.333333333333314" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+                                                                  <columns>
+                                                                      <TableColumn prefWidth="526.0000305175781" text="Appointement                                                                                                                             " />
+                                                                  </columns>
+                                                              </TableView>
+                                                              <Label layoutX="14.0" layoutY="24.0" text="Today appointments" AnchorPane.topAnchor="24.0">
+                                                                  <font>
+                                                                      <Font name="Product Sans Bold" size="15.0" />
+                                                                  </font>
+                                                              </Label>
+                                                          </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane layoutX="534.0" layoutY="-3.0" prefHeight="383.0" prefWidth="355.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                          <children>
+                                                              <Label layoutX="14.0" layoutY="31.0" text="Patients' statistics" AnchorPane.topAnchor="24.0">
+                                                                  <font>
+                                                                      <Font name="Product Sans Bold" size="15.0" />
+                                                                  </font>
+                                                              </Label>
+                                                              <AnchorPane layoutY="51.0" prefHeight="333.0" prefWidth="355.0" AnchorPane.topAnchor="53.0" />
+                                                          </children>
+                                                      </AnchorPane>
+                                                  </children>
+                                              </AnchorPane>
+                                          </children>
+
+                                      </AnchorPane>
+                  <AnchorPane prefHeight="560.0" prefWidth="890.0" stylesheets="@../Design/MainFormDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label layoutX="22.0" layoutY="14.0" text="My Patients">
+                           <font>
+                              <Font name="Product Sans Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TableView layoutX="12.0" layoutY="62.0" prefHeight="484.0" prefWidth="867.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="14.666666666666629" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.333333333333371" AnchorPane.topAnchor="62.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Patient id" />
+                            <TableColumn prefWidth="139.99996948242188" text="Full Name" />
+                              <TableColumn prefWidth="70.0" text="Age group" />
+                              <TableColumn prefWidth="140.66671752929688" text="Date of Birth" />
+                              <TableColumn prefWidth="140.66671752929688" text="Place of Birth" />
+                              <TableColumn prefWidth="140.66671752929688" text="Contact Number" />
+                              <TableColumn prefWidth="179.3333740234375" text="Address" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="770.0" layoutY="24.0" mnemonicParsing="false" style="-fx-background-color: #7A6EFE;" text="Add New Patient" textFill="WHITE" />
+                     </children>
+                     <styleClass>
+                        <String fx:value="white-bg" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </AnchorPane>
+                                  </children>
+                              </AnchorPane>
+         </center>
+         <top>
+                              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="1100.0" styleClass="bg-color-3" stylesheets="@../Design/MainFormDesign.css" BorderPane.alignment="CENTER">
+                                  <children>
+                                      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="210.0" style="-fx-background-color: #7A6EFE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="890.0" AnchorPane.topAnchor="0.0">
+                                          <children>
+                                              <Label layoutX="4.0" layoutY="10.0" style="-fx-font-size: 14;" text="Cabinet Managment System" textFill="WHITE">
+                                                  <font>
+                                                      <Font name="Product Sans Black" size="12.0" />
+                                                  </font>
+                                              </Label>
+                                          </children>
+                                      </AnchorPane>
+                                      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="1042.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                              <Image url="@../images/Question_light.png" />
+                                          </image>
+                                      </ImageView>
+                                  </children>
+                              </AnchorPane>
+         </top>
+         <left>
+                              <AnchorPane BorderPane.alignment="CENTER">
+                                  <children>
+                                      <AnchorPane prefHeight="560.0" prefWidth="210.0" styleClass="bg-color-3" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <children>
+                                              <Button layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="nav-btn-1" stylesheets="@../Design/MainFormDesign.css" text="Overview" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="16.0">
+                                                  <font>
+                                                      <Font name="Product Sans" size="12.0" />
+                                                  </font>
+                                              </Button>
+                                              <Button layoutY="119.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="nav-btn-1" stylesheets="@../Design/MainFormDesign.css" text="Appointement" AnchorPane.topAnchor="85.0" />
+                                              <Button layoutY="73.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="nav-btn-1" stylesheets="@../Design/MainFormDesign.css" text="My Patients" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                                              <Button layoutX="5.0" layoutY="155.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="nav-btn-1" stylesheets="@../Design/MainFormDesign.css" text="My Tests " AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="120.0" />
+                                              <Button layoutY="262.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" styleClass="nav-btn-1" stylesheets="@../Design/MainFormDesign.css" text="Calendar" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="155.0" />
+                                          </children>
+                                      </AnchorPane>
+                                  </children>
+                              </AnchorPane>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>
