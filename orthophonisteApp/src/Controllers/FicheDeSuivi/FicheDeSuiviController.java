@@ -1,11 +1,13 @@
-package Controllers;
+package Controllers.FicheDeSuivi;
 
 import Classes.ObjectifEvalue;
 import Classes.TypeObjectif;
+import Controllers.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.geometry.Insets;
@@ -13,6 +15,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.Optional;
 
 public class FicheDeSuiviController {
@@ -41,7 +45,7 @@ public class FicheDeSuiviController {
         goals.add(new ObjectifEvalue("Learn JavaFX", TypeObjectif.COURT, 5));
     }
 
-    /*@FXML
+    @FXML
     private void addGoal() {
         // Prompt user for goal name
         TextInputDialog dialog = new TextInputDialog();
@@ -76,14 +80,14 @@ public class FicheDeSuiviController {
                 result = dialog.showAndWait();
                 if (result.isPresent()) {
                     int selectedScore = scoreComboBox.getValue();
-                    // Create a new ObjectifEvalue instance with selected score
+
                     goals.add(new ObjectifEvalue(goalName, selectedType, selectedScore));
                 }
             }
         }
     }
 
-*/
+
     @FXML
     private void createFiche() {
         // Your code to add a goal
@@ -94,19 +98,24 @@ public class FicheDeSuiviController {
         // Your code to add a goal
     }
 
+
+
+
     @FXML
-    private void showGoalList() {
-        // Your code to show the goal list
+    private void showEvaluatedGoals(MouseEvent mouseEvent) throws IOException {
+        Main m = new Main();
+        m.changeScene("/Layouts/FicheDeSuivi/EvaluatedGoals.fxml");
     }
 
     @FXML
-    private void showEvaluatedGoals() {
-        // Your code to show the goal list
+    private void goToSheet( MouseEvent mouseEvent) throws IOException {
+        Main m = new Main();
+        m.changeScene("/Layouts/FicheDeSuivi/OtherSheets.fxml");
     }
 
-    @FXML
-    private void goToSheet() {
-        // Your code to show the goal list
+    public void showGoalList(MouseEvent mouseEvent) throws IOException {
+        Main m = new Main();
+        m.changeScene("/Layouts/FicheDeSuivi/GoalList.fxml");
     }
 
 
