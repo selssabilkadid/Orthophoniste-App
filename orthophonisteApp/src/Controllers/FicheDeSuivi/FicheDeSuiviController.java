@@ -23,6 +23,8 @@ import javafx.util.Callback;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -148,7 +150,8 @@ private void addGoal() {
     private void saveFiche() {
         FicheDeSuiviDone ficheDeSuiviDone = new FicheDeSuiviDone();
         ficheDeSuiviDone.setObjectifsAtteints(new ArrayList<>(goals));
-
+        LocalDateTime savedDateTime = LocalDateTime.now();
+        ficheDeSuiviDone.setSavedDate(savedDateTime);
 
         SharedModel.getFicheDeSuiviDoneList().add(ficheDeSuiviDone);
 
@@ -242,7 +245,7 @@ private void addGoal() {
                 goalNameLabel.setText(objectif.getNom());
                 goalTypeLabel.setText(objectif.getTypeObjectif().toString());
 
-                // Set the ComboBox value to the last assigned score, or to 0 if no scores
+
                 if (!objectif.getScores().isEmpty()) {
                     gradeComboBox.setValue(objectif.getScores().get(objectif.getScores().size() - 1));
                 } else {

@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Layouts.DashboardController"
-            fx:id="homepage" layoutY="76.0" prefHeight="566.0" prefWidth="891.3333333333334"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" stylesheets="@../Design/MainFormDesign.css">
+<AnchorPane fx:id="homepage" layoutY="76.0" prefHeight="566.0" prefWidth="891.3333333333334" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Layouts.DashboardController">
     <styleClass>
         <String fx:value="white-bg" />
     </styleClass>
@@ -114,7 +107,7 @@
                         <children>
                             <TableView layoutY="53.0" prefHeight="315.0" prefWidth="529.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="14.333333333333314" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                                 <columns>
-                                    <TableColumn id="appointmentliste" fx:id="appointementlist" prefWidth="526.0000305175781" text="Appointement                                                                                                                             " />
+                                    <TableColumn id="appointmentliste" fx:id="appointementlist" prefWidth="534.0275370677313" text="Appointement                                                                                                                             " />
                                 </columns>
                             </TableView>
                             <Label layoutX="14.0" layoutY="24.0" text="Today appointments" AnchorPane.topAnchor="24.0">
