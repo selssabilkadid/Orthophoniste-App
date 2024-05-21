@@ -16,7 +16,7 @@ import java.util.Set;
 public class Main extends Application {
     private static Stage stg;
 
-    @Override
+   /* @Override
     public void start(Stage primaryStage) throws IOException {
         stg = primaryStage;
         primaryStage.setResizable(false);
@@ -32,8 +32,8 @@ public class Main extends Application {
         Parent pane = FXMLLoader.load(getClass().getResource(fxml));
         stg.setScene(new Scene(pane, 1100, 600));
         stg.setTitle("Orthophoniste Cabinet Managment System");
-    }
-    /*@Override
+    }*/
+    @Override
     public void start(Stage primaryStage) throws IOException {
         stg = primaryStage;
         primaryStage.setResizable(false);
@@ -49,7 +49,7 @@ public class Main extends Application {
     public void changeScene(String fxml) throws IOException {
         Parent pane = FXMLLoader.load(getClass().getResource(fxml));
         stg.setScene(new Scene(pane, 1100, 600));
-    }*/
+    }
     public static void main(String[] args) {
 
         Orthophoniste ortho ;

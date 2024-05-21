@@ -37,14 +37,14 @@ public class AddGoalController {
 
     @FXML
     private void addGoal() {
-        String goalName = goalNameDialog.showAndWait().orElse("");
-        TypeObjectif selectedType = typeComboBox.getValue();
-        int selectedScore = scoreComboBox.getValue();
-
-        goals.add(new ObjectifEvalue(goalName, selectedType, selectedScore));
-
-        // Close the dialog
-        Stage stage = (Stage) typeComboBox.getScene().getWindow();
-        stage.close();
+//        String goalName = goalNameDialog.showAndWait().orElse("");
+//        TypeObjectif selectedType = typeComboBox.getValue();
+//        int selectedScore = scoreComboBox.getValue();
+//
+//        goals.add(new ObjectifEvalue(goalName, selectedType, selectedScore));
+//
+//        // Close the dialog
+//        Stage stage = (Stage) typeComboBox.getScene().getWindow();
+//        stage.close();
     }
 }

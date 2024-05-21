@@ -1,14 +1,20 @@
 package Classes;
+
 import java.util.ArrayList;
 
 public class ObjectifEvalue extends Objectif {
-    private int note;
-    public ObjectifEvalue(String nom, TypeObjectif typeObjectif, int note){
+    private ArrayList<Integer> scores;
+
+    public ObjectifEvalue(String nom, TypeObjectif typeObjectif) {
         super(nom, typeObjectif);
-        this.note = note;
+        scores = new ArrayList<>();
     }
 
-   public int getNote() {
-        return note;
-   }
+    public ArrayList<Integer> getScores() {
+        return scores;
+    }
+
+    public void addScore(int score) {
+        scores.add(score);
+    }
 }
