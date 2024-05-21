@@ -40,7 +40,9 @@ public class SignUpController {
     private Button iHaveAccbtn;
 
     public void signUpClicked(ActionEvent event) throws IOException {
-        checkSignUp();
+
+         checkSignUp();
+
     }
     private void checkSignUp() throws IOException {
         Main m = new Main();
@@ -51,19 +53,28 @@ public class SignUpController {
         String address = userAddress.getText();
         String password = userPassword.getText();
 
-        if(fName.isEmpty() || lName.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || password.isEmpty()) {
+        if (fName.isEmpty() || lName.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || password.isEmpty()) {
             wrongInfo.setText("Please enter your data.");
+        } else if (!email.endsWith("@gmail.com")) {
+            wrongInfo.setText("Please enter a valid Gmail address.");
+        } else if (phone.length() != 10 || !phone.matches("\\d+")) { // Check if phone number has exactly 10 digits
+            wrongInfo.setText("Please enter a valid 10-digit phone number.");
         } else {
             UserAccount account = new UserAccount(fName, lName, email, phone, address, password);
             AccountManager.addAccount(account);
             wrongInfo.setText("Success!");
+            AccountManager.setcurrentuser(account);
             m.changeScene("/Layouts/HomePage.fxml");
+
         }
     }
+
     @FXML
     private void goToSignIn(ActionEvent event) throws IOException {
         Main m = new Main();
+
         m.changeScene("/Layouts/SignIn.fxml");
+
     }
 
 }

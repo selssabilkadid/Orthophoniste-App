@@ -11,6 +11,15 @@ public class Question {
         return enonce;
     }
     public void modifierenonce(String newenonce){
-           enonce = newenonce;
+
+        enonce = newenonce;
     }
-} 
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+}

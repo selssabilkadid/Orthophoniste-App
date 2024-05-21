@@ -2,9 +2,11 @@ package Classes;
 import java.util.Set;
 
 public class Exercice {
+    private String id;
     private String consigne;
     private Set<String> materiels;
-    public Exercice(String consigne, Set<String> materiels) {
+    public Exercice(String id,String consigne, Set<String> materiels) {
+        this.id = id;
         this.consigne = consigne;
         this.materiels = materiels;
     }
@@ -28,5 +30,9 @@ public class Exercice {
     }
     public void modifierconsigne(String text){
         consigne = text;
+    }
+
+    public String getId() {
+        return id;
     }
 }

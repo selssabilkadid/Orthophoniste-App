@@ -1,11 +1,12 @@
 package Classes;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class QuestionQCU extends Question {
     private String bonneReponse;
-    private Set<String> propositions;
-    public QuestionQCU(String id,String enonce, String bonneReponse, Set<String> propositions) {
+    private ArrayList<String> propositions;
+    public QuestionQCU(String id,String enonce, String bonneReponse, ArrayList<String> propositions) {
         super(id,enonce);
         this.bonneReponse = bonneReponse;
         this.propositions = propositions;
@@ -14,12 +15,12 @@ public class QuestionQCU extends Question {
 
         return bonneReponse;
     }
-    public Set<String> getPropositions() {
+    public ArrayList<String> getPropositions() {
 
         return propositions;
     }
 
-    public void setPropositions(Set<String> propositions) {
+    public void setPropositions(ArrayList<String> propositions) {
 
         this.propositions = propositions;
     }

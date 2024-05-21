@@ -6,18 +6,26 @@ import java.util.Map;
 public class AccountManager {
     private static Map<String, UserAccount> accounts = new HashMap<>();
     private static final String FILE_PATH = "accounts.ser";
+    private static UserAccount currentuser ;
 
     static {
         loadAccounts();
     }
-
+    public static UserAccount getCurrentuser(){
+        return currentuser;
+    }
+   public static void setcurrentuser(UserAccount currentuser){
+        AccountManager.currentuser = currentuser;
+   }
     public static void addAccount(UserAccount account) {
         accounts.put(account.getEmail(), account);
         saveAccounts();
     }
 
     public static UserAccount getAccount(String email) {
+
         return accounts.get(email);
+
     }
 
     private static void saveAccounts() {
