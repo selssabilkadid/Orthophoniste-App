@@ -10,19 +10,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="566.0" prefWidth="891.33333333334" stylesheets="@../../Design/ficheDeSuivi.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FicheDeSuiviController">
+<AnchorPane prefHeight="600.0" prefWidth="1100.0" stylesheets="@../../Design/ficheDeSuivi.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FicheDeSuivi.FicheDeSuiviController">
    <children>
-      <Label layoutX="458.0" layoutY="15.0" text="Follow-up Sheet">
+      <Label layoutX="623.0" layoutY="15.0" text="Follow-up Sheet">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="createFicheBtn" layoutX="297.0" layoutY="513.0" mnemonicParsing="false" onAction="#addGoal" prefHeight="31.0" prefWidth="102.0" style="-fx-background-color: #188ba7;" text="Create" textFill="WHITE">
+      <Button fx:id="createFicheBtn" layoutX="408.0" layoutY="524.0" mnemonicParsing="false" onAction="#addGoal" prefHeight="31.0" prefWidth="102.0" style="-fx-background-color: #188ba7;" text="Create" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="saveFicheBtn" layoutX="768.0" layoutY="513.0" mnemonicParsing="false" onAction="#saveFiche" prefHeight="31.0" prefWidth="102.0" style="-fx-background-color: #188ba7;" text="Save" textFill="WHITE">
+      <Button fx:id="saveFicheBtn" layoutX="879.0" layoutY="524.0" mnemonicParsing="false" onAction="#saveFiche" prefHeight="31.0" prefWidth="102.0" style="-fx-background-color: #188ba7;" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -49,7 +49,7 @@
                   <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox fx:id="evaluatedGoalsBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="187.0" onMouseClicked="#showEvaluatedGoals" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
+            <HBox fx:id="evaluatedGoalsBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="163.0" onMouseClicked="#showEvaluatedGoals" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
                <children>
                   <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -69,7 +69,7 @@
                   <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox fx:id="followUpSheetBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="311.0" onMouseClicked="#goToSheet" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
+            <HBox fx:id="followUpSheetBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="264.0" onMouseClicked="#goToSheet" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
                <children>
                   <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -89,28 +89,48 @@
                   <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
+            <HBox fx:id="progressBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="365.0" onMouseClicked="#goToSheet" prefHeight="52.0" prefWidth="200.0" spacing="8.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/graphic-progression.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="67.0" stylesheets="@../../Design/ficheDeSuivi.css" text="Progress" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
          </children>
       </AnchorPane>
-      <Button fx:id="addGoalBtn" layoutX="768.0" layoutY="14.0" mnemonicParsing="false" onAction="#addGoal" prefHeight="31.0" prefWidth="102.0" style="-fx-background-color: #188ba7;" text="Add goal" textFill="WHITE">
+      <Button fx:id="addGoalBtn" layoutX="981.0" layoutY="14.0" mnemonicParsing="false" onAction="#addGoal" prefHeight="31.0" prefWidth="102.0" style="-fx-background-color: #188ba7;" text="Add goal" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="360.0" layoutY="97.0" prefHeight="17.0" prefWidth="87.0" text="Goal name">
+      <Label layoutX="471.0" layoutY="108.0" prefHeight="17.0" prefWidth="87.0" text="Goal name">
          <font>
             <Font name="System Italic" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="545.0" layoutY="97.0" prefHeight="17.0" prefWidth="87.0" text="Goal type">
+      <Label layoutX="656.0" layoutY="108.0" prefHeight="17.0" prefWidth="87.0" text="Goal type">
          <font>
             <Font name="System Italic" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="736.0" layoutY="97.0" prefHeight="17.0" prefWidth="87.0" text="Goal score">
+      <Label layoutX="847.0" layoutY="108.0" prefHeight="17.0" prefWidth="87.0" text="Goal score">
          <font>
             <Font name="System Italic" size="15.0" />
          </font>
       </Label>
-      <ListView fx:id="ficheListView" layoutX="348.0" layoutY="151.0" prefHeight="317.0" prefWidth="481.0" style="-fx-background-color: #CDE8E5;" />
+      <ListView fx:id="ficheListView" layoutX="459.0" layoutY="162.0" prefHeight="317.0" prefWidth="481.0" style="-fx-background-color: #CDE8E5;" />
    </children>
 </AnchorPane>
