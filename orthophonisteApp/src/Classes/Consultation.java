@@ -1,20 +1,42 @@
 package Classes;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Consultation extends RendezVous {
-    private Patient patient;
-    public Consultation(Date date, Time heur_debut, Time heur_fin, Patient patient) {
-        super(date, heur_debut, heur_fin);
-        this.patient = patient;
+    private String nom ;
+    private String prenom;
+    private String age;
+    public Consultation(LocalDate date, String heur_debut, String heur_fin,String observation ,String nom, String prenom, String age) {
+        super(date, heur_debut, heur_fin,observation);
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
     }
 
-    public Patient getPatient() {
-        return patient;
+
+    public String getNom() {
+        return nom;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 }

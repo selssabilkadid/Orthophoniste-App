@@ -1,27 +1,28 @@
 package Classes;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class QuestionQCM extends Question{
-    private Set<String> bonneReponse;
-    private Set<String> propositions;
-    public QuestionQCM(String id,String enonce, Set<String> bonneReponse, Set<String> propositions) {
+    private ArrayList<String> bonneReponse;
+    private ArrayList<String> propositions;
+    public QuestionQCM(String id,String enonce, ArrayList<String> bonneReponse, ArrayList<String> propositions) {
         super(id,enonce);
         this.bonneReponse = bonneReponse;
         this.propositions = propositions;
     }
-    public Set<String> getBonneReponse() {
+    public ArrayList<String> getBonneReponse() {
 
         return bonneReponse;
     }
-    public void setBonneReponse(Set<String> bonneReponse) {
+    public void setBonneReponse(ArrayList<String> bonneReponse) {
 
         this.bonneReponse = bonneReponse;
     }
-    public Set<String> getPropositions() {
+    public ArrayList<String> getPropositions() {
 
         return propositions;
     }
-    public void setPropositions(Set<String> propositions) {
+    public void setPropositions(ArrayList<String> propositions) {
 
         this.propositions = propositions;
     }

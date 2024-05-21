@@ -39,15 +39,24 @@ public class SignInController {
         Main m = new Main();
         String email = e_mail.getText();
         String password = userPassword.getText();
-        UserAccount account = AccountManager.getAccount(email);
 
-        if(account != null && account.getPassword().equals(password)) {
-            wrongInfo.setText("Success!");
-            m.changeScene("/Layouts/HomePage.fxml");
-        } else if(email.isEmpty() || password.isEmpty()) {
+        // Check if the email and password fields are not empty
+        if(email.isEmpty() || password.isEmpty()) {
             wrongInfo.setText("Please enter your data.");
+            // Check if the email is a valid Gmail address
+        } else if (!email.endsWith("@gmail.com")) {
+            wrongInfo.setText("Please enter a valid Gmail address.");
+            // Proceed with sign in if validations pass
         } else {
-            wrongInfo.setText("Wrong username or password!");
+            UserAccount account = AccountManager.getAccount(email);
+
+            if(account != null && account.getPassword().equals(password)) {
+
+                AccountManager.setcurrentuser(account);
+                m.changeScene("/Layouts/HomePage.fxml");
+            } else {
+                wrongInfo.setText("Wrong username or password!");
+            }
         }
     }
 

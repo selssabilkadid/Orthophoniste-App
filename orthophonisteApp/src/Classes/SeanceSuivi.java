@@ -1,12 +1,13 @@
 package Classes;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class SeanceSuivi extends RendezVous {
     private int patientid;
-    public SeanceSuivi(Date date, Time heur_debut, Time heur_fin, int id ) {
-        super(date, heur_debut, heur_fin);
+    public SeanceSuivi(LocalDate date, String heur_debut, String heur_fin,String observation ,int id ) {
+        super(date, heur_debut, heur_fin, observation);
         patientid = id;
     }
     //objectif map objectif note

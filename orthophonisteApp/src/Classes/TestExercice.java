@@ -1,11 +1,12 @@
 package Classes;
 import java.util.Set;
 
-public class TestExercice implements Calculable {
+public class TestExercice extends Test implements Calculable {
      Set<Exercice> exercices;
 
-    public TestExercice( Set<Exercice> exercices) {
+    public TestExercice(String id, String capacite, Set<Exercice> exercices) {
 
+        super(id,capacite);
         this.exercices = exercices;
     }
     public Set<Exercice> getExercices() {

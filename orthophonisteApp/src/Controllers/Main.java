@@ -1,11 +1,17 @@
 package Controllers;
 
+import Classes.Consultation;
+import Classes.Orthophoniste;
+import Classes.RendezVous;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main extends Application {
     private static Stage stg;
@@ -15,7 +21,6 @@ public class Main extends Application {
         stg = primaryStage;
         primaryStage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("/Layouts/SignUp.fxml"));
-
 
         primaryStage.setTitle("SIGN UP");
         //primaryStage.setScene(new Scene(root, 600, 400));
@@ -46,6 +51,9 @@ public class Main extends Application {
         stg.setScene(new Scene(pane, 1100, 600));
     }*/
     public static void main(String[] args) {
+
+        Orthophoniste ortho ;
+        Set<RendezVous> rdvs;
 
         launch(args);
     }

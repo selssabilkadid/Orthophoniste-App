@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Layouts.DashboardController"
-            fx:id="homepage" layoutY="76.0" prefHeight="566.0" prefWidth="891.3333333333334"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" stylesheets="@../Design/MainFormDesign.css">
+
+<AnchorPane fx:id="homepage" layoutY="76.0" prefHeight="566.0" prefWidth="891.3333333333334" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Layouts.DashboardController">
     <styleClass>
         <String fx:value="white-bg" />
     </styleClass>
@@ -21,11 +16,6 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Have a nice day and a great work" AnchorPane.bottomAnchor="504.6306664148966" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="703.5093129475912" AnchorPane.topAnchor="41.33333333333328">
                 <font>
                     <Font name="Product Sans Light" size="12.0" />
-                </font>
-            </Text>
-            <Text id="welcome" fx:id="welcometext" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 16;" text="Welcome Dr. Assia" AnchorPane.bottomAnchor="527.6186672846476" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="742.6773579915365" AnchorPane.topAnchor="13.333333333333258">
-                <font>
-                    <Font name="Product Sans Italic" size="14.0" />
                 </font>
             </Text>
             <AnchorPane layoutY="64.0" prefHeight="100.0" prefWidth="891.0">
@@ -110,31 +100,17 @@
             </AnchorPane>
             <AnchorPane layoutY="173.0" prefHeight="387.0" prefWidth="891.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="173.0">
                 <children>
-                    <AnchorPane layoutY="14.0" prefHeight="382.0" prefWidth="520.0" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="362.0" AnchorPane.topAnchor="0.0">
-                        <children>
-                            <TableView layoutY="53.0" prefHeight="315.0" prefWidth="529.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="14.333333333333314" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
-                                <columns>
-                                    <TableColumn id="appointmentliste" fx:id="appointementlist" prefWidth="526.0000305175781" text="Appointement                                                                                                                             " />
-                                </columns>
-                            </TableView>
-                            <Label layoutX="14.0" layoutY="24.0" text="Today appointments" AnchorPane.topAnchor="24.0">
-                                <font>
-                                    <Font name="Product Sans Bold" size="15.0" />
-                                </font>
-                            </Label>
-                        </children>
-                    </AnchorPane>
-                    <AnchorPane layoutX="534.0" layoutY="-3.0" prefHeight="383.0" prefWidth="355.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <children>
-                            <Label layoutX="14.0" layoutY="31.0" text="Patients' statistics" AnchorPane.topAnchor="24.0">
-                                <font>
-                                    <Font name="Product Sans Bold" size="15.0" />
-                                </font>
-                            </Label>
-                            <AnchorPane layoutY="51.0" prefHeight="333.0" prefWidth="355.0" AnchorPane.topAnchor="53.0" />
-                        </children>
-                    </AnchorPane>
+                      <Label layoutX="31.0" layoutY="22.0" text="Patients' statistics" AnchorPane.topAnchor="22.0">
+                          <font>
+                              <Font name="Product Sans Bold" size="15.0" />
+                          </font>
+                      </Label>
                 </children>
             </AnchorPane>
+      <Label fx:id="welcometext" layoutX="27.0" layoutY="14.0" text="Welcome Dr. Assia">
+         <font>
+            <Font name="Product Sans Bold" size="16.0" />
+         </font>
+      </Label>
         </children>
 </AnchorPane>

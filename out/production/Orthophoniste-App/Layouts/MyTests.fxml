@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Layouts.MyTestsController"
-            fx:id="mytests" layoutX="105.0" layoutY="156.0" prefHeight="560.0" prefWidth="890.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" stylesheets="@../Design/MainFormDesign.css">
-    <AnchorPane fx:id="testsview" layoutX="105.0" layoutY="156.0" prefHeight="560.0" prefWidth="890.0"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" stylesheets="@../Design/MainFormDesign.css">
+
+<AnchorPane fx:id="mytests" prefHeight="560.0" prefWidth="890.0" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Layouts.MyTestsController">
+    <AnchorPane fx:id="testsview" layoutX="105.0" layoutY="156.0" prefHeight="560.0" prefWidth="890.0" stylesheets="@../Design/MainFormDesign.css" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <styleClass>
             <String fx:value="white-bg" />
         </styleClass>
@@ -22,7 +24,7 @@
                     <Font name="Product Sans Bold" size="16.0" />
                 </font>
             </Text>
-            <TableView layoutX="31.0" layoutY="53.0" prefHeight="490.0" prefWidth="829.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css">
+            <TableView fx:id="tests_tab" layoutX="31.0" layoutY="53.0" prefHeight="490.0" prefWidth="829.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css">
                 <columns>
                     <TableColumn fx:id="titre" prefWidth="74.66667175292969" text="Id" />
                     <TableColumn fx:id="titre1" prefWidth="204.0" text="Title" />
@@ -32,14 +34,14 @@
                     <TableColumn fx:id="nbrelements1" prefWidth="85.0" text="Delete" />
                 </columns>
             </TableView>
-            <Button fx:id="createtest" layoutX="782.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: #7A6EFE; -fx-background-radius: 7;" text="Create Test" textFill="WHITE">
+            <Button fx:id="createtest" layoutX="782.0" layoutY="21.0" mnemonicParsing="false" onAction="#showBuildTestPage" style="-fx-background-color: #7A6EFE; -fx-background-radius: 7;" text="Create Test" textFill="WHITE">
                 <font>
                     <Font name="Product Sans" size="12.0" />
                 </font>
             </Button>
         </children>
     </AnchorPane>
-    <AnchorPane fx:id="buildtest" layoutX="153.0" layoutY="62.0" prefHeight="560.0" prefWidth="890.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <AnchorPane fx:id="buildtest" layoutX="153.0" layoutY="62.0" prefHeight="560.0" prefWidth="890.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <children>
             <AnchorPane layoutX="432.0" layoutY="14.0" prefHeight="279.0" prefWidth="436.0" stylesheets="@../Design/MainFormDesign.css">
                 <children>
@@ -48,7 +50,7 @@
                             <Font name="Product Sans" size="16.0" />
                         </font>
                     </Text>
-                    <TableView layoutX="10.0" layoutY="63.0" prefHeight="192.0" prefWidth="415.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css">
+                    <TableView fx:id="questions_tab" layoutX="10.0" layoutY="63.0" prefHeight="192.0" prefWidth="415.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css">
                         <columns>
                             <TableColumn fx:id="idquest" prefWidth="77.99998474121094" text="Id" />
                             <TableColumn fx:id="type" prefWidth="94.66665649414062" text="Type" />
@@ -74,7 +76,7 @@
                             <Font name="Product Sans" size="16.0" />
                         </font>
                     </Text>
-                    <TableView layoutX="10.0" layoutY="63.0" prefHeight="174.0" prefWidth="415.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css">
+                    <TableView fx:id="exercices_tab" layoutX="10.0" layoutY="63.0" prefHeight="174.0" prefWidth="415.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css">
                         <columns>
                             <TableColumn fx:id="idexo" prefWidth="77.99998474121094" text="Id" />
                             <TableColumn fx:id="textexo" prefWidth="336.00002034505206" text="Exercice" />
@@ -92,7 +94,7 @@
                     <String fx:value="shadow" />
                 </styleClass>
             </AnchorPane>
-            <AnchorPane layoutX="8.0" layoutY="14.0" prefHeight="543.0" prefWidth="412.0" stylesheets="@../Design/MainFormDesign.css" visible="false">
+            <AnchorPane fx:id="makenewtest" layoutX="8.0" layoutY="14.0" prefHeight="543.0" prefWidth="412.0" stylesheets="@../Design/MainFormDesign.css" visible="false">
                 <styleClass>
                     <String fx:value="white-bg" />
                     <String fx:value="shadow" />
@@ -109,24 +111,39 @@
                             <Font name="Product Sans Light" size="13.0" />
                         </font>
                     </Label>
-                    <TextField layoutX="15.0" layoutY="66.0" prefHeight="30.0" prefWidth="381.0" promptText="test id ..." style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
+                    <TextField fx:id="testid" layoutX="15.0" layoutY="66.0" prefHeight="30.0" prefWidth="381.0" promptText="test id ..." style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
                     <Label layoutX="14.0" layoutY="107.0" text="Type">
                         <font>
                             <Font name="Product Sans Light" size="13.0" />
                         </font>
                     </Label>
-                    <SplitMenuButton layoutX="15.0" layoutY="134.0" mnemonicParsing="false" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" styleClass="white-bg" text="Choose type">
-                        <items>
-                            <MenuItem mnemonicParsing="false" text="Action 1" />
-                            <MenuItem mnemonicParsing="false" text="Action 2" />
-                        </items>
-                    </SplitMenuButton>
                     <Label layoutX="15.0" layoutY="169.0" text="Tested Capacity">
                         <font>
                             <Font name="Product Sans Light" size="13.0" />
                         </font>
                     </Label>
-                    <TextArea layoutX="14.0" layoutY="195.0" prefHeight="118.0" prefWidth="381.0" promptText="capacities concerned in this test " style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
+                    <TextArea fx:id="testcapacity" layoutX="14.0" layoutY="195.0" prefHeight="118.0" prefWidth="381.0" promptText="capacities concerned in this test " style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
+               <AnchorPane fx:id="test_elements" layoutX="15.0" layoutY="328.0" prefHeight="118.0" prefWidth="383.0">
+                  <children>
+                     <Label text="Add a Question / Exercice">
+                        <font>
+                           <Font name="Product Sans Light" size="13.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="questid" layoutX="1.0" layoutY="27.0" prefHeight="30.0" prefWidth="233.0" promptText="Question / Exercice id " style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
+                     <Button fx:id="addquest" layoutX="267.0" layoutY="25.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" style="-fx-background-color: #24A8FA; -fx-background-radius: 7;" text="ADD" textFill="WHITE">
+                        <font>
+                           <Font name="Product Sans" size="12.0" />
+                        </font>
+                     </Button>
+                  </children>
+               </AnchorPane>
+               <Button fx:id="savetest" layoutX="298.0" layoutY="483.0" mnemonicParsing="false" onAction="#buildTest" prefHeight="30.0" prefWidth="78.0" style="-fx-background-color: #FFA901; -fx-background-radius: 7;" text="Save Test" textFill="WHITE">
+                  <font>
+                     <Font name="Product Sans" size="12.0" />
+                  </font>
+               </Button>
+               <ComboBox fx:id="type_test" layoutX="15.0" layoutY="133.0" prefWidth="150.0" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
                 </children>
             </AnchorPane>
             <AnchorPane fx:id="creationquest" layoutX="8.0" layoutY="14.0" prefHeight="543.0" prefWidth="412.0" stylesheets="@../Design/MainFormDesign.css">
@@ -152,13 +169,6 @@
                             <Font name="Product Sans Light" size="13.0" />
                         </font>
                     </Label>
-                    <SplitMenuButton fx:id="questtype" layoutX="15.0" layoutY="134.0" mnemonicParsing="false" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" styleClass="white-bg" text="Choose Type">
-                        <items>
-                            <MenuItem mnemonicParsing="false" text="QCM" />
-                            <MenuItem mnemonicParsing="false" text="QCU" />
-                            <MenuItem mnemonicParsing="false" text="Free Answer" />
-                        </items>
-                    </SplitMenuButton>
                     <Label layoutX="15.0" layoutY="169.0" text="Question text">
                         <font>
                             <Font name="Product Sans Light" size="13.0" />
@@ -173,21 +183,21 @@
                                 </font>
                             </Label>
                             <TextField fx:id="prop1" layoutX="32.0" layoutY="29.0" prefHeight="30.0" prefWidth="343.0" promptText="proposition 01" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
-                            <TextField fx:id="prop2" layoutX="33.0" layoutY="67.0" prefHeight="30.0" prefWidth="342.0" promptText="proposition 02" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
-                            <TextField fx:id="prop3" layoutX="32.0" layoutY="105.0" prefHeight="30.0" prefWidth="343.0" promptText="proposition 03" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
-                            <TextField fx:id="prop4" layoutX="31.0" layoutY="141.0" prefHeight="30.0" prefWidth="345.0" promptText="proposition 04" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
                             <CheckBox fx:id="true1" layoutX="5.0" layoutY="35.0" mnemonicParsing="false" style="-fx-border-color: #7A6EFE;" />
-                            <CheckBox fx:id="true2" layoutX="6.0" layoutY="73.0" mnemonicParsing="false" style="-fx-border-color: #7A6EFE;" />
-                            <CheckBox fx:id="true3" layoutX="6.0" layoutY="111.0" mnemonicParsing="false" style="-fx-border-color: #7A6EFE;" />
-                            <CheckBox fx:id="true4" layoutX="6.0" layoutY="147.0" mnemonicParsing="false" style="-fx-border-color: #7A6EFE;" />
                         </children>
                     </AnchorPane>
-                    <Button fx:id="confirmquest" layoutX="342.0" layoutY="505.0" mnemonicParsing="false" onAction="#Create_Question" style="-fx-background-color: #FFA901; -fx-background-radius: 7;" text="Create" textFill="WHITE">
+                    <Button fx:id="confirmquest" layoutX="342.0" layoutY="505.0" mnemonicParsing="false" onAction="#createQuestion" style="-fx-background-color: #FFA901; -fx-background-radius: 7;" text="Create" textFill="WHITE">
                         <font>
                             <Font name="Product Sans" size="12.0" />
                         </font>
                     </Button>
                     <Label fx:id="wronginfo" layoutX="16.0" layoutY="508.0" textFill="#ff5363" />
+               <ComboBox fx:id="questtype" layoutX="16.0" layoutY="131.0" prefWidth="150.0" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
+               <Button fx:id="addprop" layoutX="323.0" layoutY="407.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" style="-fx-background-color: #24A8FA; -fx-background-radius: 7;" text="ADD" textFill="WHITE">
+                  <font>
+                     <Font name="Product Sans" size="12.0" />
+                  </font>
+               </Button>
                 </children>
             </AnchorPane>
             <AnchorPane fx:id="creationexo" layoutX="8.0" layoutY="14.0" prefHeight="543.0" prefWidth="412.0" stylesheets="@../Design/MainFormDesign.css" visible="false">
@@ -219,16 +229,17 @@
                             <Font name="Product Sans Light" size="13.0" />
                         </font>
                     </Label>
-                    <TextField fx:id="mat1" layoutX="15.0" layoutY="298.0" prefHeight="30.0" prefWidth="381.0" promptText="material 01" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
-                    <TextField fx:id="mat2" layoutX="15.0" layoutY="338.0" prefHeight="30.0" prefWidth="381.0" promptText="material 02" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
-                    <TextField fx:id="mat3" layoutX="15.0" layoutY="378.0" prefHeight="30.0" prefWidth="381.0" promptText="material 03" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
-                    <TextField fx:id="mat4" layoutX="15.0" layoutY="417.0" prefHeight="30.0" prefWidth="381.0" promptText="material 04" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
+                    <TextField fx:id="mat1" layoutX="15.0" layoutY="298.0" prefHeight="30.0" prefWidth="381.0" promptText="material..." style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
                     <Button fx:id="confirmexo" layoutX="342.0" layoutY="505.0" mnemonicParsing="false" style="-fx-background-color: #FFA901; -fx-background-radius: 7;" text="Create" textFill="WHITE">
                         <font>
                             <Font name="Product Sans" size="12.0" />
                         </font>
                     </Button>
-                    <TextField fx:id="mat5" layoutX="15.0" layoutY="456.0" prefHeight="30.0" prefWidth="381.0" promptText="material 05" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" stylesheets="@../Design/MainFormDesign.css" />
+               <Button fx:id="addmat" layoutX="329.0" layoutY="347.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" style="-fx-background-color: #24A8FA; -fx-background-radius: 7;" text="ADD" textFill="WHITE">
+                  <font>
+                     <Font name="Product Sans" size="12.0" />
+                  </font>
+               </Button>
                 </children>
             </AnchorPane>
         </children>
