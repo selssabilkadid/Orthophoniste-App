@@ -1,13 +1,19 @@
 package Controllers.FicheDeSuivi;
 
+import Classes.FicheDeSuiviDone;
+import Classes.FichedeSuivi;
+import Controllers.FicheDeSuivi.AddGoalController;
 import Classes.ObjectifEvalue;
 import Classes.TypeObjectif;
 import Controllers.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.geometry.Insets;
@@ -17,7 +23,11 @@ import javafx.util.Callback;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import javafx.scene.control.ComboBox;
 
 public class FicheDeSuiviController {
 
@@ -28,6 +38,11 @@ public class FicheDeSuiviController {
 
     @FXML
     public void initialize() {
+        // Add some sample goals (you can replace this with actual data)
+        goals.add(new ObjectifEvalue("Read Book", TypeObjectif.COURT));
+        goals.add(new ObjectifEvalue("Exercise", TypeObjectif.LONG));
+        goals.add(new ObjectifEvalue("Learn JavaFX", TypeObjectif.COURT));
+
         // Set custom cell factory
         ficheListView.setCellFactory(new Callback<ListView<ObjectifEvalue>, ListCell<ObjectifEvalue>>() {
             @Override
@@ -38,64 +53,112 @@ public class FicheDeSuiviController {
 
         // Bind the observable list to the ListView
         ficheListView.setItems(goals);
-
-        // Add some sample goals (you can replace this with actual data)
-        goals.add(new ObjectifEvalue("Read Book", TypeObjectif.COURT, 3));
-        goals.add(new ObjectifEvalue("Exercise", TypeObjectif.LONG, 4));
-        goals.add(new ObjectifEvalue("Learn JavaFX", TypeObjectif.COURT, 5));
+        ficheListView.setPlaceholder(new Label("No current sheets, please create a new one"));
     }
 
-    @FXML
-    private void addGoal() {
-        // Prompt user for goal name
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Add Goal");
-        dialog.setHeaderText("Enter the name of the goal:");
-        dialog.setContentText("Goal Name:");
 
-        Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()) {
-            String goalName = result.get();
 
-            // Prompt user for goal type
-            ComboBox<TypeObjectif> typeComboBox = new ComboBox<>();
-            typeComboBox.getItems().addAll(TypeObjectif.values());
-            typeComboBox.setValue(TypeObjectif.COURT);
+@FXML
+private void addGoal() {
+    Dialog<ButtonType> dialog = new Dialog<>();
+    dialog.setTitle("Add Goal");
+//    dialog.setHeaderText("Enter the details of the goal:");
 
-            dialog.getDialogPane().setContent(typeComboBox);
-            dialog.getDialogPane().setHeaderText("Select the type of the goal:");
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Layouts/FicheDeSuivi/AddGoal.fxml"));
+    try {
+        dialog.getDialogPane().setContent(loader.load());
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 
-            result = dialog.showAndWait();
-            if (result.isPresent()) {
-                TypeObjectif selectedType = typeComboBox.getValue();
+    // Set the button types
+    dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
-                // Prompt user for score selection
-                ComboBox<Integer> scoreComboBox = new ComboBox<>();
-                scoreComboBox.getItems().addAll(1, 2, 3, 4, 5);
-                scoreComboBox.setValue(1);
+    // Get the controller instance
+    AddGoalController controller = loader.getController();
 
-                dialog.getDialogPane().setContent(scoreComboBox);
-                dialog.getDialogPane().setHeaderText("Select the score of the goal:");
-
-                result = dialog.showAndWait();
-                if (result.isPresent()) {
-                    int selectedScore = scoreComboBox.getValue();
-
-                    goals.add(new ObjectifEvalue(goalName, selectedType, selectedScore));
-                }
+    // Convert the result to a Goal object when the OK button is clicked
+    dialog.setResultConverter(dialogButton -> {
+        if (dialogButton == ButtonType.OK) {
+            String goalName = controller.getGoalName();
+            TypeObjectif selectedType = controller.getSelectedGoalType();
+            if (goalName != null && !goalName.isEmpty() && selectedType != null) {
+                goals.add(new ObjectifEvalue(goalName, selectedType));
             }
         }
-    }
+        return null;
+    });
 
+    dialog.showAndWait();
+}
 
     @FXML
     private void createFiche() {
-        // Your code to add a goal
+
+        Dialog<List<ObjectifEvalue>> dialog = new Dialog<>();
+        dialog.setTitle("Create Fiche");
+        dialog.setHeaderText("Enter the goals for the new fiche:");
+
+
+        ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField goalNameField = new TextField();
+        goalNameField.setPromptText("Goal Name");
+        ComboBox<TypeObjectif> typeComboBox = new ComboBox<>();
+        typeComboBox.getItems().addAll(TypeObjectif.values());
+        typeComboBox.setPromptText("Select goal type");
+
+        grid.add(new Label("Goal Name:"), 0, 0);
+        grid.add(goalNameField, 1, 0);
+        grid.add(new Label("Goal Type:"), 0, 1);
+        grid.add(typeComboBox, 1, 1);
+
+        dialog.getDialogPane().setContent(grid);
+
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButtonType) {
+                List<ObjectifEvalue> newGoals = new ArrayList<>();
+                String goalName = goalNameField.getText();
+                TypeObjectif goalType = typeComboBox.getValue();
+                if (goalName != null && !goalName.isEmpty() && goalType != null) {
+                    newGoals.add(new ObjectifEvalue(goalName, goalType));
+                }
+                return newGoals;
+            }
+            return null;
+        });
+
+        Optional<List<ObjectifEvalue>> result = dialog.showAndWait();
+        result.ifPresent(newGoals -> goals.addAll(newGoals));
     }
+
+
+
+
 
     @FXML
     private void saveFiche() {
-        // Your code to add a goal
+        FicheDeSuiviDone ficheDeSuiviDone = new FicheDeSuiviDone();
+        ficheDeSuiviDone.setObjectifsAtteints(new ArrayList<>(goals));
+
+
+        SharedModel.getFicheDeSuiviDoneList().add(ficheDeSuiviDone);
+
+
+        goals.clear();
+
+
+        if (goals.isEmpty()) {
+            ficheListView.setPlaceholder(new Label("No current sheets, please create a new one"));
+        }
     }
 
 
@@ -108,8 +171,10 @@ public class FicheDeSuiviController {
     }
 
     @FXML
-    private void goToSheet( MouseEvent mouseEvent) throws IOException {
+    private void goToSheet(MouseEvent mouseEvent) throws IOException {
         Main m = new Main();
+
+
         m.changeScene("/Layouts/FicheDeSuivi/OtherSheets.fxml");
     }
 
@@ -117,13 +182,26 @@ public class FicheDeSuiviController {
         Main m = new Main();
         m.changeScene("/Layouts/FicheDeSuivi/GoalList.fxml");
     }
+    @FXML
+    private void gradeGoal(ObjectifEvalue goal) {
+        // Prompt user for the grade
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Grade Goal");
+        dialog.setHeaderText("Enter the grade for the goal:");
+        dialog.setContentText("Grade:");
 
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            int grade = Integer.parseInt(result.get());
+            goal.addScore(grade);
+        }
+    }
 
     static class GoalListCell extends ListCell<ObjectifEvalue> {
         private HBox hBox = new HBox();
         private Label goalNameLabel = new Label();
         private Label goalTypeLabel = new Label();
-        private Label goalScoreLabel = new Label();
+        private ComboBox<Integer> gradeComboBox = new ComboBox<>(); // ComboBox for grading
 
         public GoalListCell() {
             super();
@@ -131,17 +209,27 @@ public class FicheDeSuiviController {
 
             goalNameLabel.setPrefWidth(190);
             goalTypeLabel.setPrefWidth(190);
-            goalScoreLabel.setPrefWidth(45);
+            gradeComboBox.getItems().addAll(0, 1, 2, 3, 4, 5); // Add grade options
+            gradeComboBox.setPromptText("Grade"); // Set prompt text
             Font customFont = Font.font("Arial", FontWeight.BOLD, 14);
             goalNameLabel.setFont(customFont);
             goalTypeLabel.setFont(customFont);
-            goalScoreLabel.setFont(customFont);
+            gradeComboBox.setPrefWidth(50);
             HBox.setHgrow(goalNameLabel, Priority.ALWAYS);
             HBox.setHgrow(goalTypeLabel, Priority.ALWAYS);
-            HBox.setHgrow(goalScoreLabel, Priority.ALWAYS);
+            HBox.setHgrow(gradeComboBox, Priority.ALWAYS);
 
-            hBox.getChildren().addAll(goalNameLabel, goalTypeLabel, goalScoreLabel);
+            hBox.getChildren().addAll(goalNameLabel, goalTypeLabel, gradeComboBox);
             hBox.setPadding(new Insets(10, 10, 15, 7));
+
+            // Event handler for gradeComboBox
+            gradeComboBox.setOnAction(event -> {
+                ObjectifEvalue goal = getItem();
+                if (goal != null) {
+                    // Add the selected grade to the goal's list of scores
+                    goal.addScore(gradeComboBox.getValue());
+                }
+            });
         }
 
         @Override
@@ -153,9 +241,17 @@ public class FicheDeSuiviController {
             } else {
                 goalNameLabel.setText(objectif.getNom());
                 goalTypeLabel.setText(objectif.getTypeObjectif().toString());
-                goalScoreLabel.setText(String.valueOf(objectif.getNote()));
+
+                // Set the ComboBox value to the last assigned score, or to 0 if no scores
+                if (!objectif.getScores().isEmpty()) {
+                    gradeComboBox.setValue(objectif.getScores().get(objectif.getScores().size() - 1));
+                } else {
+                    gradeComboBox.setValue(0);
+                }
+
                 setGraphic(hBox);
             }
         }
     }
+
 }

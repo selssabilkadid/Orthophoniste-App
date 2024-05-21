@@ -6,9 +6,98 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Font?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="Controllers.FicheDeSuivi.OtherSheetsController"
             prefHeight="400.0" prefWidth="600.0">
+    <AnchorPane id="fusSidebar" layoutX="-45.0" layoutY="59.0" prefHeight="477.0" prefWidth="282.0" style="-fx-background-radius: 50;" styleClass="sidebar" stylesheets="@../../Design/ficheDeSuivi.css">
+        <children>
+            <HBox fx:id="goalListBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="61.0" onMouseClicked="#showGoalList" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
+                <children>
+                    <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../images/target.png" />
+                        </image>
+                    </ImageView>
+                    <Label alignment="CENTER" prefHeight="30.0" prefWidth="77.0" stylesheets="@../../Design/ficheDeSuivi.css" text="Goal list" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Label>
+                </children>
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+                <padding>
+                    <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
+                </padding>
+            </HBox>
+            <HBox fx:id="evaluatedGoalsBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="163.0" onMouseClicked="#showEvaluatedGoals" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
+                <children>
+                    <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../images/check.png" />
+                        </image>
+                    </ImageView>
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="125.0" stylesheets="@../../Design/ficheDeSuivi.css" text="Evaluated goals" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Label>
+                </children>
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+                <padding>
+                    <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+                </padding>
+            </HBox>
+            <HBox fx:id="followUpSheetBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="264.0"  prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color:#1B1A55; -fx-background-radius: 10;">
+                <children>
+                    <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../images/to-do-list.png" />
+                        </image>
+                    </ImageView>
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="67.0" stylesheets="@../../Design/ficheDeSuivi.css" text="Sheets" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Label>
+                </children>
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+                <padding>
+                    <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+                </padding>
+            </HBox>
+            <HBox fx:id="progressBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="365.0" prefHeight="52.0" prefWidth="200.0" spacing="8.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
+                <children>
+                    <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../images/graphic-progression.png" />
+                        </image>
+                    </ImageView>
+                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="67.0" stylesheets="@../../Design/ficheDeSuivi.css" text="Progress" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Label>
+                </children>
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+                <padding>
+                    <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+                </padding>
+            </HBox>
+        </children>
+    </AnchorPane>
+    <ListView fx:id="ficheDoneListView" layoutX="459.0" layoutY="162.0" prefHeight="317.0" prefWidth="481.0" style="-fx-background-color: #CDE8E5;"/>
 
 </AnchorPane>

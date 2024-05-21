@@ -25,20 +25,20 @@ public class EvaluatedGoalsController {
     private final ObservableList<ObjectifEvalue> goals = FXCollections.observableArrayList();
     public void initialize() {
         // Set custom cell factory
-        yesScoreGoals.setCellFactory(new Callback<ListView<ObjectifEvalue>, ListCell<ObjectifEvalue>>() {
-            @Override
-            public ListCell<ObjectifEvalue> call(ListView<ObjectifEvalue> listView) {
-                return new GoalListCell();
-            }
-        });
-
-        // Bind the observable list to the ListView
-        yesScoreGoals.setItems(goals);
-
-        // Add some sample goals (you can replace this with actual data)
-        goals.add(new ObjectifEvalue("Read Book", TypeObjectif.COURT, 3));
-        goals.add(new ObjectifEvalue("Exercise", TypeObjectif.LONG, 4));
-        goals.add(new ObjectifEvalue("Learn JavaFX", TypeObjectif.COURT, 5));
+//        yesScoreGoals.setCellFactory(new Callback<ListView<ObjectifEvalue>, ListCell<ObjectifEvalue>>() {
+//            @Override
+//            public ListCell<ObjectifEvalue> call(ListView<ObjectifEvalue> listView) {
+//                return new GoalListCell();
+//            }
+//        });
+//
+//        // Bind the observable list to the ListView
+//        yesScoreGoals.setItems(goals);
+//
+//        // Add some sample goals (you can replace this with actual data)
+//        goals.add(new ObjectifEvalue("Read Book", TypeObjectif.COURT, 3));
+//        goals.add(new ObjectifEvalue("Exercise", TypeObjectif.LONG, 4));
+//        goals.add(new ObjectifEvalue("Learn JavaFX", TypeObjectif.COURT, 5));
     }
 
 
@@ -80,16 +80,16 @@ public class EvaluatedGoalsController {
 
         @Override
         protected void updateItem(ObjectifEvalue objectif, boolean empty) {
-            super.updateItem(objectif, empty);
-            if (empty || objectif == null) {
-                setText(null);
-                setGraphic(null);
-            } else {
-                goalNameLabel.setText(objectif.getNom());
-                goalTypeLabel.setText(objectif.getTypeObjectif().toString());
-                goalScoreLabel.setText(String.valueOf(objectif.getNote()));
-                setGraphic(hBox);
-            }
-        }
+//            super.updateItem(objectif, empty);
+//            if (empty || objectif == null) {
+//                setText(null);
+//                setGraphic(null);
+//            } else {
+//                goalNameLabel.setText(objectif.getNom());
+//                goalTypeLabel.setText(objectif.getTypeObjectif().toString());
+//                goalScoreLabel.setText(String.valueOf(objectif.getNote()));
+//                setGraphic(hBox);
+//            }
+     }
     }
 }
