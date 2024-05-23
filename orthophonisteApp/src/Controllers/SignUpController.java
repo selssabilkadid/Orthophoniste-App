@@ -72,7 +72,6 @@ public class SignUpController {
     @FXML
     private void goToSignIn(ActionEvent event) throws IOException {
         Main m = new Main();
-
         m.changeScene("/Layouts/SignIn.fxml");
 
     }

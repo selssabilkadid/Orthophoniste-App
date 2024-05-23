@@ -1,5 +1,7 @@
 package Classes;
 
 public class BilanO_Anamnese extends BilanO {
-    Anamnese anamnese;
+    private static final long serialVersionUID = 1L;
+    CRAnamnese anamnese;
+
 }

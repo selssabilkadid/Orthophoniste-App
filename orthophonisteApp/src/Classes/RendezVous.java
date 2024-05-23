@@ -1,8 +1,10 @@
 package Classes;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract  class RendezVous {
+public abstract  class RendezVous implements Serializable {
+    private static final long serialVersionUID = 1L;
     private LocalDate date;
     private String heur_debut;
     private String heur_fin;

@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -30,132 +26,16 @@
                         <Font name="Product Sans Bold" size="18.0" />
                     </font>
                 </Label>
-                <TableView fx:id="patientliste" layoutX="30.0" layoutY="78.0" prefHeight="457.0" prefWidth="830.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css" visible="false">
+                <TableView fx:id="rdvliste" layoutX="30.0" layoutY="78.0" prefHeight="457.0" prefWidth="830.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css">
                     <columns>
                         <TableColumn fx:id="date" prefWidth="118.666" text="Date" />
                         <TableColumn fx:id="heure_debut" prefWidth="120.666" text="Start Hour" />
                         <TableColumn fx:id="heur_fin" prefWidth="130.0" text="End Hour" />
                         <TableColumn fx:id="type_RDV" prefWidth="100.0" text="Type" />
-                        <TableColumn fx:id="observation" prefWidth="359.3333435058594" text="Observation" />
+                        <TableColumn fx:id="observation" prefWidth="277.3334045410156" text="Observation" />
+                  <TableColumn fx:id="deleteRDV" prefWidth="81.3333740234375" text="Delete" />
                     </columns>
                 </TableView>
-            <HBox layoutX="49.0" layoutY="86.0" prefHeight="444.0" prefWidth="789.0">
-               <children>
-                  <ScrollPane prefHeight="444.0" prefWidth="793.0">
-                     <content>
-                        <VBox fx:id="RDVLIST" prefHeight="429.0" prefWidth="787.0" stylesheets="@../Design/MainFormDesign.css">
-                           <children>
-                              <HBox fx:id="RDVListeHEADER" prefHeight="49.0" prefWidth="787.0" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;">
-                                 <children>
-                                    <Label prefWidth="120.0" text="Date">
-                                       <font>
-                                          <Font name="Product Sans Medium" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="20.0" top="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="10.0" prefWidth="100.0" text="Start Hour">
-                                       <font>
-                                          <Font name="Product Sans Medium" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets top="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Label layoutX="163.0" layoutY="22.0" prefWidth="100.0" text="End Hour">
-                                       <font>
-                                          <Font name="Product Sans Medium" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets top="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Label layoutX="313.0" layoutY="22.0" prefWidth="140.0" text="Type">
-                                       <font>
-                                          <Font name="Product Sans Medium" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets top="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Label layoutX="455.0" layoutY="22.0" prefWidth="200.0" text="Observation">
-                                       <font>
-                                          <Font name="Product Sans Medium" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets top="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Label layoutX="510.0" layoutY="22.0" prefWidth="60.0" text="Actions">
-                                       <font>
-                                          <Font name="Product Sans Medium" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets top="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox fx:id="RDVListeITEM" prefHeight="50.0" prefWidth="787.0">
-                                 <children>
-                                    <Label prefWidth="120.0" text="22/12/2024">
-                                       <font>
-                                          <Font name="Product Sans Medium" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="20.0" top="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Label prefWidth="100.0" text="13:00">
-                                       <font>
-                                          <Font name="Product Sans Medium" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets top="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Label prefWidth="100.0" text="14:30">
-                                       <font>
-                                          <Font name="Product Sans Medium" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets top="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <ComboBox prefWidth="120.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css">
-                                       <HBox.margin>
-                                          <Insets top="12.0" />
-                                       </HBox.margin>
-                                    </ComboBox>
-                                    <Label prefWidth="200.0" text="Observation">
-                                       <font>
-                                          <Font name="Product Sans Medium" size="15.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="20.0" top="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <Button mnemonicParsing="false" style="-fx-background-radius: 7; -fx-background-color: #FF5363;" text="Delete" textFill="WHITE">
-                                       <HBox.margin>
-                                          <Insets top="12.0" />
-                                       </HBox.margin>
-                                       <font>
-                                          <Font name="Product Sans" size="13.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </children>
-                           <styleClass>
-                              <String fx:value="bg-color-3" />
-                              <String fx:value="radius" />
-                           </styleClass>
-                        </VBox>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </HBox>
             </children>
         </AnchorPane>
 
@@ -196,7 +76,7 @@
                 </Label>
                 <TextArea fx:id="noteRDV" layoutX="192.0" layoutY="245.0" prefHeight="108.0" prefWidth="441.0" promptText="type your note here..." style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
 
-                <AnchorPane fx:id="groupdetails" layoutX="31.0" layoutY="359.0" prefHeight="137.0" prefWidth="609.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css">
+                <AnchorPane fx:id="groupdetails" layoutX="31.0" layoutY="359.0" prefHeight="137.0" prefWidth="609.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css" visible="false">
                     <children>
                         <Label layoutY="23.0" text="Add theme">
                             <font>
@@ -230,7 +110,7 @@
                     </children>
                 </AnchorPane>
 
-                <AnchorPane fx:id="consultdetails" layoutX="31.0" layoutY="359.0" prefHeight="159.0" prefWidth="515.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css" visible="false">
+                <AnchorPane fx:id="consultdetails" layoutX="31.0" layoutY="359.0" prefHeight="159.0" prefWidth="515.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css">
                     <children>
                         <Label layoutY="26.0" text="Add Patient Information">
                             <font>
@@ -243,12 +123,17 @@
                     </children>
 
                 </AnchorPane>
-            <Button fx:id="save_appointment" layoutX="567.0" layoutY="506.0" mnemonicParsing="false" onAction="#make_appointement" style="-fx-background-color: #FF5363;" text="Save" textFill="WHITE">
+            <Button fx:id="save_appointment" layoutX="567.0" layoutY="499.0" mnemonicParsing="false" onAction="#make_appointement" prefHeight="30.0" prefWidth="69.0" style="-fx-background-color: #FF5363; -fx-background-radius: 7;" text="Save" textFill="WHITE">
                <font>
                   <Font name="Product Sans" size="12.0" />
                </font>
             </Button>
             <ComboBox fx:id="typeRDV" layoutX="192.0" layoutY="55.0" prefWidth="150.0" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
+            <Label fx:id="alerteinfo" layoutX="413.0" layoutY="23.0" textFill="#ff5363">
+               <font>
+                  <Font name="Product Sans" size="16.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </children>

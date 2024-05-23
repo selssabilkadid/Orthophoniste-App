@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.Set;
 
 public class AtelierGrp extends RendezVous {
+    private static final long serialVersionUID = 1L;
+
     private String thematique;
     private Set<Integer> patientlist;
 

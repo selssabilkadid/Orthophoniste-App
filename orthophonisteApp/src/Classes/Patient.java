@@ -1,8 +1,10 @@
 package Classes;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 
-public abstract class Patient {
+public abstract class Patient implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String nom;
     private String prenom;
     private int age;

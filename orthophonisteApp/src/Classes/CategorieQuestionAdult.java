@@ -1,5 +1,8 @@
 package Classes;
-public enum CategorieQuestionAdult {
+
+import java.io.Serializable;
+
+public enum CategorieQuestionAdult  {
     HISTOIRE_MALADIE,
     SUIVI_MEDICAL,
 }

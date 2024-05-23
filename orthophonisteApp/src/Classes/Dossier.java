@@ -1,9 +1,11 @@
 package Classes;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Dossier {
+public class Dossier implements Serializable {
+    private static final long serialVersionUID = 1L;
      static int  id;
      Patient patient;
      Set<FichedeSuivi> fichedeSuivis = new HashSet<FichedeSuivi>();

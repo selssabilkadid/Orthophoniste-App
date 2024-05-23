@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class QuestionQCU extends Question {
+    private static final long serialVersionUID = 1L;
+
     private String bonneReponse;
     private ArrayList<String> propositions;
-    public QuestionQCU(String id,String enonce, String bonneReponse, ArrayList<String> propositions) {
+    public QuestionQCU(String id,String enonce, ArrayList<String> propositions) {
         super(id,enonce);
-        this.bonneReponse = bonneReponse;
         this.propositions = propositions;
     }
     public String getBonnesReponses() {

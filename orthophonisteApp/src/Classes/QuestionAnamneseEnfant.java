@@ -1,5 +1,7 @@
 package Classes;
 public class QuestionAnamneseEnfant extends Question {
+    private static final long serialVersionUID = 1L;
+
     private CategorieQuestionEnfant categorie;
     private String reponse;
 

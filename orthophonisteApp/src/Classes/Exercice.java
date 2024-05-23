@@ -1,7 +1,9 @@
 package Classes;
+import java.io.Serializable;
 import java.util.Set;
 
-public class Exercice {
+public class Exercice implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String id;
     private String consigne;
     private Set<String> materiels;

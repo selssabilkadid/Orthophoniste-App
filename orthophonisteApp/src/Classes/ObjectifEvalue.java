@@ -3,6 +3,7 @@ package Classes;
 import java.util.ArrayList;
 
 public class ObjectifEvalue extends Objectif {
+    private static final long serialVersionUID = 1L;
     private ArrayList<Integer> scores;
 
     public ObjectifEvalue(String nom, TypeObjectif typeObjectif) {

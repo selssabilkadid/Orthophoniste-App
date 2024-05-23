@@ -1,8 +1,10 @@
 package Classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FichedeSuivi {
+public class FichedeSuivi implements Serializable {
+    private static final long serialVersionUID = 1L;
     private ArrayList<Objectif> liste_objectifs;
 
     // Constructor to initialize the ArrayList

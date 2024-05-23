@@ -2,6 +2,8 @@ package Classes;
 import java.text.DateFormat;
 
 public class Adulte extends Patient{
+    private static final long serialVersionUID = 1L;
+
     String diplome; 
     String profession ;
     String numtel;

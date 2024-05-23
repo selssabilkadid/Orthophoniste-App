@@ -2,6 +2,7 @@ package Classes;
 import java.text.DateFormat;
 
 public class Enfant extends Patient{
+    private static final long serialVersionUID = 1L;
     private String classeEtude;
     private String telpere;
     private String telmere;

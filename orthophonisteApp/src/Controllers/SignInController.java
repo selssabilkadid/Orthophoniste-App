@@ -49,7 +49,6 @@ public class SignInController {
             // Proceed with sign in if validations pass
         } else {
             UserAccount account = AccountManager.getAccount(email);
-
             if(account != null && account.getPassword().equals(password)) {
 
                 AccountManager.setcurrentuser(account);

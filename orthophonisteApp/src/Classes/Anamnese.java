@@ -1,9 +1,11 @@
 package Classes;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Anamnese {
+public class Anamnese implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int id ;
     private Set<Question> questions = new HashSet<Question>();
     Anamnese(Set<Question> questions){

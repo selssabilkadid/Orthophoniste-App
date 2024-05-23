@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Consultation extends RendezVous {
+    private static final long serialVersionUID = 1L;
+
     private String nom ;
     private String prenom;
     private String age;

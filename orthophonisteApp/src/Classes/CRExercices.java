@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class CRExercices extends CompteRendu implements Calculable {
+    private static final long serialVersionUID = 1L;
+
     ArrayList<Integer> scoreExo;
     CRExercices(int scoretotal, String conclusion, Test test , ArrayList<Integer> notes) {
         super(scoretotal, conclusion, test);

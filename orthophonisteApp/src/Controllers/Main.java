@@ -1,8 +1,6 @@
 package Controllers;
 
-import Classes.Consultation;
-import Classes.Orthophoniste;
-import Classes.RendezVous;
+import Classes.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,7 +37,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
 
         // Update the path to correctly locate SignUp.fxml
-        Parent root = FXMLLoader.load(getClass().getResource("/Layouts/FicheDeSuivi/FicheDeSuivi.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Layouts/SignUp.fxml"));
 
         primaryStage.setTitle("SIGN UP");
         primaryStage.setScene(new Scene(root, 1100, 600));
@@ -51,10 +49,9 @@ public class Main extends Application {
         stg.setScene(new Scene(pane, 1100, 600));
     }
     public static void main(String[] args) {
-
-        Orthophoniste ortho ;
-        Set<RendezVous> rdvs;
-
+        // Ensure AccountManager is initialized
+        AccountManager.getCurrentuser(); // This will trigger static initialization and add the shutdown hook
         launch(args);
     }
+
 }

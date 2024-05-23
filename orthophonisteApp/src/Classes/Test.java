@@ -1,5 +1,9 @@
 package Classes;
-public abstract class Test {
+
+import java.io.Serializable;
+
+public abstract class Test implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String nom;
     private String capacite;
 
@@ -13,6 +17,12 @@ public abstract class Test {
     }
     public void modifiercapacite(String capacite){
         this.capacite = capacite;
+    }
+    public String getNom(){
+        return nom;
+    }
+    public String getCapacite(){
+        return capacite;
     }
     
 }

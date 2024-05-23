@@ -3,11 +3,12 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class QuestionQCM extends Question{
+    private static final long serialVersionUID = 1L;
+
     private ArrayList<String> bonneReponse;
     private ArrayList<String> propositions;
-    public QuestionQCM(String id,String enonce, ArrayList<String> bonneReponse, ArrayList<String> propositions) {
+    public QuestionQCM(String id,String enonce,  ArrayList<String> propositions) {
         super(id,enonce);
-        this.bonneReponse = bonneReponse;
         this.propositions = propositions;
     }
     public ArrayList<String> getBonneReponse() {

@@ -1,4 +1,7 @@
 package Classes;
+
+import java.io.Serializable;
+
 public enum CategorieQuestionEnfant {
    STRUCTURE_FAMILIALE,
    DYNAMIQUE_FAMILIALE,

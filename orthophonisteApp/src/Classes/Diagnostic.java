@@ -1,5 +1,9 @@
 package Classes;
-public class Diagnostic {
+
+import java.io.Serializable;
+
+public class Diagnostic implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Trouble[] troubles;
 
     public Diagnostic(Trouble[] troubles) {

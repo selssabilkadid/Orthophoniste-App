@@ -2,7 +2,9 @@ package Classes;
 import java.util.Set;
 
 public class TestExercice extends Test implements Calculable {
-     Set<Exercice> exercices;
+    private static final long serialVersionUID = 1L;
+
+    Set<Exercice> exercices;
 
     public TestExercice(String id, String capacite, Set<Exercice> exercices) {
 
