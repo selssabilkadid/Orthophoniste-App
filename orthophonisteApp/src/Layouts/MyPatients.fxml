@@ -18,7 +18,7 @@
                 <Font name="Product Sans Bold" size="18.0" />
             </font>
         </Label>
-        <TableView fx:id="patientliste" layoutX="12.0" layoutY="62.0" prefHeight="484.0" prefWidth="867.0" styleClass="white-bg" AnchorPane.bottomAnchor="14.666666666666629" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.333333333333371" AnchorPane.topAnchor="62.0">
+        <TableView fx:id="patientliste" layoutX="12.0" layoutY="62.0" prefHeight="484.0" prefWidth="867.0" stylesheets="@../Design/CustomRow.css" styleClass="white-bg" AnchorPane.bottomAnchor="14.666666666666629" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.333333333333371" AnchorPane.topAnchor="62.0">
             <columns>
                 <TableColumn fx:id="numdossier" prefWidth="75.0" text="Patient ID" />
                 <TableColumn fx:id="fullname" prefWidth="140.0" text="Full Name" />

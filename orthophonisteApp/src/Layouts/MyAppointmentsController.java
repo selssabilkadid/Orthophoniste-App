@@ -1,11 +1,7 @@
 package Layouts;
 
 import Classes.*;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTimePicker;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,14 +31,7 @@ public class MyAppointmentsController {
     @FXML
     private Button addpatient;
 
-    @FXML
-    private JFXDatePicker datepick;
 
-    @FXML
-    private JFXTimePicker timepick1;
-
-    @FXML
-    private JFXTimePicker timepick2;
 
     @FXML
     private TextField age;

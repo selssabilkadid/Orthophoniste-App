@@ -225,11 +225,10 @@ private void addGoal() {
             hBox.getChildren().addAll(goalNameLabel, goalTypeLabel, gradeComboBox);
             hBox.setPadding(new Insets(10, 10, 15, 7));
 
-            // Event handler for gradeComboBox
+
             gradeComboBox.setOnAction(event -> {
                 ObjectifEvalue goal = getItem();
                 if (goal != null) {
-                    // Add the selected grade to the goal's list of scores
                     goal.addScore(gradeComboBox.getValue());
                 }
             });

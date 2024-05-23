@@ -16,11 +16,11 @@ import java.util.Set;
 public class Main extends Application {
     private static Stage stg;
 
-   /* @Override
+    @Override
     public void start(Stage primaryStage) throws IOException {
         stg = primaryStage;
         primaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getResource("/Layouts/SignUp.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Layouts/HomePage.fxml"));
 
         primaryStage.setTitle("SIGN UP");
         //primaryStage.setScene(new Scene(root, 600, 400));
@@ -32,8 +32,12 @@ public class Main extends Application {
         Parent pane = FXMLLoader.load(getClass().getResource(fxml));
         stg.setScene(new Scene(pane, 1100, 600));
         stg.setTitle("Orthophoniste Cabinet Managment System");
-    }*/
-    @Override
+    }
+    public static void changerScene(Parent root) {
+        stg.setScene(new Scene(root, 1100, 600));
+        stg.setTitle("Orthophoniste Cabinet Management System");
+    }
+    /*@Override
     public void start(Stage primaryStage) throws IOException {
         stg = primaryStage;
         primaryStage.setResizable(false);
@@ -44,12 +48,12 @@ public class Main extends Application {
         primaryStage.setTitle("SIGN UP");
         primaryStage.setScene(new Scene(root, 1100, 600));
         primaryStage.show();
-    }
+    }*/
 
-    public void changeScene(String fxml) throws IOException {
-        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-        stg.setScene(new Scene(pane, 1100, 600));
-    }
+//    public void changeScene(String fxml) throws IOException {
+//        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
+//        stg.setScene(new Scene(pane, 1100, 600));
+//    }
     public static void main(String[] args) {
 
         Orthophoniste ortho ;
