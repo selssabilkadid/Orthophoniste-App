@@ -1,5 +1,6 @@
 package Controllers;
 
+import Layouts.MyPatientsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -31,6 +32,7 @@ public class HomePageController {
     public void initialize() {
         // Set the initial view to Dashboard
         loadCenterSection("/Layouts/Dashboard.fxml");
+        mainPane.getProperties().put("controller", this);
     }
 
     @FXML
@@ -53,10 +55,17 @@ public class HomePageController {
         loadCenterSection(fxmlFile);
     }
 
-    private void loadCenterSection(String fxmlFile) {
+    public void loadCenterSection(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Node centerNode = loader.load();
+
+
+            if (loader.getController() instanceof MyPatientsController) {
+                MyPatientsController controller = loader.getController();
+                controller.setHomePageController(this);
+            }
+
             mainPane.setCenter(centerNode);
         } catch (IOException e) {
             e.printStackTrace();

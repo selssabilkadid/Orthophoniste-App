@@ -1,13 +1,7 @@
 package Layouts;
 
 import Classes.*;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTimePicker;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,7 +10,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,9 +20,18 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 public class MyAppointmentsController {
+    @FXML
+    private VBox RDVLIST;
 
     @FXML
+    private HBox RDVListeHEADER;
+
+    @FXML
+    private HBox RDVListeITEM;
+    @FXML
     private Button addpatient;
+
+
 
     @FXML
     private TextField age;
@@ -110,19 +112,11 @@ public class MyAppointmentsController {
 
     @FXML
     private TableColumn<RendezVous,String> type_RDV;
-    @FXML
-    private TableView<RendezVous> rdvliste;
 
-    @FXML
-    private TableColumn<RendezVous, String> deleteRDV;
 
-    @FXML
-    private Label alerteinfo;
 
     private Set<Integer> patientsids = new HashSet<Integer>() ;
-    private  UserAccount Orthophoniste = AccountManager.getCurrentuser();
-    private Set<RendezVous> mesRDVs = Orthophoniste.getRDVs();
-    ObservableList<RendezVous> RObservableList = convertSetToObservableList(mesRDVs);
+    private UserAccount Orthophoniste;
 
     @FXML
     public void initialize() {
@@ -145,9 +139,6 @@ public class MyAppointmentsController {
 
         // intialize date to local date
         dateRDV.setValue(LocalDate.now());
-
-        //initialize rdv liste view of all rdvs
-        intializeRDVlist();
 
     }
 
@@ -178,154 +169,81 @@ public class MyAppointmentsController {
     }
     @FXML
     void handle_addpatientAction(){
-        String patientid = ids.getText();
-        if (patientid.isEmpty()) {
-            alerteinfo.setText("Please enter a patient ID.");
-            return;
-        }
-
-        try {
-            int number = Integer.parseInt(patientid);
-            Dossier folder = Orthophoniste.getDossierById(number);
-            if (folder != null) {
+            String patientid = ids.getText();
+            try {
+                int number = Integer.parseInt(patientid);
                 patientsids.add(number);
-                alerteinfo.setText("Patient added successfully.");
-            } else {
-                alerteinfo.setText("Patient with ID " + patientid + " does not exist.");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input: " + patientid + " is not a valid integer.");
             }
-        } catch (NumberFormatException e) {
-            alerteinfo.setText("Invalid input: " + patientid + " is not a valid integer.");
-        }
     }
-
     @FXML
     void make_appointement(){
-
         String choice = typeRDV.getValue();
         LocalDate selectedDate = dateRDV.getValue();
         String heured = heuredebutRDV.getText();
         String heuref = heurefinRDV.getText();
         String note = noteRDV.getText();
 
-        if (selectedDate == null || heured.isEmpty() || heuref.isEmpty() || note.isEmpty() || choice == null) {
-            alerteinfo.setText("Please fill all required fields.");
-            return;
-        }
-
         if (choice.equals("Consultation")) {
             String name = firstname.getText();
             String surname = familyname.getText();
             String agep = age.getText();
-
-            if (name.isEmpty() || surname.isEmpty() || agep.isEmpty()) {
-                alerteinfo.setText("Please fill all required fields for Consultation.");
-                return;
-            }
-
-            Consultation newconsult = new Consultation(selectedDate, heured, heuref, note, name, surname, agep);
+            Consultation newconsult = new Consultation(selectedDate,heured,heuref,note,name,surname,agep);
             Orthophoniste.ajouter_Consultation(newconsult);
-            alerteinfo.setText("Consultation added successfully.");
         } else if (choice.equals("Group Session")) {
             String thematique = theme.getText();
-
-            if (thematique.isEmpty() || patientsids.isEmpty()) {
-                alerteinfo.setText("Please fill all required fields for Group Session and add at least one patient.");
-                return;
-            }
-
-            AtelierGrp groupe = new AtelierGrp(selectedDate, heured, heuref, note, patientsids, thematique);
-            boolean allPatientsExist = true;
-            for (Integer id : patientsids) {
+            addpatient.setOnAction(event -> handle_addpatientAction());
+            AtelierGrp groupe = new AtelierGrp(selectedDate,heured,heuref,note,patientsids,thematique);
+            for(Integer id : patientsids){
                 Dossier folder = Orthophoniste.getDossierById(id);
-                if (folder != null) {
-                    Orthophoniste.ajouterRDV(folder, groupe);
-                } else {
-                    allPatientsExist = false;
-                    alerteinfo.setText("Patient with ID " + id + " does not exist.");
-                    break;
-                }
-            }
-            if (allPatientsExist) {
-                alerteinfo.setText("Group Session added successfully.");
+                if(folder != null){
+                Orthophoniste.ajouterRDV(folder,groupe);}
             }
         } else if (choice.equals("Personal Session")) {
             String patientid = ipatient.getText();
-            if (patientid.isEmpty()) {
-                alerteinfo.setText("Please fill all required fields for Personal Session.");
-                return;
-            }
-
             try {
                 int number = Integer.parseInt(patientid);
                 Dossier folder = Orthophoniste.getDossierById(number);
-                if (folder == null) {
-                    alerteinfo.setText("Patient with ID " + patientid + " does not exist.");
-                    return;
-                }
-                SeanceSuivi seance = new SeanceSuivi(selectedDate, heured, heuref, note, number);
-                Orthophoniste.ajouterRDV(folder, seance);
-                alerteinfo.setText("Personal Session added successfully.");
+                SeanceSuivi seance = new SeanceSuivi(selectedDate,heured,heuref,note,number);
+                if(folder!= null){
+                Orthophoniste.ajouterRDV(folder,seance);}
             } catch (NumberFormatException e) {
-                alerteinfo.setText("Invalid input: " + patientid + " is not a valid integer.");
+                System.out.println("Invalid input: " + patientid + " is not a valid integer.");
             }
-        }
-    }
 
-    public static ObservableList<RendezVous> convertSetToObservableList(Set<RendezVous> RSet) {
-        return FXCollections.observableArrayList(RSet);
-    }
-
-    @FXML
-    void intializeRDVlist() {
-        date.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getDate()));
-        heure_debut.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHeur_debut()));
-        heur_fin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHeur_fin()));
-        observation.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getObservation()));
-        type_RDV.setCellValueFactory(cellData -> new SimpleStringProperty(getRDVTypeName(cellData.getValue())));
-        setButtonCellFactory(deleteRDV, "Delete", this::deleteRDV);
-        rdvliste.setItems(RObservableList);
-    }
-    private String getRDVTypeName(RendezVous rdv) {
-        if (rdv instanceof Consultation) {
-            return "Consultation";
-        } else if (rdv instanceof AtelierGrp) {
-            return "Group session";
-        } else if(rdv instanceof SeanceSuivi){
-            return "Follow up"; // default case if other types of tests are added in the future
-        }else{
-            return "Unknown";
         }
     }
 
 
-    private void setButtonCellFactory(TableColumn<RendezVous, String> column, String buttonText, Callback<RendezVous, Void> action) {
-        column.setCellFactory(col -> new TableCell<>() {
-            private final Button button = new Button(buttonText);
-
-
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    button.setStyle("-fx-background-color: #FF5363; -fx-background-radius: 7; -fx-text-color: #FFFFFF;");
-                    button.setOnAction(event -> action.call(getTableView().getItems().get(getIndex())));
-                    setGraphic(button);
-                }
-                setText(null);
-            }
-        });
-    }
-    private Void deleteRDV(RendezVous R) {
-        System.out.println("Deleting test: " + R.getDate());
-        ObservableList<RendezVous> testData = rdvliste.getItems();
-        testData.remove(R);
-        Orthophoniste.SupprimerRDV(R);
-        return null;
-    }
-
-
+//    Set<RendezVous> rdvs = new HashSet<RendezVous>();
+//    // Correct instantiation of LocalDate
+//    // Declare Consultation objects
+//    Consultation consultation1 = new Consultation(LocalDate.of(2024, 5, 21), "13:00", "15:00","hi", "Malak", "Kadid", "13");
+//    Consultation consultation2 = new Consultation(LocalDate.of(2024, 5, 22), "10:00", "12:00","hello", "Alice", "Smith", "14");
+//    Consultation consultation3 = new Consultation(LocalDate.of(2024, 5, 23), "09:00", "11:00","welcome", "John", "Doe", "15");
+//
+//
+//    @Override
+//    public void initialize(URL url, ResourceBundle resourceBundle) {
+//        Set<RendezVous> rdvs = new HashSet<>(); // Ensure this set is properly initialized
+//        rdvs.add(consultation3);
+//        rdvs.add(consultation2);
+//        rdvs.add(consultation1);
+//
+//        for (RendezVous RDV : rdvs) {
+//            FXMLLoader fxmlloader = new FXMLLoader();
+//            fxmlloader.setLocation(getClass().getResource("/Layouts/RendezVousItem.fxml"));
+//            try {
+//                HBox hbox = fxmlloader.load();
+//                RendezVousItem item = fxmlloader.getController(); // Get the controller from the FXMLLoader
+//                item.setData(RDV); // Use the loaded controller instance to set data
+//                RDVLIST.getChildren().add(hbox);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 }
 
