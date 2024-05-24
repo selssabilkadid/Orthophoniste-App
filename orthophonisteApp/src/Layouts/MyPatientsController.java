@@ -125,7 +125,7 @@ public class MyPatientsController {
             if (item == null || empty) {
                 setStyle("");
             } else {
-
+                setStyle("-fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 14px; -fx-padding: 10px;");
             }
         }
 

@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -42,6 +43,12 @@ public class DossierPatientController {
     private Label contactNumber;
     @FXML
     private Label patientGrp;
+    @FXML
+    private Label profession;
+    @FXML
+    private Label profType;
+    @FXML
+    private VBox troublesVBox;
 
     @FXML
     public void initialize() {
@@ -71,6 +78,7 @@ public class DossierPatientController {
         patientPlace.setText(patient.getLieuNaissance());
         patientAdress.setText(patient.getAdresse());
 
+        troublesVBox.getChildren().clear(); // Clear any existing troubles
         if (patient.getTroubles() == null || patient.getTroubles().isEmpty()) {
             ArrayList<Trouble> dummyTroubles = new ArrayList<>();
             dummyTroubles.add(new Trouble("Trouble 1", CategorieTrouble.deglutition));
@@ -78,13 +86,22 @@ public class DossierPatientController {
             dummyTroubles.add(new Trouble("Trouble 3", CategorieTrouble.neuro_developpementaux));
             patient.setTroubles(dummyTroubles);
         }
-        troubles.setText(patient.getTroubles().toString());
+
+        for (Trouble trouble : patient.getTroubles()) {
+            Text troubleText = new Text(trouble.getNom());
+            troubleText.setStyle("-fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 14;");
+            troublesVBox.getChildren().add(troubleText);
+        }
         if (patient instanceof Adulte adulte) {
             contactNumber.setText(adulte.getNumTel());
             patientGrp.setText("Adulte");
+            profType.setText("Profession");
+            profession.setText(adulte.getProfession());
         } else if (patient instanceof Enfant enfant) {
             contactNumber.setText("Père: " + enfant.getTelpere() + "\n" + "Mère: " + enfant.getTelmere());
             patientGrp.setText("Enfant");
+            profType.setText("Grade");
+            profession.setText(enfant.getClasseEtude());
         }
         System.out.println("Patient data set successfully");
     }

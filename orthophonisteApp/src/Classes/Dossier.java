@@ -33,5 +33,39 @@ public class Dossier implements Serializable {
     public void supprimerfiche (FichedeSuivi fiche){
         fichedeSuivis.remove(fiche);
     }
-    
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+    public static int getId() {
+        return id;
+    }
+    public static void setId(int id) {
+        Dossier.id = id;
+    }
+    public Patient getPatient() {
+        return patient;
+    }
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+    public Set<FichedeSuivi> getFichedeSuivis() {
+        return fichedeSuivis;
+    }
+    public void setFichedeSuivis(Set<FichedeSuivi> fichedeSuivis) {
+        this.fichedeSuivis = fichedeSuivis;
+    }
+    public Set<RendezVous> getRendezvous() {
+        return rendezvous;
+    }
+    public void setRendezvous(Set<RendezVous> rendezvous) {
+        this.rendezvous = rendezvous;
+    }
+    public Set<BilanO> getBilans() {
+        return Bilans;
+    }
+    public void setBilans(Set<BilanO> bilans) {
+        Bilans = bilans;
+    }
+
 }
