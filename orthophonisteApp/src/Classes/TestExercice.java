@@ -4,7 +4,7 @@ import java.util.Set;
 public class TestExercice extends Test implements Calculable {
     private static final long serialVersionUID = 1L;
 
-    Set<Exercice> exercices;
+    private Set<Exercice> exercices;
 
     public TestExercice(String id, String capacite, Set<Exercice> exercices) {
 
@@ -22,8 +22,10 @@ public class TestExercice extends Test implements Calculable {
         exercices.add(exercice);
     }
     public void supprimerExercice(Exercice exercice){
+
         exercices.remove(exercice);
     }
+
 
 
     public int calculerScore() {

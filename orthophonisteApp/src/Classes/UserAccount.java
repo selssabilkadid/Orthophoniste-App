@@ -17,7 +17,9 @@ public class UserAccount implements Serializable {
     private Set<RendezVous> Rendezvous = new HashSet<>();
     private Set<Patient> patients = new HashSet<>();
     private Set<Test> mes_tests = new HashSet<>();
+    private Set<TestQuestionnaire> mes_questionnaires = new HashSet<>();
     private Set<Exercice> mes_exercices = new HashSet<>();
+    private Set<TestExercice> mes_testexercices = new HashSet<>();
     private Set<Question> mes_questions = new HashSet<>();
     private Map<Integer, Dossier> dossierMap = new HashMap<>();
 
@@ -167,4 +169,49 @@ public class UserAccount implements Serializable {
         Rendezvous.remove(R);
     }
 
+    public Set<TestQuestionnaire> getMes_questionnaires() {
+        return mes_questionnaires;
+    }
+
+    public void setMes_questionnaires(Set<TestQuestionnaire> mes_questionnaires) {
+        this.mes_questionnaires = mes_questionnaires;
+    }
+
+    public Set<TestExercice> getMes_testexercices() {
+        return mes_testexercices;
+    }
+
+    public void setMes_testexercices(Set<TestExercice> mes_testexercices) {
+        this.mes_testexercices = mes_testexercices;
+    }
+    public void ajouterTestQuestionnaire(TestQuestionnaire Q){
+        mes_questionnaires.add(Q);
+    }
+    public void ajouterTestExercice(TestExercice E){
+        mes_testexercices.add(E);
+    }
+    public Test getTestByName(String name) {
+        for (Test test : mes_tests) {
+            if (test.getNom().equals(name)) {
+                return test;
+            }
+        }
+        return null; // Return null if no test is found with the given name
+    }
+    public TestQuestionnaire getTestQuestionnaireByName(String name) {
+        for (TestQuestionnaire test : mes_questionnaires) {
+            if (test.getNom().equals(name)) {
+                return test;
+            }
+        }
+        return null; // Return null if no test is found with the given name
+    }
+    public TestExercice getTestExerciceByName(String name) {
+        for (TestExercice test : mes_testexercices) {
+            if (test.getNom().equals(name)) {
+                return test;
+            }
+        }
+        return null; // Return null if no test is found with the given name
+    }
 }
