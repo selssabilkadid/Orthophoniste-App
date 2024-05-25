@@ -141,6 +141,11 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Button>
+      <ImageView fx:id="gobackBtn" fitHeight="29.0" fitWidth="36.0" layoutX="16.0" layoutY="14.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/left-arrow-in-circular-button-black-symbol.png" />
+         </image>
+      </ImageView>
 
    </children>
 </AnchorPane>

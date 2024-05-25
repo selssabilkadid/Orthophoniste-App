@@ -1,8 +1,6 @@
 package Layouts;
 
-import Classes.Adulte;
-import Classes.Enfant;
-import Classes.Patient;
+import Classes.*;
 import Controllers.DossierPatientController;
 import Controllers.HomePageController;
 import Controllers.Main;
@@ -50,7 +48,7 @@ public class MyPatientsController {
 
     @FXML
     private TableColumn<Patient, String> adresse;
-
+    private UserAccount currentUser = AccountManager.getCurrentuser();
     private HomePageController homePageController;
 
     public void setHomePageController(HomePageController homePageController) {
@@ -106,7 +104,9 @@ public class MyPatientsController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        for (Patient patient : patients) {
+            currentUser.creerdossier(patient);
+        }
         return patients;
 
     }
@@ -139,7 +139,14 @@ public class MyPatientsController {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Layouts/DossierPatient.fxml"));
                         Parent root = loader.load();
                         DossierPatientController dossierPatientController = loader.getController();
-                        dossierPatientController.setPatientData(patient);
+
+
+                        Dossier dossier = currentUser.getDossierByPatient(patient);
+
+                        System.out.println(dossier);
+                        dossierPatientController.setPatientAndDossier(patient, dossier);
+
+
                         Main.changerScene(root);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -148,6 +155,6 @@ public class MyPatientsController {
             }
         }
 
-}
+    }
 
     }

@@ -13,6 +13,7 @@ import javafx.util.Callback;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MyTestsController {
@@ -169,8 +170,36 @@ public class MyTestsController {
         intializeExoSet();
         intializeQuestionSet();
         intializeTestslist();
+        TestQuestionnaire test1 = new TestQuestionnaire("Test 1", "Test capacity 1", createDummyQuestions());
+        TestExercice test2 = new TestExercice("Test 2", "Test capacity 2", createDummyExercices());
+
+        testObservableList.addAll(test1, test2);
+
+    }
+    private Set<Question> createDummyQuestions() {
+        Set<Question> questions = new HashSet<>();
+
+        QuestionQCM question1 = new QuestionQCM("Q1", "Question 1: What is 2 + 2?", new ArrayList<>(List.of("3", "4", "5")));
+        QuestionQCU question2 = new QuestionQCU("Q2", "Question 2: What is the capital of France?", new ArrayList<>(List.of("Paris", "Berlin", "London")));
+
+        questions.add(question1);
+        questions.add(question2);
+
+        return questions;
     }
 
+    private Set<Exercice> createDummyExercices() {
+        Set<Exercice> exercices = new HashSet<>();
+
+        // Create dummy exercices and add them to the set
+        Exercice exercice1 = new Exercice("E1", "Exercice 1: Solve the following equation", new HashSet<>(Set.of("Equation 1", "Equation 2")));
+        Exercice exercice2 = new Exercice("E2", "Exercice 2: Write a short paragraph about your favorite hobby", new HashSet<>(Set.of("Paragraph task")));
+
+        exercices.add(exercice1);
+        exercices.add(exercice2);
+
+        return exercices;
+    }
     public void showBuildTestPage() {
         testsview.setVisible(false);
         buildtest.setVisible(true);

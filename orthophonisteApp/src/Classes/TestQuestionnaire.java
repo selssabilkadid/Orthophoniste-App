@@ -20,6 +20,12 @@ public class TestQuestionnaire extends Test  {
         questions.remove(question);
     }
 
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
+    }
 
 
 }

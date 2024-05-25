@@ -1,40 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="670.0" prefWidth="623.0" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CreateBoController">
+<ScrollPane fx:id="mainLayout" prefHeight="937.0" prefWidth="670.0" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CreateBoController">
 
-            <children>
-                <Label alignment="CENTER" layoutX="180.0" layoutY="14.0" prefHeight="37.0" prefWidth="247.0" style="-fx-border-radius: 8; -fx-background-color: #FEEEEFFF;" text="Create a new balance sheet" textAlignment="CENTER" textFill="RED">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="15.0" />
-         </font></Label>
-                <VBox layoutX="6.0" layoutY="70.0" prefHeight="262.0" prefWidth="535.0" spacing="10">
-                    <Label prefHeight="21.0" prefWidth="116.0" text="Diagnostique">
-            <VBox.margin>
-               <Insets left="250.0" top="20.0" />
-            </VBox.margin>
-            <font>
-               <Font name="Arial Rounded MT Bold" size="15.0" />
-            </font></Label>
-                    <VBox fx:id="troublesVBox" spacing="5" />
-                    <ListView fx:id="troublesListView" prefHeight="180.0" prefWidth="471.0">
-            <VBox.margin>
-               <Insets left="80.0" />
-            </VBox.margin></ListView>
+    <AnchorPane prefHeight="923.0" prefWidth="664.0">
 
-                    <Button alignment="CENTER" onAction="#addTrouble" text="Add Trouble">
-            <VBox.margin>
-               <Insets left="260.0" />
-            </VBox.margin></Button>
-                </VBox>
-                <ListView fx:id="testsListView" layoutX="83.0" layoutY="407.0" prefHeight="200.0" prefWidth="455.0" />
-            </children>
+        <children>
+            <Label alignment="CENTER" layoutX="180.0" layoutY="14.0" prefHeight="37.0" prefWidth="247.0" style="-fx-border-radius: 8; -fx-background-color: #FEEEEFFF;" text="Create a new balance sheet" textAlignment="CENTER" textFill="RED">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="15.0" />
+                </font></Label>
 
-</AnchorPane>
+            <Button alignment="CENTER" layoutX="459.0" layoutY="121.0" onAction="#addTrouble" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #FEEEEFFF;" text="Add Trouble" textFill="RED">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="12.0" />
+                </font>
+            </Button>
+            <Label layoutX="86.0" layoutY="125.0" prefHeight="17.0" prefWidth="81.0" text="Diagnostic">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="15.0" />
+                </font>
+            </Label>
+            <VBox fx:id="troublesVBox" layoutX="6.0" layoutY="152.66665649414062" spacing="5" />
+            <ListView fx:id="troublesListView" layoutX="86.0" layoutY="162.66665649414062" prefHeight="180.0" prefWidth="471.0" />
+            <ListView fx:id="testsListView" layoutX="83.0" layoutY="407.0" prefHeight="200.0" prefWidth="471.0" />
+            <Button fx:id="confirmButton" layoutX="460.0" layoutY="374.0" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #FEEEEFFF;" text="Confirm" textFill="RED">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="13.0" />
+                </font></Button>
+            <Label layoutX="86.0" layoutY="376.0" prefHeight="21.0" prefWidth="116.0" text="List of tests">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="15.0" />
+                </font>
+            </Label>
+            <Label layoutX="86.0" layoutY="650" prefHeight="21.0" prefWidth="152.0" text="Therapeutic project">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="15.0" />
+                </font>
+            </Label>
+            <TextField fx:id="projetThField" layoutX="86.0" layoutY="679.0" prefHeight="111.0" prefWidth="475.0" promptText="Enter ProjetTh" />
+         <Button fx:id="addBilanBtn" layoutX="269.0" layoutY="818.0" mnemonicParsing="false" onAction="#addBilan" prefHeight="31.0" prefWidth="125.0" text="Add sheet" />
+        </children>
+
+    </AnchorPane>
+
+</ScrollPane>

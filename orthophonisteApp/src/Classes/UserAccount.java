@@ -1,10 +1,9 @@
 package Classes;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class UserAccount implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -67,7 +66,14 @@ public class UserAccount implements Serializable {
         }
         return null; // Return null if no question is found with the given ID
     }
-
+    public Dossier getDossierByPatient(Patient patient) {
+        for (Dossier dossier : dossierMap.values()) {
+            if (dossier.getPatient().equals(patient)) {
+                return dossier;
+            }
+        }
+        return null;
+    }
     public Set<RendezVous> getRendezvous() {
         return Rendezvous;
     }
@@ -160,4 +166,5 @@ public class UserAccount implements Serializable {
     public void SupprimerRDV(RendezVous R){
         Rendezvous.remove(R);
     }
+
 }
