@@ -18,7 +18,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         stg = primaryStage;
         primaryStage.setResizable(false);
-        Parent root = FXMLLoader.load(getClass().getResource("/Layouts/HomePage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Layouts/SignUp.fxml"));
 
         primaryStage.setTitle("SIGN UP");
         //primaryStage.setScene(new Scene(root, 600, 400));

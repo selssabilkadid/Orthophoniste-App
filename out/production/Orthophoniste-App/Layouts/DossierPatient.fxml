@@ -136,6 +136,11 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Button>
+      <Button fx:id="createBo" layoutX="557.0" layoutY="538.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="100.0" style="-fx-background-radius: 7; -fx-border-color: #FEEEEF; -fx-background-color: #FEEEEF;" text="Create BO" textFill="#ff5363">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Button>
 
    </children>
 </AnchorPane>

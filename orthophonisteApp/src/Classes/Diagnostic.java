@@ -9,12 +9,23 @@ public class Diagnostic implements Serializable {
     public Diagnostic(Trouble[] troubles) {
         this.troubles = troubles;
     }
+    public Diagnostic( ) {
+
+    }
 
     public Trouble[] getTroubles() {
         return troubles;
+    }
+    public void setTroubles(Trouble[] troubles) {
+        this.troubles = troubles;
     }
 
     public void ajouterTrouble(Trouble trouble) {
 
     }
+
+
+
+
+
 }

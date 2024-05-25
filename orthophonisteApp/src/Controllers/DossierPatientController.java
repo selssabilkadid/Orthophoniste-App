@@ -2,12 +2,18 @@ package Controllers;
 
 import Classes.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -49,12 +55,15 @@ public class DossierPatientController {
     private Label profType;
     @FXML
     private VBox troublesVBox;
+    @FXML
+    private Button createBo;
 
     @FXML
     public void initialize() {
         btnFiches.setOnAction(event -> showFiches());
         btnBilans.setOnAction(event -> showBilans());
         btnRendezvous.setOnAction(event -> showRendezvous());
+        createBo.setOnAction(event -> createBo());
         System.out.println("DossierPatientController initialized");
     }
 
@@ -123,4 +132,27 @@ public class DossierPatientController {
         rendezvousView.getChildren().add(new Label("Displaying Rendezvous"));
         contentPane.getChildren().setAll(rendezvousView);
     }
+
+    private void createBo() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Layouts/CreateBO.fxml")); // Ensure this path is correct
+            AnchorPane createBoPane = loader.load();
+
+            CreateBoController createBoController = loader.getController();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(createBoPane)); // AnchorPane is used here
+            stage.showAndWait();
+
+
+            BilanO bilanO = createBoController.createBilanO();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+
+
