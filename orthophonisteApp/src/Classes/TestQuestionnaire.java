@@ -20,6 +20,14 @@ public class TestQuestionnaire extends Test  {
         questions.remove(question);
     }
 
-
+    public Set<Question> getQuestions(){
+        return questions;
+    }
+    public void afficher() {
+        System.out.println("Liste des questions pour le test " + getNom() + ":");
+        for (Question question : questions) {
+            System.out.println(" - " + question.getId() + ": " + question.getenonce());
+        }
+    }
 
 }

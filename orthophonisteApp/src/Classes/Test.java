@@ -24,5 +24,6 @@ public abstract class Test implements Serializable {
     public String getCapacite(){
         return capacite;
     }
+
     
 }

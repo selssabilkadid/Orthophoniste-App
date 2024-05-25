@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -91,7 +92,7 @@
                         </Label>
                         <TextField fx:id="patients_liste" layoutX="160.0" layoutY="75.0" prefHeight="30.0" prefWidth="442.0" promptText="list like 1,2,3... (separate items with commas)" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" visible="false" />
                   <TextField fx:id="ids" layoutX="160.0" layoutY="75.0" prefHeight="30.0" prefWidth="133.0" promptText="patient id" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
-                  <Button fx:id="addpatient" layoutX="393.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="59.0" style="-fx-background-color: #FFA901;" text="ADD" textFill="WHITE">
+                  <Button fx:id="addpatient" layoutX="393.0" layoutY="75.0" mnemonicParsing="false" onAction="#handle_addpatientAction" prefHeight="30.0" prefWidth="59.0" style="-fx-background-color: #FFA901;" text="ADD" textFill="WHITE">
                      <font>
                         <Font name="Product Sans" size="12.0" />
                      </font>
@@ -107,6 +108,11 @@
                             </font>
                         </Label>
                         <TextField fx:id="ipatient" layoutX="160.0" layoutY="17.0" prefHeight="30.0" prefWidth="442.0" promptText="patient id" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
+                  <CheckBox fx:id="Online" layoutX="160.0" layoutY="73.0" mnemonicParsing="false" text="Online" textFill="#6a7177">
+                     <font>
+                        <Font name="Product Sans" size="14.0" />
+                     </font>
+                  </CheckBox>
                     </children>
                 </AnchorPane>
 
@@ -131,7 +137,7 @@
             <ComboBox fx:id="typeRDV" layoutX="192.0" layoutY="55.0" prefWidth="150.0" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
             <Label fx:id="alerteinfo" layoutX="413.0" layoutY="23.0" textFill="#ff5363">
                <font>
-                  <Font name="Product Sans" size="16.0" />
+                  <Font name="Product Sans" size="13.0" />
                </font>
             </Label>
             </children>

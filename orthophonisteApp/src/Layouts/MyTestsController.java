@@ -18,6 +18,57 @@ import java.util.Set;
 public class MyTestsController {
 
     @FXML
+    private TableColumn<Question, String> EE;
+
+    @FXML
+    private TableColumn<Exercice, String> EE1;
+
+    @FXML
+    private TableColumn<Question, String> Edelete;
+
+    @FXML
+    private TableColumn<Exercice, String> Edelete1;
+
+    @FXML
+    private TableColumn<Question, String> Eedit;
+
+    @FXML
+    private TableColumn<Exercice, String> Eedit1;
+
+    @FXML
+    private TableColumn<Question, String> Eid;
+
+    @FXML
+    private TableColumn<Exercice, String> Eid1;
+
+    @FXML
+    private TableColumn<Question, String> Etype;
+
+    @FXML
+    private TableColumn<Exercice, String> Etype1;
+
+    @FXML
+    private TableView<Exercice> Exercicesview;
+
+    @FXML
+    private TableView<Question> Quizview;
+
+    @FXML
+    private Button TaddnewQ;
+
+    @FXML
+    private AnchorPane TeditTest;
+
+    @FXML
+    private Button Tsavechanges;
+
+    @FXML
+    private Label Ttitle;
+
+    @FXML
+    private Label Ttype;
+
+    @FXML
     private Button addmat;
 
     @FXML
@@ -145,6 +196,8 @@ public class MyTestsController {
 
     private UserAccount Orthophoniste = AccountManager.getCurrentuser();
 
+    private Test currentTest;
+
     private Set<Test> mestests = Orthophoniste.getMes_tests();
     ObservableList<Test> testObservableList = convertSetToObservableList(mestests);
     private Set<Question> mesquestions = Orthophoniste.getQuestions();
@@ -155,6 +208,7 @@ public class MyTestsController {
     @FXML
     public void initialize() {
         buildtest.setVisible(false);
+        TeditTest.setVisible(false);
         intializeTestslist();
         createtest.setOnAction(event -> showBuildTestPage());
 
@@ -177,6 +231,7 @@ public class MyTestsController {
         makenewtest.setVisible(true);
         creationquest.setVisible(false);
         creationexo.setVisible(false);
+        TeditTest.setVisible(false);
     }
 
     @FXML
@@ -215,7 +270,6 @@ public class MyTestsController {
                 if (selectedChoice.equals("QCM")) {
                     QuestionQCM qcm = new QuestionQCM(id, enonce, propositions);
                     Orthophoniste.ajouterquestion(qcm);
-
                     System.out.println(qcm.getenonce());
                 } else if (selectedChoice.equals("QCU")) {
                     QuestionQCU qcu = new QuestionQCU(id, enonce, propositions);
@@ -273,12 +327,15 @@ public class MyTestsController {
             if (type_test.getValue().equals("Quiz")) {
                 Question q = Orthophoniste.getQuestionById(quest);
                 questions.add(q);
-            } else if (type_test.getValue().equals("Exercice")) {
+                System.out.println("added");
+                questid.clear();
+            } else if (type_test.getValue().equals("Exercices")) {
                 Exercice exo = Orthophoniste.getExerciceById(quest);
                 exercices.add(exo);
                 System.out.println(exo.getConsigne());
+                System.out.println("added");
+                questid.clear();
             }
-            questid.clear();
         }
     }
 
@@ -291,12 +348,14 @@ public class MyTestsController {
             if (selectedChoice.equals("Quiz")) {
                 TestQuestionnaire test = new TestQuestionnaire(id, capacite, questions);
                 Orthophoniste.ajouterTest(test);
-
+                Orthophoniste.ajouterTestQuestionnaire(test);
+                TestQuestionnaire Q = Orthophoniste.getTestQuestionnaireByName(test.getNom());
+                Q.afficher();
                 System.out.println("Ok");
             } else if (selectedChoice.equals("Exercices")) {
                 TestExercice test = new TestExercice(id, capacite, exercices);
                 Orthophoniste.ajouterTest(test);
-
+                Orthophoniste.ajouterTestExercice(test);
                 System.out.println("Ok");
             }
             testid.clear();
@@ -321,15 +380,7 @@ public class MyTestsController {
         setButtonCellFactory(deleteTest, "Delete", this::deleteTest);
         tests_tab.setItems(testObservableList);
     }
-    private String getTestTypeName(Test test) {
-        if (test instanceof TestQuestionnaire) {
-            return "TestQuestionnaire";
-        } else if (test instanceof TestExercice) {
-            return "TestExercice";
-        } else {
-            return "Unknown"; // default case if other types of tests are added in the future
-        }
-    }
+
 
 
     private void setButtonCellFactory(TableColumn<Test, String> column, String buttonText, Callback<Test, Void> action) {
@@ -352,10 +403,7 @@ public class MyTestsController {
         });
     }
 
-    private Void editTest(Test test) {
-        System.out.println("Editing test: " + test.getNom());
-        return null;
-    }
+
 
     private Void deleteTest(Test test) {
         System.out.println("Deleting test: " + test.getNom());
@@ -398,6 +446,141 @@ public class MyTestsController {
 
         exercices_tab.setItems(EObservableList);
     }
+
+
+    // Initialize Edit test tab view
+    private String getTestTypeName(Test t) {
+        if (t instanceof TestQuestionnaire) {
+            return "Quiz";
+        } else if (t instanceof TestExercice) {
+            return "Exercices";
+        } else{
+            return "Unknown"; // default case if other types of tests are added in the future
+        }
+    }
+
+    private void showTestDetailsQuestionnaire(TestQuestionnaire test) {
+            Quizview.setVisible(true);
+            Exercicesview.setVisible(false);
+            test.afficher();
+            initializeTestElementSet(test.getQuestions());
+    }
+    private void showTestDetailsExercices(TestExercice test){
+        Quizview.setVisible(false);
+        Exercicesview.setVisible(true);
+        initializeExerciceElementSet(test.getExercices());
+    }
+
+    private Void editTest(Test test) {
+        if(getTestTypeName(test).equals("Quiz")){
+            TestQuestionnaire testQ = Orthophoniste.getTestQuestionnaireByName(test.getNom());
+            currentTest = testQ; // Store the current test
+            buildtest.setVisible(false);
+            TeditTest.setVisible(true);
+            Ttitle.setText(testQ.getNom());
+            Ttype.setText(getTestTypeName(testQ));
+            showTestDetailsQuestionnaire(testQ);
+        }else if(getTestTypeName(test).equals("Exercices")){
+            TestExercice testQ = Orthophoniste.getTestExerciceByName(test.getNom());
+            buildtest.setVisible(false);
+            TeditTest.setVisible(true);
+            Ttitle.setText(testQ.getNom());
+            Ttype.setText(getTestTypeName(testQ));
+            showTestDetailsExercices(testQ);
+
+        }
+        System.out.println("Editing test: " + test.getNom());
+        return null;
+    }
+
+
+
+
+    @FXML
+    void initializeTestElementSet(Set<Question> Tquestions) {
+        ObservableList<Question> MQObservableList = convertSetQToObservableList(Tquestions);
+        Quizview.setItems(MQObservableList);
+        Eid.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        Etype.setCellValueFactory(cellData -> new SimpleStringProperty(getQuestionTypeName(cellData.getValue())));
+        EE.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getenonce()));
+        setButtonCellFactoryQ(Eedit, "Edit", this::editQuestion);
+        setButtonCellFactoryQ(Edelete, "Delete", this::deleteQuestion);
+    }
+    private Void editQuestion(Question Q){
+        System.out.println("editing Question"+Q.getId());
+        return null;
+    }
+    private Void deleteQuestion(Question Q){
+        ObservableList<Question> testData =Quizview.getItems();
+        testData.remove(Q);
+        if (currentTest instanceof TestQuestionnaire) {
+            ((TestQuestionnaire) currentTest).supprimerelement(Q);
+        }
+        return null;
+    }
+
+    private void setButtonCellFactoryQ(TableColumn<Question, String> column, String buttonText, Callback<Question, Void> action) {
+        column.setCellFactory(col -> new TableCell<>() {
+            private final Button button = new Button(buttonText);
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    button.setStyle("-fx-background-color: #D6D3FE; -fx-background-radius: 7;");
+                    button.setOnAction(event -> action.call(getTableView().getItems().get(getIndex())));
+                    setGraphic(button);
+                }
+                setText(null);
+            }
+        });
+    }
+
+    @FXML
+    void initializeExerciceElementSet(Set<Exercice> Texercices) {
+        ObservableList<Exercice> MEObservableList = convertSetEToObservableList(Texercices);
+        Exercicesview.setItems(MEObservableList);
+        Eid1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        Etype1.setCellValueFactory(cellData -> new SimpleStringProperty("Exercices"));
+        EE1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getConsigne()));
+        setButtonCellFactoryE(Eedit1, "Edit", this::editExercice);
+        setButtonCellFactoryE(Edelete1, "Delete", this::deleteExercice);
+    }
+    private Void editExercice(Exercice E) {
+        System.out.println("Editing Exercice: " + E.getId());
+        return null;
+    }
+
+    private Void deleteExercice(Exercice E) {
+        ObservableList<Exercice> exerciseData = Exercicesview.getItems();
+        exerciseData.remove(E);
+
+        if (currentTest instanceof TestExercice) {
+            ((TestExercice) currentTest).supprimerExercice(E);
+        }
+        return null;
+    }
+
+    private void setButtonCellFactoryE(TableColumn<Exercice, String> column, String buttonText, Callback<Exercice, Void> action) {
+        column.setCellFactory(col -> new TableCell<>() {
+            private final Button button = new Button(buttonText);
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    button.setStyle("-fx-background-color: #D6D3FE; -fx-background-radius: 7;");
+                    button.setOnAction(event -> action.call(getTableView().getItems().get(getIndex())));
+                    setGraphic(button);
+                }
+                setText(null);
+            }
+        });
+    }
+
 
 
 }

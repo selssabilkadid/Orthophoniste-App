@@ -1,13 +1,10 @@
 package Layouts;
 
 import Classes.*;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTimePicker;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,13 +17,20 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MyAppointmentsController {
+
+    @FXML
+    private CheckBox Online;
 
     @FXML
     private Button addpatient;
@@ -199,16 +203,28 @@ public class MyAppointmentsController {
     }
 
     @FXML
-    void make_appointement(){
-
+    void make_appointement() {
         String choice = typeRDV.getValue();
         LocalDate selectedDate = dateRDV.getValue();
         String heured = heuredebutRDV.getText();
         String heuref = heurefinRDV.getText();
         String note = noteRDV.getText();
 
+        // Validate input fields
         if (selectedDate == null || heured.isEmpty() || heuref.isEmpty() || note.isEmpty() || choice == null) {
             alerteinfo.setText("Please fill all required fields.");
+            return;
+        }
+
+        // Validate time format
+        if (!isValidTimeFormat(heured) || !isValidTimeFormat(heuref)) {
+            alerteinfo.setText("Invalid time format. Time format should be between 00:00 and 23:59.");
+            return;
+        }
+
+        // Validate time range
+        if (!isValidTimeRange(heured, heuref)) {
+            alerteinfo.setText("Invalid time range. Start time must be before end time.");
             return;
         }
 
@@ -222,9 +238,27 @@ public class MyAppointmentsController {
                 return;
             }
 
-            Consultation newconsult = new Consultation(selectedDate, heured, heuref, note, name, surname, agep);
-            Orthophoniste.ajouter_Consultation(newconsult);
-            alerteinfo.setText("Consultation added successfully.");
+            try {
+                int ageInt = Integer.parseInt(agep);
+                Duration consultationDuration = getDuration(heured, heuref);
+                if (ageInt < 18) {
+                    if (consultationDuration.toMinutes() < 150) { // 2 hours and 30 minutes = 150 minutes
+                        alerteinfo.setText("Consultation duration must be at least 2 hours and 30 minutes for patients under 18.");
+                        return;
+                    }
+                } else {
+                    if (consultationDuration.toMinutes() < 90) { // 1 hour and 30 minutes = 90 minutes
+                        alerteinfo.setText("Consultation duration must be at least 1 hour and 30 minutes for patients 18 and over.");
+                        return;
+                    }
+                }
+
+                Consultation newconsult = new Consultation(selectedDate, heured, heuref, note, name, surname, agep);
+                Orthophoniste.ajouter_Consultation(newconsult);
+                alerteinfo.setText("Consultation added successfully.");
+            } catch (NumberFormatException e) {
+                alerteinfo.setText("Invalid input: Age must be a valid integer.");
+            }
         } else if (choice.equals("Group Session")) {
             String thematique = theme.getText();
 
@@ -262,14 +296,53 @@ public class MyAppointmentsController {
                     alerteinfo.setText("Patient with ID " + patientid + " does not exist.");
                     return;
                 }
-                SeanceSuivi seance = new SeanceSuivi(selectedDate, heured, heuref, note, number);
-                Orthophoniste.ajouterRDV(folder, seance);
-                alerteinfo.setText("Personal Session added successfully.");
+
+                Duration sessionDuration = getDuration(heured, heuref);
+                if (sessionDuration.toMinutes() < 60) { // 1 hour = 60 minutes
+                    alerteinfo.setText("Personal Session duration must be at least 1 hour.");
+                    return;
+                }
+
+                Online.setOnAction(e -> {
+                    if (Online.isSelected()) {
+                        System.out.println("Online");
+                        SeanceSuivi seance = new SeanceSuivi(selectedDate, heured, heuref, note, number,true);
+                        Orthophoniste.ajouterRDV(folder, seance);
+                        alerteinfo.setText("Personal Session added successfully.");
+                    } else {
+                        System.out.println("Offline");
+                        SeanceSuivi seance = new SeanceSuivi(selectedDate, heured, heuref, note, number,false);
+                        Orthophoniste.ajouterRDV(folder, seance);
+                        alerteinfo.setText("Personal Session added successfully.");
+                    }
+                });
             } catch (NumberFormatException e) {
                 alerteinfo.setText("Invalid input: " + patientid + " is not a valid integer.");
             }
         }
     }
+
+    // Method to validate time format
+    private boolean isValidTimeFormat(String time) {
+        String timeRegex = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
+        Pattern pattern = Pattern.compile(timeRegex);
+        Matcher matcher = pattern.matcher(time);
+        return matcher.matches();
+    }
+        // Method to validate time range
+    private boolean isValidTimeRange(String startTime, String endTime) {
+        // Convert time strings to LocalTime for comparison
+        LocalTime start = LocalTime.parse(startTime);
+        LocalTime end = LocalTime.parse(endTime);
+        return start.isBefore(end);
+    }
+    //Calculate duration
+    private Duration getDuration(String startTime, String endTime) {
+        LocalTime start = LocalTime.parse(startTime);
+        LocalTime end = LocalTime.parse(endTime);
+        return Duration.between(start, end);
+    }
+
 
     public static ObservableList<RendezVous> convertSetToObservableList(Set<RendezVous> RSet) {
         return FXCollections.observableArrayList(RSet);

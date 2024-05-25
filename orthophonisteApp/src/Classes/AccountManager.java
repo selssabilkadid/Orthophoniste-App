@@ -11,7 +11,7 @@ public class AccountManager {
 
     static {
         loadAccounts();
-        //addShutdownHook();
+        addShutdownHook();
     }
 
     public static UserAccount getCurrentuser() {
