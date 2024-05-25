@@ -1,0 +1,9 @@
+.custom-patient-row {
+    -fx-padding: 10px;
+    -fx-font-family: "Inter Semi Bold";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-border-color: gray;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: #caf0f8;
+}
