@@ -343,7 +343,6 @@ public class MyAppointmentsController {
         return Duration.between(start, end);
     }
 
-
     public static ObservableList<RendezVous> convertSetToObservableList(Set<RendezVous> RSet) {
         return FXCollections.observableArrayList(RSet);
     }

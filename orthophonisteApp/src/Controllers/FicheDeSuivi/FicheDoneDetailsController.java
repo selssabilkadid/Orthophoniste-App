@@ -19,7 +19,7 @@ public class FicheDoneDetailsController {
     public void setFiche(FicheDeSuiviDone fiche) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         dateLabel.setText(fiche.getSavedDate().format(formatter));
-        goalsListView.setItems(FXCollections.observableArrayList(fiche.getObjectifsAtteints()));
+        //goalsListView.setItems(FXCollections.observableArrayList(fiche.getObjectifsAtteints()));
 
         // Set the cell factory if you need to display goal details in a specific way
         goalsListView.setCellFactory(listView -> new FicheDeSuiviController.GoalListCell());

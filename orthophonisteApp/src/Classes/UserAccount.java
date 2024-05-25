@@ -1,5 +1,7 @@
 package Classes;
 
+import Layouts.AnamneseController;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +17,7 @@ public class UserAccount implements Serializable {
     private String password;
 
     private Set<RendezVous> Rendezvous = new HashSet<>();
+    private Set<Consultation> Consultations = new HashSet<>();
     private Set<Patient> patients = new HashSet<>();
     private Set<Test> mes_tests = new HashSet<>();
     private Set<TestQuestionnaire> mes_questionnaires = new HashSet<>();
@@ -22,6 +25,7 @@ public class UserAccount implements Serializable {
     private Set<TestExercice> mes_testexercices = new HashSet<>();
     private Set<Question> mes_questions = new HashSet<>();
     private Map<Integer, Dossier> dossierMap = new HashMap<>();
+    private Set<Anamnese> Anamneses = new HashSet<Anamnese>();
 
     public UserAccount(String firstName, String lastName, String email, String phoneNumber, String address, String password) {
         this.firstName = firstName;
@@ -54,6 +58,7 @@ public class UserAccount implements Serializable {
 
     public void ajouter_Consultation(Consultation consulter) {
         Rendezvous.add(consulter);
+        Consultations.add(consulter);
     }
 
     public void ajouterquestion(Question Q) {
@@ -201,7 +206,10 @@ public class UserAccount implements Serializable {
     public TestQuestionnaire getTestQuestionnaireByName(String name) {
         for (TestQuestionnaire test : mes_questionnaires) {
             if (test.getNom().equals(name)) {
+                System.out.println("test Questionnaire");
+                test.afficher();
                 return test;
+
             }
         }
         return null; // Return null if no test is found with the given name
@@ -214,4 +222,24 @@ public class UserAccount implements Serializable {
         }
         return null; // Return null if no test is found with the given name
     }
+    public Set<Consultation> getConsultations(){
+        return Consultations;
+    }
+    public void DeleteConsultation(Consultation C){
+        Consultations.remove(C);
+        Rendezvous.remove(C);
+    }
+    public Set<Patient> getPatients(){
+        return patients;
+    }
+    public void ajouterAnamnese(Anamnese A){
+        Anamneses.add(A);
+    }
+    public void supprimerAnamnese(Anamnese A){
+        Anamneses.remove(A);
+    }
+    public void getAnamnesebyID(String ID){
+
+    }
+
 }

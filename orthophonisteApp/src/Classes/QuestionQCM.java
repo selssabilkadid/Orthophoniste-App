@@ -1,8 +1,9 @@
 package Classes;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class QuestionQCM extends Question{
+public class QuestionQCM extends Question implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private ArrayList<String> bonneReponse;
