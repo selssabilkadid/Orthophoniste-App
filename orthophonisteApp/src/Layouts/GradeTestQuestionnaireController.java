@@ -1,13 +1,20 @@
 package Layouts;
 
-import Classes.Question;
-import Classes.QuestionQCM;
-import Classes.QuestionQCU;
-import Classes.TestQuestionnaire;
+import Classes.*;
+import Controllers.CreateBoController;
+import Controllers.SharedScoreDataModel;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 public class GradeTestQuestionnaireController {
 
@@ -17,7 +24,16 @@ public class GradeTestQuestionnaireController {
     @FXML
     private VBox questionsContainer;
 
+    @FXML
+    private Button savescorebtn;
+
+    @FXML
+    private AnchorPane rootLayout;
+
     private TestQuestionnaire test;
+    private int totalScore = 0;
+
+    private SharedScoreDataModel sharedDataModel = SharedScoreDataModel.getInstance();
 
     public void setTest(TestQuestionnaire test) {
         this.test = test;
@@ -26,39 +42,90 @@ public class GradeTestQuestionnaireController {
 
     @FXML
     private void initialize() {
-        initializeView();
-    }
-
-    private void initializeView() {
         if (test != null) {
-            testNameLabel.setText(test.getNom());
-            int totalScore = 0;
-            for (Question question : test.getQuestions()) {
-                VBox questionBox = new VBox(5);
-                Label questionLabel = new Label(question.getenonce());
-                questionLabel.setStyle("-fx-font-weight: bold;");
-
-
-
-                TextField scoreField = new TextField();
-                scoreField.setPromptText("Enter score");
-
-                questionBox.getChildren().addAll(questionLabel, scoreField);
-                questionsContainer.getChildren().add(questionBox);
-                try {
-                    int score = Integer.parseInt(scoreField.getText());
-                    if (score >= 1 && score <= 10) {
-                        totalScore += score;
-                    } else {
-                        // Handle invalid score input
-                    }
-                } catch (NumberFormatException e) {
-                    // Handle invalid score input
-                }
-                System.out.println(totalScore);
-            }
+            initializeView();
         }
     }
 
+    private void initializeView() {
+        testNameLabel.setText(test.getNom());
+        for (Question question : test.getQuestions()) {
+            VBox questionBox = new VBox(5);
+            Label questionLabel = new Label(question.getenonce());
+            questionLabel.setStyle("-fx-font-weight: bold;");
+
+            TextField scoreField = new TextField();
+            scoreField.setPromptText("Enter score");
+
+            questionBox.getChildren().addAll(questionLabel, scoreField);
+            questionsContainer.getChildren().add(questionBox);
+        }
+    }
+
+    @FXML
+    private void saveScore() {
+        totalScore = 0;
+        boolean validScores = true;
+
+        for (int i = 0; i < questionsContainer.getChildren().size(); i++) {
+            VBox questionBox = (VBox) questionsContainer.getChildren().get(i);
+            TextField scoreField = (TextField) questionBox.getChildren().get(1);
+
+            try {
+                int score = Integer.parseInt(scoreField.getText());
+                if (score >= 1 && score <= 10) {
+                    totalScore += score;
+                    scoreField.setStyle(null);  // Clear any previous error style
+                } else {
+                    validScores = false;
+                    scoreField.setStyle("-fx-border-color: red;");  // Highlight invalid score
+                }
+            } catch (NumberFormatException e) {
+                validScores = false;
+                scoreField.setStyle("-fx-border-color: red;");  // Highlight invalid score
+            }
+        }
+
+        if (validScores) {
+            sharedDataModel.setTestScore(test, totalScore);  // Update the shared data model
+            navigateToCreateBO();
+        } else {
+            System.out.println("Please enter valid scores between 1 and 10 for all questions.");
+        }
+    }
+    private Set<Test> selectedTests;
+    private List<Trouble> troubles;
+    private String projetThField;
+
+    public void setSelectedTests(Set<Test> selectedTests) {
+        this.selectedTests = selectedTests;
+    }
+
+    public void setTroubles(List<Trouble> troubles) {
+        this.troubles = troubles;
+    }
+
+    public void setProjetThField(String projetThField) {
+        this.projetThField = projetThField;
+    }
+
+    private void navigateToCreateBO() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Layouts/CreateBO.fxml"));
+            ScrollPane newContent = loader.load();
+            CreateBoController createBoController = loader.getController();
+
+            // Pass selected tests, troubles, and projetTh to CreateBoController
+            createBoController.setTestsAndTroubles(selectedTests, troubles);
+            createBoController.setProjetTh(projetThField);
+
+            createBoController.addTestScore(test.getNom(), totalScore);
+
+            rootLayout.getChildren().setAll(newContent);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

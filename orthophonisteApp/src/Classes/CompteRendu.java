@@ -7,7 +7,7 @@ public class CompteRendu implements Serializable {
     private int scoretotal;
     private String conclusion;
     private Test test;
-    CompteRendu(int scoretotal, String conclusion, Test test ){
+    public CompteRendu(int scoretotal, String conclusion, Test test){
            
     }
     public int getScoretotal(){

@@ -26,6 +26,11 @@ public class TestQuestionnaire extends Test  {
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
     }
-
+    public void afficher() {
+        System.out.println("Liste des questions pour le test " + getNom() + ":");
+        for (Question question : this.questions) {
+            System.out.println(" - " + question.getId() + ": " + question.getenonce());
+        }
+    }
 
 }

@@ -13,4 +13,8 @@ public class ProjetTh implements Serializable {
     public String getProjet() {
         return projet;
     }
+    public void setProjet(String projet) {
+        this.projet = projet;
+    }
+
 }

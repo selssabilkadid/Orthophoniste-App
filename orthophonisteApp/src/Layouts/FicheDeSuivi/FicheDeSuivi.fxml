@@ -27,9 +27,9 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <AnchorPane id="fusSidebar" layoutX="-45.0" layoutY="59.0" prefHeight="477.0" prefWidth="282.0" style="-fx-background-radius: 50;" styleClass="sidebar" stylesheets="@../../Design/ficheDeSuivi.css">
+      <AnchorPane id="fusSidebar" layoutX="-41.0" layoutY="159.0" prefHeight="324.0" prefWidth="282.0" style="-fx-background-radius: 50;" styleClass="sidebar" stylesheets="@../../Design/ficheDeSuivi.css">
          <children>
-            <HBox fx:id="goalListBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="61.0" onMouseClicked="#showGoalList" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
+            <HBox fx:id="goalListBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="65.0" onMouseClicked="#showGoalList" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
                <children>
                   <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -49,27 +49,7 @@
                   <Insets bottom="5.0" left="20.0" right="10.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox fx:id="evaluatedGoalsBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="163.0" onMouseClicked="#showEvaluatedGoals" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
-               <children>
-                  <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/check.png" />
-                     </image>
-                  </ImageView>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="125.0" stylesheets="@../../Design/ficheDeSuivi.css" text="Evaluated goals" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
-            <HBox fx:id="followUpSheetBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="264.0" onMouseClicked="#goToSheet" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
+            <HBox fx:id="followUpSheetBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="195.0" onMouseClicked="#goToSheet" prefHeight="52.0" prefWidth="200.0" spacing="4.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
                <children>
                   <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -77,26 +57,6 @@
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="67.0" stylesheets="@../../Design/ficheDeSuivi.css" text="Sheets" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
-            <HBox fx:id="progressBtn" alignment="CENTER_LEFT" layoutX="58.0" layoutY="365.0" onMouseClicked="#goToSheet" prefHeight="52.0" prefWidth="200.0" spacing="8.0" style="-fx-background-color: #002379; -fx-background-radius: 10;">
-               <children>
-                  <ImageView fitHeight="30.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/graphic-progression.png" />
-                     </image>
-                  </ImageView>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="67.0" stylesheets="@../../Design/ficheDeSuivi.css" text="Progress" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -132,5 +92,10 @@
          </font>
       </Label>
       <ListView fx:id="ficheListView" layoutX="459.0" layoutY="162.0" prefHeight="317.0" prefWidth="481.0" style="-fx-background-color: #CDE8E5;" />
+      <ImageView fx:id="gobackBtn" fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/arrow.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
