@@ -4,9 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="1100.0" spacing="30.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="Controllers.FicheDeSuivi.FicheDoneDetailsController">
-    <Label fx:id="dateLabel" text="Date Saved: " />
+<VBox prefHeight="600.0" prefWidth="1100.0" spacing="30.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FicheDeSuivi.FicheDoneDetailsController">
+    <Label fx:id="dateLabel" text="Date Saved: ">
+      <VBox.margin>
+         <Insets left="100.0" />
+      </VBox.margin>
+      <font>
+         <Font name="Arial Rounded MT Bold" size="19.0" />
+      </font></Label>
     <ListView fx:id="goalsListView" prefHeight="388.0" prefWidth="941.0">
       <VBox.margin>
          <Insets left="100.0" right="100.0" />

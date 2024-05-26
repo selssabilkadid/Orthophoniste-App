@@ -1,24 +1,26 @@
 package Controllers.FicheDeSuivi;
 
-import Classes.FicheDeSuiviDone;
-import Classes.FichedeSuivi;
+import Classes.*;
+import Controllers.DossierPatientController;
 import Controllers.FicheDeSuivi.AddGoalController;
-import Classes.ObjectifEvalue;
-import Classes.TypeObjectif;
 import Controllers.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 import javafx.geometry.Insets;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.awt.event.ActionEvent;
@@ -33,6 +35,8 @@ import javafx.scene.control.ComboBox;
 
 public class FicheDeSuiviController {
 
+    public ImageView gobackBtn;
+    public HBox progressBtn;
     @FXML
     private ListView<ObjectifEvalue> ficheListView;
 
@@ -40,12 +44,10 @@ public class FicheDeSuiviController {
 
     @FXML
     public void initialize() {
-        // Add some sample goals (you can replace this with actual data)
         goals.add(new ObjectifEvalue("Read Book", TypeObjectif.COURT));
         goals.add(new ObjectifEvalue("Exercise", TypeObjectif.LONG));
         goals.add(new ObjectifEvalue("Learn JavaFX", TypeObjectif.COURT));
 
-        // Set custom cell factory
         ficheListView.setCellFactory(new Callback<ListView<ObjectifEvalue>, ListCell<ObjectifEvalue>>() {
             @Override
             public ListCell<ObjectifEvalue> call(ListView<ObjectifEvalue> listView) {
@@ -53,7 +55,6 @@ public class FicheDeSuiviController {
             }
         });
 
-        // Bind the observable list to the ListView
         ficheListView.setItems(goals);
         ficheListView.setPlaceholder(new Label("No current sheets, please create a new one"));
     }
@@ -64,7 +65,6 @@ public class FicheDeSuiviController {
 private void addGoal() {
     Dialog<ButtonType> dialog = new Dialog<>();
     dialog.setTitle("Add Goal");
-//    dialog.setHeaderText("Enter the details of the goal:");
 
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/Layouts/FicheDeSuivi/AddGoal.fxml"));
     try {
@@ -73,13 +73,10 @@ private void addGoal() {
         e.printStackTrace();
     }
 
-    // Set the button types
     dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
-    // Get the controller instance
     AddGoalController controller = loader.getController();
 
-    // Convert the result to a Goal object when the OK button is clicked
     dialog.setResultConverter(dialogButton -> {
         if (dialogButton == ButtonType.OK) {
             String goalName = controller.getGoalName();
@@ -187,7 +184,6 @@ private void addGoal() {
     }
     @FXML
     private void gradeGoal(ObjectifEvalue goal) {
-        // Prompt user for the grade
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Grade Goal");
         dialog.setHeaderText("Enter the grade for the goal:");
@@ -199,12 +195,31 @@ private void addGoal() {
             goal.addScore(grade);
         }
     }
+    private Patient patient;
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+    public void goBack(MouseEvent mouseEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Layouts/DossierPatient.fxml"));
+        Parent root = loader.load();
+
+        DossierPatientController dossierPatientController = loader.getController();
+
+        dossierPatientController.setPatientData(patient);
+
+        Main m = new Main();
+        m.changerScene(root);
+    }
+
+
 
     static class GoalListCell extends ListCell<ObjectifEvalue> {
         private HBox hBox = new HBox();
         private Label goalNameLabel = new Label();
         private Label goalTypeLabel = new Label();
-        private ComboBox<Integer> gradeComboBox = new ComboBox<>(); // ComboBox for grading
+        private ComboBox<Integer> gradeComboBox = new ComboBox<>();
+        private List<Integer> scores = new ArrayList<>();
 
         public GoalListCell() {
             super();
@@ -229,10 +244,40 @@ private void addGoal() {
             gradeComboBox.setOnAction(event -> {
                 ObjectifEvalue goal = getItem();
                 if (goal != null) {
-                    goal.addScore(gradeComboBox.getValue());
+                    int score = gradeComboBox.getValue();
+                    goal.addScore(score);
+                    scores.add(score);
+                }
+            });
+            setOnMouseClicked(event -> {
+                if (!isEmpty()) {
+                    ObjectifEvalue goal = getItem();
+                    if (goal != null) {
+                        // Show line chart popup for the selected goal
+                        showGoalEvolutionPopup(goal);
+                    }
                 }
             });
         }
+        private void showGoalEvolutionPopup(ObjectifEvalue goal) {
+            Stage stage = new Stage();
+            stage.setTitle("Goal Evolution - " + goal.getNom());
+
+            LineChart<Number, Number> lineChart = new LineChart<>(new NumberAxis(), new NumberAxis());
+            lineChart.setTitle("Goal Evolution - " + goal.getNom());
+
+            XYChart.Series<Number, Number> series = new XYChart.Series<>();
+            for (int i = 0; i < goal.getScores().size(); i++) {
+                series.getData().add(new XYChart.Data<>(i + 1, goal.getScores().get(i)));
+            }
+            lineChart.getData().add(series);
+
+            Scene scene = new Scene(new VBox(new BorderPane(lineChart)), 400, 300);
+            stage.setScene(scene);
+
+            stage.show();
+        }
+
 
         @Override
         protected void updateItem(ObjectifEvalue objectif, boolean empty) {
@@ -254,6 +299,10 @@ private void addGoal() {
                 setGraphic(hBox);
             }
         }
+        public List<Integer> getScores() {
+            return scores;
+        }
     }
+
 
 }
