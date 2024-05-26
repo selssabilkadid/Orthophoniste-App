@@ -2,6 +2,8 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -65,7 +67,7 @@
                                     <Image url="@../images/Group 8736 (2).png" />
                                 </image>
                             </ImageView>
-                            <Text fill="WHITE" layoutX="76.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group session">
+                            <Text fill="WHITE" layoutX="76.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consultation">
                                 <font>
                                     <Font name="Product Sans" size="12.0" />
                                 </font>
@@ -84,7 +86,7 @@
                                     <Image url="@../images/Group 8736 (3).png" />
                                 </image>
                             </ImageView>
-                            <Text fill="WHITE" layoutX="76.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Therapy project">
+                            <Text fill="WHITE" layoutX="76.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Specific Test">
                                 <font>
                                     <Font name="Product Sans" size="12.0" />
                                 </font>
@@ -100,11 +102,20 @@
             </AnchorPane>
             <AnchorPane layoutY="173.0" prefHeight="387.0" prefWidth="891.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="173.0">
                 <children>
-                      <Label layoutX="31.0" layoutY="22.0" text="Patients' statistics" AnchorPane.topAnchor="22.0">
+                      <Label layoutX="31.0" layoutY="22.0" text="Consultations" AnchorPane.topAnchor="22.0">
                           <font>
-                              <Font name="Product Sans Bold" size="15.0" />
+                              <Font name="Product Sans" size="14.0" />
                           </font>
                       </Label>
+            <TableView fx:id="Consultations" layoutX="23.0" layoutY="55.0" prefHeight="312.0" prefWidth="435.0">
+              <columns>
+                <TableColumn fx:id="ConsDate" prefWidth="119.9999942779541" text="Date" />
+                <TableColumn fx:id="SHour" prefWidth="79.99996948242188" text="Start" />
+                  <TableColumn fx:id="EHour" prefWidth="74.00001525878906" text="End" />
+                  <TableColumn fx:id="Ccancel" minWidth="0.0" prefWidth="82.6666259765625" text="Cancel" />
+                  <TableColumn fx:id="CBegin" minWidth="7.99993896484375" prefWidth="74.00003051757812" text="Begin" />
+              </columns>
+            </TableView>
                 </children>
             </AnchorPane>
       <Label fx:id="welcometext" layoutX="27.0" layoutY="14.0" text="Welcome Dr. Assia">

@@ -55,6 +55,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         // Ensure AccountManager is initialized
         AccountManager.getCurrentuser(); // This will trigger static initialization and add the shutdown hook
+
         launch(args);
     }
 

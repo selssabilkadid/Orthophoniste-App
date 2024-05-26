@@ -3,6 +3,9 @@
 .white-bg{
     -fx-background-color: #fff;
 }
+.mainBackgroud{
+   -fx-background-color: #F9F9F9;
+  }
 
 .border-top{
     -fx-border-color: #000;

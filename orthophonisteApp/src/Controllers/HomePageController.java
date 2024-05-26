@@ -29,6 +29,9 @@ public class HomePageController {
     private Button calendarbtn;
 
     @FXML
+    private Button myanamnsesbtn;
+
+    @FXML
     public void initialize() {
         // Set the initial view to Dashboard
         loadCenterSection("/Layouts/Dashboard.fxml");
@@ -50,6 +53,8 @@ public class HomePageController {
             fxmlFile = "/Layouts/MyTests.fxml";
         } else if (clickedButton == calendarbtn) {
             fxmlFile = "/Layouts/Calendar.fxml";
+        } if (clickedButton == myanamnsesbtn) {
+            fxmlFile = "/Layouts/Anamnese.fxml";
         }
 
         loadCenterSection(fxmlFile);

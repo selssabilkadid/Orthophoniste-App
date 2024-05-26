@@ -1,5 +1,8 @@
 package Classes;
-public class QuestionAnamneseAdult extends Question {
+
+import java.io.Serializable;
+
+public class QuestionAnamneseAdult extends Question implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private CategorieQuestionAdult categorie;
