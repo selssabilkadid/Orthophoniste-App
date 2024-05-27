@@ -1,6 +1,8 @@
 package Controllers;
 
 import Classes.*;
+import Controllers.AddTroubleController;
+
 import Layouts.GradeTestExerciceController;
 import Layouts.GradeTestQuestionnaireController;
 import javafx.collections.FXCollections;
@@ -12,17 +14,16 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static Layouts.MyTestsController.convertSetToObservableList;
 
@@ -42,12 +43,9 @@ public class CreateBoController {
     @FXML
     private ScrollPane mainLayout;
 
-
-
-
     private UserAccount orthophoniste = AccountManager.getCurrentuser();
     private Set<Test> mestests = orthophoniste.getMes_tests();
-    ObservableList<Test> testObservableList = convertSetToObservableList(mestests);
+    private final ObservableList<Test> testObservableList = convertSetToObservableList(mestests);
 
     private Set<Question> createDummyQuestions() {
         Set<Question> questions = new HashSet<>();
@@ -64,7 +62,6 @@ public class CreateBoController {
     private Set<Exercice> createDummyExercices() {
         Set<Exercice> exercices = new HashSet<>();
 
-        // Create dummy exercices and add them to the set
         Exercice exercice1 = new Exercice("E1", "Exercice 1: Solve the following equation", new HashSet<>(Set.of("Equation 1", "Equation 2")));
         Exercice exercice2 = new Exercice("E2", "Exercice 2: Write a short paragraph about your favorite hobby", new HashSet<>(Set.of("Paragraph task")));
 
@@ -74,17 +71,16 @@ public class CreateBoController {
         return exercices;
     }
 
-
     private final Set<Test> selectedTests = new HashSet<>();
-    ObservableList<Test> selectedTestsList = convertSetToObservableList(selectedTests);
+    private final ObservableList<Test> selectedTestsList = convertSetToObservableList(selectedTests);
     private Dossier dossier;
 
     public void setDossier(Dossier dossier) {
         this.dossier = dossier;
     }
+
     @FXML
     private void initialize() {
-
         troublesListView.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Trouble> call(ListView<Trouble> troubleListView) {
@@ -93,7 +89,6 @@ public class CreateBoController {
         });
         troublesListView.setItems(troubles);
         troublesListView.setPlaceholder(new Label("No current troubles, please create a new one"));
-
 
         testsListView.setCellFactory(new Callback<>() {
             @Override
@@ -115,13 +110,10 @@ public class CreateBoController {
                 loadTestDetails(newValue);
             }
         });
-
     }
 
     private void initializeConfirmButton() {
-
         confirmButton.setOnAction(event -> {
-            //testsListView.getItems().clear();
             selectedTests.clear();
             for (Test test : testObservableList) {
                 if (test.isSelected()) {
@@ -131,10 +123,8 @@ public class CreateBoController {
             selectedTestsList.clear();
             selectedTestsList.addAll(selectedTests);
 
-
             testsListView.setItems(selectedTestsList);
             System.out.println("Selected tests: " + selectedTests.stream().map(Test::getNom).collect(Collectors.joining(", ")));
-
         });
     }
 
@@ -163,45 +153,45 @@ public class CreateBoController {
         dialog.showAndWait();
     }
 
+    static class TestListCell extends ListCell<Test> {
+        private final HBox hBox = new HBox();
+        private final CheckBox checkBox = new CheckBox();
+        private final Label testNameLabel = new Label();
 
-static class TestListCell extends ListCell<Test> {
-    private HBox hBox = new HBox();
-    private CheckBox checkBox = new CheckBox();
-    private Label testNameLabel = new Label();
+        public TestListCell() {
+            super();
+            hBox.setSpacing(10);
+            testNameLabel.setPrefWidth(190);
+            Font customFont = Font.font("Arial", FontWeight.BOLD, 14);
+            testNameLabel.setFont(customFont);
+            HBox.setHgrow(testNameLabel, Priority.ALWAYS);
+            hBox.getChildren().addAll(checkBox, testNameLabel);
+            hBox.setPadding(new Insets(10, 10, 15, 7));
+            checkBox.setOnAction(event -> {
+                if (getItem() != null) {
+                    getItem().setSelected(checkBox.isSelected());
+                }
+            });
+        }
 
-    public TestListCell() {
-        super();
-        hBox.setSpacing(10);
-        testNameLabel.setPrefWidth(190);
-        Font customFont = Font.font("Arial", FontWeight.BOLD, 14);
-        testNameLabel.setFont(customFont);
-        HBox.setHgrow(testNameLabel, Priority.ALWAYS);
-        hBox.getChildren().addAll(checkBox, testNameLabel);
-        hBox.setPadding(new Insets(10, 10, 15, 7));
-        checkBox.setOnAction(event -> {
-            if (getItem() != null) {
-                getItem().setSelected(checkBox.isSelected());
+        @Override
+        protected void updateItem(Test test, boolean empty) {
+            super.updateItem(test, empty);
+            if (empty || test == null) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                testNameLabel.setText(test.getNom());
+                checkBox.setSelected(test.isSelected());
+                setGraphic(hBox);
             }
-        });
-    }
-
-    @Override
-    protected void updateItem(Test test, boolean empty) {
-        super.updateItem(test, empty);
-        if (empty || test == null) {
-            setText(null);
-            setGraphic(null);
-        } else {
-            testNameLabel.setText(test.getNom());
-            checkBox.setSelected(test.isSelected());
-            setGraphic(hBox);
         }
     }
-}
+
     static class TroubleListCell extends ListCell<Trouble> {
-        private HBox hBox = new HBox();
-        private Label troubleNameLabel = new Label();
-        private Label troubleTypeLabel = new Label();
+        private final HBox hBox = new HBox();
+        private final Label troubleNameLabel = new Label();
+        private final Label troubleTypeLabel = new Label();
 
         public TroubleListCell() {
             super();
@@ -232,6 +222,7 @@ static class TestListCell extends ListCell<Test> {
             }
         }
     }
+
     @FXML
     private void addBilan() {
         BilanO bilanO = new BilanO();
@@ -243,12 +234,11 @@ static class TestListCell extends ListCell<Test> {
         diagnostic.setTroubles(getTroubles().toArray(new Trouble[0])); // Convert list to array
         bilanO.setDiagnostique(diagnostic);
 
-       bilanO.setTests(selectedTests);
+        bilanO.setTests(selectedTests);
 
         dossier.ajouterBO(bilanO);
-
-
     }
+
     private void loadTestDetails(Test test) {
         String fxmlFile = "";
         if (test instanceof TestQuestionnaire) {
@@ -274,8 +264,9 @@ static class TestListCell extends ListCell<Test> {
             e.printStackTrace();
         }
     }
-    public BilanO createBilanO() {
-        BilanO bilanO = new BilanO();
+
+    public BilanO_Anamnese createBOAnamnese() {
+        BilanO_Anamnese bilanO = new BilanO_Anamnese();
         String projetThName = projetThField.getText();
         ProjetTh projetTh = new ProjetTh(projetThName);
         bilanO.setProjet(projetTh);
@@ -287,6 +278,6 @@ static class TestListCell extends ListCell<Test> {
     }
 
     public List<Trouble> getTroubles() {
-        return troubles;
+        return new ArrayList<>(troubles);
     }
 }

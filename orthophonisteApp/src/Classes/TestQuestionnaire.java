@@ -7,7 +7,7 @@ import java.util.Set;
 public class TestQuestionnaire extends Test implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Set<Question> questions = new HashSet<Question>();
+    private Set<Question> questions ;
 
     public TestQuestionnaire(String nom , String capacite ,Set<Question> questions){
         super(nom , capacite);

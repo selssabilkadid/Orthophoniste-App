@@ -2,6 +2,8 @@ package Classes;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -22,7 +24,28 @@ public abstract class Patient implements Serializable {
         lieunaissance =lieu;
         datenaissance = date;
         this.adresse = adresse ;
+        this.age = calculateAge(date);
+
     }
+    // Method to calculate age based on date of birth
+    private int calculateAge(Date birthDate) {
+        if (birthDate == null) {
+            return 0;
+        }
+        LocalDate birthLocalDate = convertToLocalDateViaInstant(birthDate);
+        LocalDate currentDate = LocalDate.now();
+        if (birthLocalDate != null && !birthLocalDate.isAfter(currentDate)) {
+            return Period.between(birthLocalDate, currentDate).getYears();
+        } else {
+            return 0;
+        }
+    }
+
+    // Helper method to convert java.util.Date to java.time.LocalDate
+    private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
+    }
+
 
     // Getter and setter methods
     public String getnom() {

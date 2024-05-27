@@ -15,6 +15,9 @@ public abstract  class RendezVous implements Serializable {
         this.heur_fin =heur_fin;
         this.observation =observation;
     }
+    public RendezVous(){
+
+    }
 
     public LocalDate getDate() {
         return date;

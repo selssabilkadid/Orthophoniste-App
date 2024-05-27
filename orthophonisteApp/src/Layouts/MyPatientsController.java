@@ -61,9 +61,9 @@ public class MyPatientsController {
         fullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
         groupe.setCellValueFactory(cellData -> {
             if (cellData.getValue() instanceof Adulte) {
-                return new SimpleStringProperty(((Adulte) cellData.getValue()).getAgeGroup());
+                return new SimpleStringProperty("Adulte");
             } else if (cellData.getValue() instanceof Enfant) {
-                return new SimpleStringProperty(((Enfant) cellData.getValue()).getAgeGroup());
+                return new SimpleStringProperty("Child");
             } else {
                 return new SimpleStringProperty("");
             }
@@ -101,6 +101,7 @@ public class MyPatientsController {
 
             patients.add(new Adulte("Kheddia", "Assia", "Chlef", adultDateOfBirth, "Algeria", "Masters", "Engineer", "123456789"));
             patients.add(new Enfant("Kadid", "Selssabil", "Medea", childDateOfBirth, "Algeria", "5th Grade", "987654321", "123456789"));
+            patients = FXCollections.observableArrayList(currentUser.getPatients());
         } catch (ParseException e) {
             e.printStackTrace();
         }
