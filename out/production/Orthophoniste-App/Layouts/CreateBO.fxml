@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="mainLayout" prefHeight="937.0" prefWidth="670.0" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CreateBoController">
+<ScrollPane fx:id="mainLayout" prefHeight="400.0" prefWidth="670.0" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CreateBoController">
 
     <AnchorPane prefHeight="923.0" prefWidth="664.0">
 

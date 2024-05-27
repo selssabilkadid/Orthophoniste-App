@@ -1,12 +1,17 @@
 package Controllers;
 
 import Classes.*;
-import Controllers.CreateBoController;
+import Controllers.FicheDeSuivi.FicheDeSuiviController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -60,6 +65,7 @@ public class DossierPatientController {
     private VBox troublesVBox;
     @FXML
     private Button createBo;
+    @FXML Button gotoFichesBtn;
     private Dossier dossier;
     private Patient patient;
     @FXML
@@ -71,11 +77,20 @@ public class DossierPatientController {
         System.out.println("DossierPatientController initialized");
     }
     public void setPatientAndDossier(Patient patient, Dossier dossier) {
+        System.out.println("Setting patient and dossier: " + patient + ", " + dossier);
         this.patient = patient;
         this.dossier = dossier;
         setPatientData(patient);
+
+    }
+    public void storePatientData(Patient patient) {
+        this.patient = patient;
     }
 
+
+    public Patient retrievePatientData() {
+        return patient;
+    }
     public void setPatientData(Patient patient) {
         System.out.println("Setting patient data: " + patient.getFullname());
 
@@ -131,33 +146,46 @@ public class DossierPatientController {
     }
 
     private void showBilans() {
-        VBox bilansView = new VBox();
+        ListView<String> bilansListView = new ListView<>();
+        ObservableList<String> bilansData = FXCollections.observableArrayList();
 
         for (BilanO bilan : dossier.getBilans()) {
-
-            Label bilanLabel = new Label(" Projet: " + bilan.getProjet().getProjet());
-            bilansView.getChildren().add(bilanLabel);
+            bilansData.add("  " + bilan.getProjet().getProjet());
         }
 
-        contentPane.getChildren().setAll(bilansView);
+        bilansListView.setItems(bilansData);
+        bilansListView.setPrefSize(300, 400);
+
+
+        bilansListView.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 15;");
+
+        contentPane.getChildren().setAll(bilansListView);
     }
 
+
     private void showRendezvous() {
-        VBox rendezvousView = new VBox();
-        rendezvousView.getChildren().add(new Label("Displaying Rendezvous"));
-        contentPane.getChildren().setAll(rendezvousView);
+        ListView<String> rendezvousListView = new ListView<>();
+        ObservableList<String> rendezvousData = FXCollections.observableArrayList();
+        for (RendezVous rdv : dossier.getRendezvous()) {
+            rendezvousData.add("  " + rdv.getDate().toString());
+        }
+         rendezvousListView.setItems(rendezvousData);
+        rendezvousListView.setPrefSize(300, 400);
+        rendezvousListView.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 15;");
+        contentPane.getChildren().setAll(rendezvousListView);
     }
 
     private void createBo() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Layouts/CreateBO.fxml")); // Ensure this path is correct
-            ScrollPane createBoPane = loader.load();
+            Parent root = loader.load();
 
             CreateBoController createBoController = loader.getController();
             createBoController.setDossier(dossier);
+            System.out.println("Dossier passed to CreateBoController: " + dossier);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(new Scene(createBoPane));
+            stage.setScene(new Scene(root));
             stage.showAndWait();
 
 
@@ -167,8 +195,21 @@ public class DossierPatientController {
     }
 
     public void goBack(MouseEvent mouseEvent) throws IOException {
+        storePatientData(patient);
         Main m = new Main();
         m.changeScene("../layouts/HomePage.fxml");
+    }
+
+    public void gotoFiches(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../layouts/FicheDeSuivi/FicheDeSuivi.fxml"));
+        Parent root = loader.load();
+
+        FicheDeSuiviController ficheDeSuiviController = loader.getController();
+
+        ficheDeSuiviController.setPatient(patient);
+
+        Main m = new Main();
+        m.changerScene(root);
     }
 }
 

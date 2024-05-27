@@ -1,8 +1,7 @@
+
 package Controllers;
 
 import Classes.*;
-import Controllers.AddTroubleController;
-
 import Layouts.GradeTestExerciceController;
 import Layouts.GradeTestQuestionnaireController;
 import javafx.collections.FXCollections;
@@ -19,10 +18,7 @@ import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static Layouts.MyTestsController.convertSetToObservableList;
@@ -45,7 +41,8 @@ public class CreateBoController {
 
     private UserAccount orthophoniste = AccountManager.getCurrentuser();
     private Set<Test> mestests = orthophoniste.getMes_tests();
-    private final ObservableList<Test> testObservableList = convertSetToObservableList(mestests);
+    ObservableList<Test> testObservableList = convertSetToObservableList(mestests);
+    private static Map<Test, CompteRendu> testScores = new HashMap<>();
 
     private Set<Question> createDummyQuestions() {
         Set<Question> questions = new HashSet<>();
@@ -72,15 +69,25 @@ public class CreateBoController {
     }
 
     private final Set<Test> selectedTests = new HashSet<>();
-    private final ObservableList<Test> selectedTestsList = convertSetToObservableList(selectedTests);
+    ObservableList<Test> selectedTestsList = convertSetToObservableList(selectedTests);
     private Dossier dossier;
 
     public void setDossier(Dossier dossier) {
         this.dossier = dossier;
+
     }
+    private SharedScoreDataModel sharedDataModel = SharedScoreDataModel.getInstance();
 
     @FXML
     private void initialize() {
+        if (dossier != null) {
+            initializeDossierData();
+        }
+        Map<Test, Integer> rawTestScores = sharedDataModel.getTestScores();
+        for (Map.Entry<Test, Integer> entry : rawTestScores.entrySet()) {
+            testScores.put(entry.getKey(), new CompteRendu(entry.getValue(), "", entry.getKey()));
+        }
+
         troublesListView.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Trouble> call(ListView<Trouble> troubleListView) {
@@ -110,8 +117,47 @@ public class CreateBoController {
                 loadTestDetails(newValue);
             }
         });
+        System.out.println("CreateBoController initialized with dossier: " + dossier);
     }
+        private void loadTestDetails(Test test) {
+        String fxmlFile = "";
+        if (test instanceof TestQuestionnaire) {
+            fxmlFile = "../Layouts/GradeTestQuestionnaire.fxml";
+        } else if (test instanceof TestExercice) {
+            fxmlFile = "../Layouts/GradeTestExercice.fxml";
+        }
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        try {
+            AnchorPane testDetails = loader.load();
+            mainLayout.setContent(testDetails);
+
+            if (test instanceof TestQuestionnaire) {
+                GradeTestQuestionnaireController controller = loader.getController();
+                controller.setSelectedTests(selectedTests);
+                controller.setTroubles(troubles);
+                controller.setProjetThField(projetThField.getText());
+                controller.setTest((TestQuestionnaire) test);
+            } else if (test instanceof TestExercice) {
+                GradeTestExerciceController controller = loader.getController();
+
+                controller.setSelectedTests(selectedTests);
+                controller.setTroubles(troubles);
+                controller.setProjetThField(projetThField.getText());
+
+                controller.setTest((TestExercice) test);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void initializeDossierData() {
+        if (dossier != null) {
+
+            System.out.println("Dossier data initialized: " + dossier);
+        }
+    }
     private void initializeConfirmButton() {
         confirmButton.setOnAction(event -> {
             selectedTests.clear();
@@ -126,6 +172,47 @@ public class CreateBoController {
             testsListView.setItems(selectedTestsList);
             System.out.println("Selected tests: " + selectedTests.stream().map(Test::getNom).collect(Collectors.joining(", ")));
         });
+
+    }
+    public void addTestScore(String testName, int totalScore) {
+//        Test testToUpdate = mestests.stream()
+//                .filter(test -> test.getNom().equals(testName))
+//                .findFirst()
+//                .orElse(null);
+//
+//        if (testToUpdate != null) {
+//            CompteRendu compteRendu = new CompteRendu(totalScore, "", testToUpdate);
+//            testScores.put(testToUpdate, compteRendu);
+//        } else {
+//            testToUpdate = mestests.stream()
+//                    .filter(test -> test.getNom().contains(testName))
+//                    .findFirst()
+//                    .orElse(null);
+//
+//            if (testToUpdate != null) {
+//                CompteRendu compteRendu = new CompteRendu(totalScore, "", testToUpdate);
+//                testScores.put(testToUpdate, compteRendu);
+//            } else {
+//                System.out.println("Test with name '" + testName + "' not found.");
+//            }
+//        }
+        Test testToUpdate = new TestQuestionnaire("Test 1", "Test capacity 1", createDummyQuestions());
+
+        CompteRendu compteRendu = new CompteRendu(totalScore, "", testToUpdate);
+        testScores.put(testToUpdate, compteRendu);
+    }
+
+    public void setTestsAndTroubles(Set<Test> tests, List<Trouble> troubles) {
+        selectedTests.addAll(tests);
+        selectedTestsList.addAll(selectedTests);
+        testsListView.setItems(selectedTestsList);
+
+        this.troubles.addAll(troubles);
+        troublesListView.setItems(this.troubles);
+    }
+
+    public void setProjetTh(String projetTh) {
+        projetThField.setText(projetTh);
     }
 
     @FXML
@@ -153,19 +240,24 @@ public class CreateBoController {
         dialog.showAndWait();
     }
 
+
+
     static class TestListCell extends ListCell<Test> {
-        private final HBox hBox = new HBox();
-        private final CheckBox checkBox = new CheckBox();
-        private final Label testNameLabel = new Label();
+        private HBox hBox = new HBox();
+        private CheckBox checkBox = new CheckBox();
+        private Label testNameLabel = new Label();
+        private Label testScoreLabel = new Label();
 
         public TestListCell() {
             super();
             hBox.setSpacing(10);
             testNameLabel.setPrefWidth(190);
+            testScoreLabel.setPrefWidth(50);
             Font customFont = Font.font("Arial", FontWeight.BOLD, 14);
             testNameLabel.setFont(customFont);
+            testScoreLabel.setFont(customFont);
             HBox.setHgrow(testNameLabel, Priority.ALWAYS);
-            hBox.getChildren().addAll(checkBox, testNameLabel);
+            hBox.getChildren().addAll(checkBox, testNameLabel, testScoreLabel);
             hBox.setPadding(new Insets(10, 10, 15, 7));
             checkBox.setOnAction(event -> {
                 if (getItem() != null) {
@@ -182,16 +274,19 @@ public class CreateBoController {
                 setGraphic(null);
             } else {
                 testNameLabel.setText(test.getNom());
+                CompteRendu compteRendu = testScores.get(test);
+                testScoreLabel.setText(compteRendu != null ? String.valueOf(compteRendu.getScoretotal()) : "");
                 checkBox.setSelected(test.isSelected());
                 setGraphic(hBox);
             }
         }
     }
 
+
     static class TroubleListCell extends ListCell<Trouble> {
-        private final HBox hBox = new HBox();
-        private final Label troubleNameLabel = new Label();
-        private final Label troubleTypeLabel = new Label();
+        private HBox hBox = new HBox();
+        private Label troubleNameLabel = new Label();
+        private Label troubleTypeLabel = new Label();
 
         public TroubleListCell() {
             super();
@@ -223,7 +318,7 @@ public class CreateBoController {
         }
     }
 
-    @FXML
+        @FXML
     private void addBilan() {
         BilanO bilanO = new BilanO();
         String projetThName = projetThField.getText();
@@ -234,50 +329,13 @@ public class CreateBoController {
         diagnostic.setTroubles(getTroubles().toArray(new Trouble[0])); // Convert list to array
         bilanO.setDiagnostique(diagnostic);
 
-        bilanO.setTests(selectedTests);
+       bilanO.setTests(selectedTests);
 
         dossier.ajouterBO(bilanO);
+
+
     }
-
-    private void loadTestDetails(Test test) {
-        String fxmlFile = "";
-        if (test instanceof TestQuestionnaire) {
-            fxmlFile = "../Layouts/GradeTestQuestionnaire.fxml";
-        } else if (test instanceof TestExercice) {
-            fxmlFile = "../Layouts/GradeTestExercice.fxml";
-        }
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-        try {
-            AnchorPane testDetails = loader.load();
-            mainLayout.setContent(testDetails);
-
-            if (test instanceof TestQuestionnaire) {
-                GradeTestQuestionnaireController controller = loader.getController();
-                controller.setTest((TestQuestionnaire) test);
-            } else if (test instanceof TestExercice) {
-                GradeTestExerciceController controller = loader.getController();
-                controller.setTest((TestExercice) test);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public BilanO_Anamnese createBOAnamnese() {
-        BilanO_Anamnese bilanO = new BilanO_Anamnese();
-        String projetThName = projetThField.getText();
-        ProjetTh projetTh = new ProjetTh(projetThName);
-        bilanO.setProjet(projetTh);
-        Diagnostic diagnostic = new Diagnostic();
-        diagnostic.setTroubles(getTroubles().toArray(new Trouble[0])); // Convert list to array
-        bilanO.setDiagnostique(diagnostic);
-
-        return bilanO;
-    }
-
-    public List<Trouble> getTroubles() {
-        return new ArrayList<>(troubles);
+        public List<Trouble> getTroubles() {
+        return troubles;
     }
 }
