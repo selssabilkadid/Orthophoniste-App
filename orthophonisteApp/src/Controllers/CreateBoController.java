@@ -71,11 +71,22 @@ public class CreateBoController {
     private final Set<Test> selectedTests = new HashSet<>();
     ObservableList<Test> selectedTestsList = convertSetToObservableList(selectedTests);
     private Dossier dossier;
+    private Patient patient;
+    private Integer testScore;
+
+    public void setTestScore(String testName, Integer testScore) {
+        this.testScore = testScore;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 
     public void setDossier(Dossier dossier) {
         this.dossier = dossier;
 
     }
+
     private SharedScoreDataModel sharedDataModel = SharedScoreDataModel.getInstance();
 
     @FXML
@@ -87,7 +98,7 @@ public class CreateBoController {
         for (Map.Entry<Test, Integer> entry : rawTestScores.entrySet()) {
             testScores.put(entry.getKey(), new CompteRendu(entry.getValue(), "", entry.getKey()));
         }
-
+        System.out.println("testScores map after initialization: " + testScores);
         troublesListView.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Trouble> call(ListView<Trouble> troubleListView) {
@@ -137,6 +148,7 @@ public class CreateBoController {
                 controller.setSelectedTests(selectedTests);
                 controller.setTroubles(troubles);
                 controller.setProjetThField(projetThField.getText());
+                controller.setDossierAndPatient(dossier, patient);
                 controller.setTest((TestQuestionnaire) test);
             } else if (test instanceof TestExercice) {
                 GradeTestExerciceController controller = loader.getController();
@@ -144,6 +156,7 @@ public class CreateBoController {
                 controller.setSelectedTests(selectedTests);
                 controller.setTroubles(troubles);
                 controller.setProjetThField(projetThField.getText());
+                controller.setDossierAndPatient(dossier, patient);
 
                 controller.setTest((TestExercice) test);
             }

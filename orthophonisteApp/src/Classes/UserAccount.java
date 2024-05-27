@@ -27,6 +27,7 @@ public class UserAccount implements Serializable {
     private Map<Integer, Dossier> dossierMap = new HashMap<>();
     private Set<Anamnese> Anamneses = new HashSet<Anamnese>();
 
+
     public UserAccount(String firstName, String lastName, String email, String phoneNumber, String address, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -241,5 +242,6 @@ public class UserAccount implements Serializable {
     public void getAnamnesebyID(String ID){
 
     }
+
 
 }

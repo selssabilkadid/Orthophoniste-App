@@ -87,6 +87,12 @@ public class GradeTestExerciceController {
         private Set<Test> selectedTests;
         private List<Trouble> troubles;
         private String projetThField;
+        private Dossier dossier;
+        private Patient patient;
+        public void setDossierAndPatient(Dossier dossier, Patient patient) {
+                this.dossier = dossier;
+                this.patient = patient;
+        }
 
         public void setSelectedTests(Set<Test> selectedTests) {
                 this.selectedTests = selectedTests;
@@ -106,9 +112,10 @@ public class GradeTestExerciceController {
                         ScrollPane newContent = loader.load();
                         CreateBoController createBoController = loader.getController();
 
-                        // Pass selected tests, troubles, and projetTh to CreateBoController
                         createBoController.setTestsAndTroubles(selectedTests, troubles);
                         createBoController.setProjetTh(projetThField);
+                        createBoController.setPatient(patient);
+                        createBoController.setDossier(dossier);
 
                         createBoController.addTestScore(test.getNom(), totalScore);
 

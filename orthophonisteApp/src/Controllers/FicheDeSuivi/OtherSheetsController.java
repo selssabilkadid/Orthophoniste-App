@@ -1,6 +1,8 @@
 package Controllers.FicheDeSuivi;
 
+import Classes.Dossier;
 import Classes.FicheDeSuiviDone;
+import Classes.Patient;
 import Controllers.FicheDeSuivi.SharedModel;
 import Controllers.Main;
 import javafx.fxml.FXML;
@@ -54,14 +56,24 @@ public class OtherSheetsController implements Initializable {
 
     public void showGoalList(MouseEvent mouseEvent) {
     }
-
-    public void showEvaluatedGoals(MouseEvent mouseEvent) {
+private Patient patient;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
+   private Dossier dossier;
+    public void setDossier(Dossier dossier) {
+        this.dossier = dossier;
+    }
 
     public void goBack(MouseEvent mouseEvent) throws IOException {
-        Main m = new Main();
-        m.changeScene("/Layouts/FicheDeSuivi/FicheDeSuivi.fxml");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Layouts/FicheDeSuivi/FicheDeSuivi.fxml"));
+        Parent root = loader.load();
+
+        FicheDeSuiviController controller = loader.getController();
+       controller.setPatient(patient);
+       controller.setDossier(dossier);
+       Main.changerScene(root);
     }
     public static class FicheDeSuiviDoneCell extends ListCell<FicheDeSuiviDone> {
         private HBox hBox = new HBox();

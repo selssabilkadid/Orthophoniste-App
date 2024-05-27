@@ -87,15 +87,23 @@ public class GradeTestQuestionnaireController {
         }
 
         if (validScores) {
-            sharedDataModel.setTestScore(test, totalScore);  // Update the shared data model
-            navigateToCreateBO();
+           // sharedDataModel.setTestScore(test, totalScore);  // Update the shared data model
+            navigateToCreateBO(totalScore);
         } else {
             System.out.println("Please enter valid scores between 1 and 10 for all questions.");
         }
     }
+
     private Set<Test> selectedTests;
     private List<Trouble> troubles;
     private String projetThField;
+    private Dossier dossier;
+    private Patient patient;
+
+    public void setDossierAndPatient(Dossier dossier, Patient patient) {
+        this.dossier = dossier;
+        this.patient = patient;
+    }
 
     public void setSelectedTests(Set<Test> selectedTests) {
         this.selectedTests = selectedTests;
@@ -109,17 +117,19 @@ public class GradeTestQuestionnaireController {
         this.projetThField = projetThField;
     }
 
-    private void navigateToCreateBO() {
+    private void navigateToCreateBO(Integer totalScore) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Layouts/CreateBO.fxml"));
             ScrollPane newContent = loader.load();
             CreateBoController createBoController = loader.getController();
 
-            // Pass selected tests, troubles, and projetTh to CreateBoController
             createBoController.setTestsAndTroubles(selectedTests, troubles);
             createBoController.setProjetTh(projetThField);
+            createBoController.setDossier(dossier);
+            createBoController.setPatient(patient);
 
-            createBoController.addTestScore(test.getNom(), totalScore);
+            //createBoController.addTestScore(test.getNom(), totalScore);
+            createBoController.setTestScore(test.getNom(),totalScore);
 
             rootLayout.getChildren().setAll(newContent);
 

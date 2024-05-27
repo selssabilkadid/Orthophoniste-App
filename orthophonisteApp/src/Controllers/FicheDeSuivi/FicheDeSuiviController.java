@@ -172,10 +172,16 @@ private void addGoal() {
 
     @FXML
     private void goToSheet(MouseEvent mouseEvent) throws IOException {
-        Main m = new Main();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Layouts/FicheDeSuivi/OtherSheets.fxml"));
+        Parent root = loader.load();
+
+        OtherSheetsController otherSheetsController = loader.getController();
+
+        otherSheetsController.setPatient(patient);
+        otherSheetsController.setDossier(dossier);
 
 
-        m.changeScene("/Layouts/FicheDeSuivi/OtherSheets.fxml");
+        Main.changerScene(root);
     }
 
     public void showGoalList(MouseEvent mouseEvent) throws IOException {
@@ -200,16 +206,16 @@ private void addGoal() {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
+    private Dossier dossier;
+    public void setDossier(Dossier dossier) {
+        this.dossier = dossier;
+    }
     public void goBack(MouseEvent mouseEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Layouts/DossierPatient.fxml"));
         Parent root = loader.load();
-
         DossierPatientController dossierPatientController = loader.getController();
-
-        dossierPatientController.setPatientData(patient);
-
-        Main m = new Main();
-        m.changerScene(root);
+        dossierPatientController.setPatientAndDossier(patient, dossier);
+        Main.changerScene(root);
     }
 
 
@@ -227,8 +233,8 @@ private void addGoal() {
 
             goalNameLabel.setPrefWidth(190);
             goalTypeLabel.setPrefWidth(190);
-            gradeComboBox.getItems().addAll(0, 1, 2, 3, 4, 5); // Add grade options
-            gradeComboBox.setPromptText("Grade"); // Set prompt text
+            gradeComboBox.getItems().addAll(0, 1, 2, 3, 4, 5);
+            gradeComboBox.setPromptText("Grade");
             Font customFont = Font.font("Arial", FontWeight.BOLD, 14);
             goalNameLabel.setFont(customFont);
             goalTypeLabel.setFont(customFont);
@@ -253,7 +259,6 @@ private void addGoal() {
                 if (!isEmpty()) {
                     ObjectifEvalue goal = getItem();
                     if (goal != null) {
-                        // Show line chart popup for the selected goal
                         showGoalEvolutionPopup(goal);
                     }
                 }

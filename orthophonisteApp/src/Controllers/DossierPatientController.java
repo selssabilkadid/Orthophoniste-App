@@ -30,8 +30,7 @@ import java.util.Date;
 
 public class DossierPatientController {
 
-    @FXML
-    private Button btnFiches;
+
 
     @FXML
     private Button btnBilans;
@@ -70,7 +69,7 @@ public class DossierPatientController {
     private Patient patient;
     @FXML
     public void initialize() {
-        btnFiches.setOnAction(event -> showFiches());
+
         btnBilans.setOnAction(event -> showBilans());
         btnRendezvous.setOnAction(event -> showRendezvous());
         createBo.setOnAction(event -> createBo());
@@ -111,7 +110,7 @@ public class DossierPatientController {
         patientPlace.setText(patient.getLieuNaissance());
         patientAdress.setText(patient.getAdresse());
 
-        troublesVBox.getChildren().clear(); // Clear any existing troubles
+        troublesVBox.getChildren().clear();
         if (patient.getTroubles() == null || patient.getTroubles().isEmpty()) {
             ArrayList<Trouble> dummyTroubles = new ArrayList<>();
             dummyTroubles.add(new Trouble("Trouble 1", CategorieTrouble.deglutition));
@@ -139,11 +138,7 @@ public class DossierPatientController {
         System.out.println("Patient data set successfully");
     }
 
-    private void showFiches() {
-        VBox fichesView = new VBox();
-        fichesView.getChildren().add(new Label("Displaying Fiches"));
-        contentPane.getChildren().setAll(fichesView);
-    }
+
 
     private void showBilans() {
         ListView<String> bilansListView = new ListView<>();
@@ -182,6 +177,7 @@ public class DossierPatientController {
 
             CreateBoController createBoController = loader.getController();
             createBoController.setDossier(dossier);
+            createBoController.setPatient(patient);
             System.out.println("Dossier passed to CreateBoController: " + dossier);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -207,6 +203,7 @@ public class DossierPatientController {
         FicheDeSuiviController ficheDeSuiviController = loader.getController();
 
         ficheDeSuiviController.setPatient(patient);
+        ficheDeSuiviController.setDossier(dossier);
 
         Main m = new Main();
         m.changerScene(root);

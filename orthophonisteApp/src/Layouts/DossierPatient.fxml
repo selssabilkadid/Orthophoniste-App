@@ -118,7 +118,7 @@
             <ListView fx:id="listView" style="-fx-border-width: 0;" />
          </children>
       </StackPane>
-      <Button fx:id="btnRendezvous" cache="true" layoutX="116.0" layoutY="75.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="124.0" style="-fx-background-radius: 7; -fx-background-color: #FEEEEF; -fx-border-color: #ff53 #FEEEEF63;" text="Rendez-vous" textFill="#ff5363">
+      <Button fx:id="btnRendezvous" cache="true" layoutX="206.0" layoutY="75.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="124.0" style="-fx-background-radius: 7; -fx-background-color: #FEEEEF; -fx-border-color: #ff53 #FEEEEF63;" text="Rendez-vous" textFill="#ff5363">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
@@ -126,12 +126,7 @@
             <Insets top="10.0" />
          </opaqueInsets>
       </Button>
-      <Button fx:id="btnBilans" layoutX="311.0" layoutY="75.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="131.0" style="-fx-background-radius: 7; -fx-border-color: #FEEEEF; -fx-background-color: #FEEEEF;" text="Balance sheets" textFill="#ff5363">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnFiches" layoutX="515.0" layoutY="75.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="141.0" style="-fx-background-radius: 7; -fx-border-color: #FEEEEF; -fx-background-color: #FEEEEF;" text="Follow-Up sheets" textFill="#ff5363">
+      <Button fx:id="btnBilans" layoutX="423.0" layoutY="75.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="131.0" style="-fx-background-radius: 7; -fx-border-color: #FEEEEF; -fx-background-color: #FEEEEF;" text="Balance sheets" textFill="#ff5363">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
