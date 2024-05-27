@@ -503,23 +503,23 @@ public class MyTestsController {
     }
 
     private Void editTest(Test test) {
-        if(getTestTypeName(test).equals("Quiz")){
-            TestQuestionnaire testQ = Orthophoniste.getTestQuestionnaireByName(test.getNom());
-            currentTest = testQ; // Store the current test
-            buildtest.setVisible(false);
-            TeditTest.setVisible(true);
-            Ttitle.setText(testQ.getNom());
-            Ttype.setText(getTestTypeName(testQ));
-            showTestDetailsQuestionnaire(testQ);
-        }else if(getTestTypeName(test).equals("Exercices")){
-            TestExercice testQ = Orthophoniste.getTestExerciceByName(test.getNom());
-            buildtest.setVisible(false);
-            TeditTest.setVisible(true);
-            Ttitle.setText(testQ.getNom());
-            Ttype.setText(getTestTypeName(testQ));
-            showTestDetailsExercices(testQ);
-
-        }
+//        if(getTestTypeName(test).equals("Quiz")){
+//            TestQuestionnaire testQ = Orthophoniste.getTestQuestionnaireByName(test.getNom());
+//            currentTest = testQ; // Store the current test
+//            buildtest.setVisible(false);
+//            TeditTest.setVisible(true);
+//            Ttitle.setText(testQ.getNom());
+//            Ttype.setText(getTestTypeName(testQ));
+//            showTestDetailsQuestionnaire(testQ);
+//        }else if(getTestTypeName(test).equals("Exercices")){
+//            TestExercice testQ = Orthophoniste.getTestExerciceByName(test.getNom());
+//            buildtest.setVisible(false);
+//            TeditTest.setVisible(true);
+//            Ttitle.setText(testQ.getNom());
+//            Ttype.setText(getTestTypeName(testQ));
+//            showTestDetailsExercices(testQ);
+//
+//        }
         System.out.println("Editing test: " + test.getNom());
         return null;
     }
