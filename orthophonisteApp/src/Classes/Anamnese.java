@@ -30,4 +30,12 @@ public class Anamnese implements Serializable {
     public Set<QuestionAnamneseAdult> getQuestionsAdult(){
         return QuestionsAdult;
     }
+
+    public boolean isSelected() {
+        return true;
+    }
+
+    public String getNom() {
+        return id;
+    }
 }

@@ -9,9 +9,10 @@ public class CRAnamnese implements Serializable {
      private Consultation consultation;
      private Set<String> reponses;
 
-     public CRAnamnese(Anamnese anamnese, Consultation consultation){
+     public CRAnamnese(Anamnese anamnese, Consultation consultation,Set<String> reponses){
          this.anamnese = anamnese;
          this.consultation = consultation;
+         this.reponses = reponses;
      }
 
     public Anamnese getAnamnese() {

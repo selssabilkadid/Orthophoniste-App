@@ -1,11 +1,13 @@
 package Classes;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
-public class TestQuestionnaire extends Test  {
+public class TestQuestionnaire extends Test implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Set<Question> questions;
+    private Set<Question> questions ;
 
     public TestQuestionnaire(String nom , String capacite ,Set<Question> questions){
         super(nom , capacite);
@@ -20,11 +22,8 @@ public class TestQuestionnaire extends Test  {
         questions.remove(question);
     }
 
-    public Set<Question> getQuestions() {
+    public Set<Question> getQuestions(){
         return questions;
-    }
-    public void setQuestions(Set<Question> questions) {
-        this.questions = questions;
     }
     public void afficher() {
         System.out.println("Liste des questions pour le test " + getNom() + ":");

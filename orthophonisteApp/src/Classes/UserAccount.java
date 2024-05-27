@@ -1,7 +1,5 @@
 package Classes;
 
-import Layouts.AnamneseController;
-
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +38,7 @@ public class UserAccount implements Serializable {
     // Getter and setter methods
 
     public void ajouterDossier(Dossier dossier) {
-        // Implementation
+
     }
 
     public void ajouternouveaupatient(Patient P) {
@@ -241,6 +239,9 @@ public class UserAccount implements Serializable {
     }
     public void getAnamnesebyID(String ID){
 
+    }
+    public Set<Anamnese> getAnamneses(){
+        return Anamneses;
     }
 
 

@@ -17,7 +17,9 @@ public class Consultation extends RendezVous {
         this.age = age;
     }
 
+    public Consultation(){
 
+    }
     public String getNom() {
         return nom;
     }
