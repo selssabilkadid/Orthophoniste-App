@@ -131,7 +131,7 @@ public class DossierPatientController {
             profession.setText(adulte.getProfession());
         } else if (patient instanceof Enfant enfant) {
             contactNumber.setText("Père: " + enfant.getTelpere() + "\n" + "Mère: " + enfant.getTelmere());
-            patientGrp.setText("Enfant");
+            patientGrp.setText(patient.getAgeGroup());
             profType.setText("Grade");
             profession.setText(enfant.getClasseEtude());
         }

@@ -39,14 +39,14 @@ public class FicheDeSuiviController {
     public HBox progressBtn;
     @FXML
     private ListView<ObjectifEvalue> ficheListView;
-
+    private UserAccount currentUser = AccountManager.getCurrentuser();
     private final ObservableList<ObjectifEvalue> goals = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        goals.add(new ObjectifEvalue("Read Book", TypeObjectif.COURT));
-        goals.add(new ObjectifEvalue("Exercise", TypeObjectif.LONG));
-        goals.add(new ObjectifEvalue("Learn JavaFX", TypeObjectif.COURT));
+//        goals.add(new ObjectifEvalue("Language comprehension", TypeObjectif.LONG));
+//        goals.add(new ObjectifEvalue("Vocabulary development", TypeObjectif.MOYEN));
+//        goals.add(new ObjectifEvalue("Pragmatic language skills", TypeObjectif.COURT));
 
         ficheListView.setCellFactory(new Callback<ListView<ObjectifEvalue>, ListCell<ObjectifEvalue>>() {
             @Override
@@ -159,16 +159,14 @@ private void addGoal() {
         if (goals.isEmpty()) {
             ficheListView.setPlaceholder(new Label("No current sheets, please create a new one"));
         }
+        currentUser.ajouterFichedesuivi(ficheDeSuiviDone);
+
     }
 
 
 
 
-    @FXML
-    private void showEvaluatedGoals(MouseEvent mouseEvent) throws IOException {
-        Main m = new Main();
-        m.changeScene("/Layouts/FicheDeSuivi/EvaluatedGoals.fxml");
-    }
+
 
     @FXML
     private void goToSheet(MouseEvent mouseEvent) throws IOException {

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Layouts.MyPatientsController"
-            fx:id="patient_liste" prefHeight="560.0" prefWidth="890.0" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" >
+<AnchorPane fx:id="patient_liste" prefHeight="560.0" prefWidth="890.0" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Layouts.MyPatientsController">
 
     <children>
         <Label layoutX="22.0" layoutY="14.0" text="My Patients">
@@ -18,7 +15,7 @@
                 <Font name="Product Sans Bold" size="18.0" />
             </font>
         </Label>
-        <TableView fx:id="patientliste" layoutX="12.0" layoutY="62.0" prefHeight="484.0" prefWidth="867.0"  styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="14.666666666666629" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.333333333333371" AnchorPane.topAnchor="62.0">
+        <TableView fx:id="patientliste" layoutX="12.0" layoutY="62.0" prefHeight="484.0" prefWidth="867.0" styleClass="white-bg" stylesheets="@../Design/MainFormDesign.css" AnchorPane.bottomAnchor="14.666666666666629" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.333333333333371" AnchorPane.topAnchor="62.0">
             <columns>
                 <TableColumn fx:id="numdossier" prefWidth="75.0" text="Patient ID" />
                 <TableColumn fx:id="fullname" prefWidth="140.0" text="Full Name" />
@@ -29,7 +26,6 @@
                 <TableColumn fx:id="adresse" prefWidth="179.333" text="Address" />
             </columns>
         </TableView>
-        <Button fx:id="addnewpatient" layoutX="770.0" layoutY="24.0" mnemonicParsing="false" style="-fx-background-color: #7A6EFE;" text="Add New Patient" textFill="WHITE" />
     </children>
     <styleClass>
         <String fx:value="white-bg" />

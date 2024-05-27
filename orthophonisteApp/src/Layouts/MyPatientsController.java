@@ -57,15 +57,15 @@ public class MyPatientsController {
 
     @FXML
     public void initialize() {
-        numdossier.setCellValueFactory(new PropertyValueFactory<>("fullname"));
+        numdossier.setCellValueFactory(new PropertyValueFactory<>(""));
         fullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
         groupe.setCellValueFactory(cellData -> {
-            if (cellData.getValue() instanceof Adulte) {
-                return new SimpleStringProperty("Adulte");
-            } else if (cellData.getValue() instanceof Enfant) {
+            Patient patient = cellData.getValue();
+            if (patient.getAge() >= 18) {
+                System.out.println(patient.getFullname() + " is an Adult");
+                return new SimpleStringProperty("Adult");
+            } else  {
                 return new SimpleStringProperty("Child");
-            } else {
-                return new SimpleStringProperty("");
             }
         });
         datenaissance.setCellValueFactory(new PropertyValueFactory<>("DateNaissanceString"));
@@ -73,8 +73,10 @@ public class MyPatientsController {
         numtel.setCellValueFactory(cellData -> {
             Patient patient = cellData.getValue();
             if (patient instanceof Enfant) {
+
                 return new SimpleStringProperty(((Enfant) patient).getTelpere());
             } else if (patient instanceof Adulte) {
+
                 return new SimpleStringProperty(((Adulte) patient).getNumTel());
             } else {
                 return new SimpleStringProperty("");

@@ -32,7 +32,7 @@
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="patientGrp" alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="99.0" prefHeight="16.0" prefWidth="52.0" text="Enfant" textFill="#747474">
+            <Label fx:id="patientGrp" alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="99.0" prefHeight="16.0" prefWidth="52.0"  textFill="#747474">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>

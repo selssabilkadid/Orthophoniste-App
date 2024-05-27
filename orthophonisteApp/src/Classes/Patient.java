@@ -27,6 +27,15 @@ public abstract class Patient implements Serializable {
         this.age = calculateAge(date);
 
     }
+    public String getAgeGroup() {
+        if (age <= 18) {
+            return "Child";
+        } else if (age <= 60) {
+            return "Adult";
+        } else {
+            return "Senior";
+        }
+    }
     // Method to calculate age based on date of birth
     private int calculateAge(Date birthDate) {
         if (birthDate == null) {

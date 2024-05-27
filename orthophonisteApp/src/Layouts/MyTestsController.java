@@ -189,8 +189,8 @@ public class MyTestsController {
     @FXML
     private ComboBox<String> type_test;
 
-    @FXML
-    private TableColumn<Test, String> typetest;
+//    @FXML
+//    private TableColumn<Test, String> typetest;
 
     @FXML
     private Label wronginfo;
@@ -404,7 +404,7 @@ public class MyTestsController {
     void intializeTestslist() {
         title.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNom()));
         capacite.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCapacite()));
-        typetest.setCellValueFactory(cellData -> new SimpleStringProperty(getTestTypeName(cellData.getValue())));
+//        typetest.setCellValueFactory(cellData -> new SimpleStringProperty(getTestTypeName(cellData.getValue())));
         setButtonCellFactory(editTest, "Edit", this::editTest);
         setButtonCellFactory(deleteTest, "Delete", this::deleteTest);
         tests_tab.setItems(testObservableList);

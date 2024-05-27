@@ -345,6 +345,7 @@ public class CreateBoController {
        bilanO.setTests(selectedTests);
 
         dossier.ajouterBO(bilanO);
+        orthophoniste.ajouterBilan(dossier, bilanO);
 
 
     }

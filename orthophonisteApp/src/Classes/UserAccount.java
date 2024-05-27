@@ -24,6 +24,8 @@ public class UserAccount implements Serializable {
     private Set<Question> mes_questions = new HashSet<>();
     private Map<Integer, Dossier> dossierMap = new HashMap<>();
     private Set<Anamnese> Anamneses = new HashSet<Anamnese>();
+    private Set<BilanO> bilans = new HashSet<BilanO>();
+    private Set<FicheDeSuiviDone> fichedeSuivis = new HashSet<FicheDeSuiviDone>();
 
 
     public UserAccount(String firstName, String lastName, String email, String phoneNumber, String address, String password) {
@@ -40,9 +42,16 @@ public class UserAccount implements Serializable {
     public void ajouterDossier(Dossier dossier) {
 
     }
+    public void ajouterFichedesuivi(FicheDeSuiviDone fichedeSuivi) {
+        fichedeSuivis.add(fichedeSuivi);
+    }
 
     public void ajouternouveaupatient(Patient P) {
         patients.add(P);
+    }
+    public void ajouterBilan (Dossier folder, BilanO bilan) {
+        folder.ajouterBO(bilan);
+        bilans.add(bilan);
     }
 
     public void creerdossier(Patient P) {

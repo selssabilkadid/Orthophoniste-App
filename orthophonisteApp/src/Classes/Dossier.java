@@ -9,6 +9,7 @@ public class Dossier implements Serializable {
      static int  id;
      Patient patient;
      Set<FichedeSuivi> fichedeSuivis = new HashSet<FichedeSuivi>();
+
      Set<RendezVous> rendezvous = new HashSet<RendezVous>();
      Set<BilanO> Bilans = new HashSet<BilanO>();
     Dossier(Patient patient){
