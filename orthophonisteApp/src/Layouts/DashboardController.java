@@ -2,6 +2,7 @@ package Layouts;
 
 import Classes.*;
 import Controllers.Main;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -9,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -19,9 +21,11 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Array;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class DashboardController implements Initializable {
     @FXML
@@ -159,6 +163,10 @@ public class DashboardController implements Initializable {
     @FXML
     private Label welcometext;
 
+    @FXML
+    private PieChart STATISTICS;
+
+
 
     private static final UserAccount Orthophoniste = AccountManager.getCurrentuser();
 
@@ -170,6 +178,17 @@ public class DashboardController implements Initializable {
         BoAnamneseLayput.setVisible(false);
         Anamnese.setVisible(false);
         BOAnamnese.setVisible(false);
+        ObservableList<PieChart.Data> pieCharteData = FXCollections.observableArrayList (
+                new PieChart.Data("Child", Orthophoniste.Childrenstat()),
+                new PieChart.Data("Adult", Orthophoniste.AdultsStat()));
+        pieCharteData.forEach(data ->
+                data.nameProperty().bind(
+                        Bindings.concat(
+                                data.getName(), " amount: ", data.pieValueProperty()
+                        )
+                )
+        );
+        STATISTICS.getData().addAll(pieCharteData);
 
         if (Orthophoniste != null) {
             welcometext.setText("Welcome Dr." + Orthophoniste.getFirstName());
@@ -180,7 +199,7 @@ public class DashboardController implements Initializable {
             nbpatients.setText(i.toString());
             i = Orthophoniste.getConsultations().size();
             nbatelier.setText(i.toString());
-            i = Orthophoniste.getMes_tests().size();
+            i = (Orthophoniste.getMes_questionnaires().size()+Orthophoniste.getMes_testexercices().size());
             nbprojet.setText(i.toString());
         } else {
             // Handle the case where no user is logged in
@@ -257,24 +276,51 @@ public class DashboardController implements Initializable {
 
         }
     }
+    Patient currentpatient ;
     @FXML
-    public void CreatePatient(ActionEvent event){
-        if(event.getSource()==SavePatient) {
+    public void CreatePatient(ActionEvent event) {
+        if (event.getSource() == SavePatient) {
             String prenom = Pname.getText();
             String nom = Pfamilyname.getText();
             Date date = Date.from(Pbirthday.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             String lieu = Pbirthplace.getText();
             String adresse = Paddress.getText();
+
             // Check for empty fields
             if (prenom.isEmpty() || nom.isEmpty() || lieu.isEmpty() || adresse.isEmpty()) {
                 alerteinfo.setText("Please fill in all required fields.");
                 return;
             }
-            if (consultation.getAge().compareTo("18") == -1) {
+
+            // Check if date of birth is before today
+            LocalDate today = LocalDate.now();
+            if (!Pbirthday.getValue().isBefore(today)) {
+                alerteinfo.setText("Date of birth must be before today.");
+                return;
+            }
+
+            // Define a pattern for a 10-digit number
+            Pattern phonePattern = Pattern.compile("\\d{10}");
+
+            if (Integer.parseInt(consultation.getAge()) < 18) {
                 String numfather = Pfatherphone.getText();
                 String nummother = Pmothernumber.getText();
                 String grade = Pstudygrade.getText();
+
+                // Validate father's phone number
+                if (!phonePattern.matcher(numfather).matches()) {
+                    alerteinfo.setText("Father's phone number must contain exactly 10 digits.");
+                    return;
+                }
+
+                // Validate mother's phone number
+                if (!phonePattern.matcher(nummother).matches()) {
+                    alerteinfo.setText("Mother's phone number must contain exactly 10 digits.");
+                    return;
+                }
+
                 Enfant E = new Enfant(nom, prenom, lieu, date, adresse, grade, nummother, numfather);
+                currentpatient = E;
                 Orthophoniste.ajouternouveaupatient(E);
                 Orthophoniste.creerdossier(E);
                 Dossier folder = Orthophoniste.getDossierByPatient(E);
@@ -287,7 +333,15 @@ public class DashboardController implements Initializable {
                 String numtel = Pphone.getText();
                 String studyf = Pfieldofstudy.getText();
                 String profession = Pprofession.getText();
+
+                // Validate phone number
+                if (!phonePattern.matcher(numtel).matches()) {
+                    alerteinfo.setText("Phone number must contain exactly 10 digits.");
+                    return;
+                }
+
                 Adulte A = new Adulte(nom, prenom, lieu, date, adresse, studyf, profession, numtel);
+                currentpatient = A;
                 Orthophoniste.ajouternouveaupatient(A);
                 Orthophoniste.creerdossier(A);
                 Dossier folder = Orthophoniste.getDossierByPatient(A);
@@ -297,10 +351,9 @@ public class DashboardController implements Initializable {
                 alerteinfo.setText("Successfully created patient");
                 initializeAnamnese();
             }
-
         }
-
     }
+
 
 
     @FXML
@@ -309,7 +362,9 @@ public class DashboardController implements Initializable {
         BoAnamneseLayput.setVisible(false);
         Anamnese.setVisible(true);
         BOAnamnese.setVisible(false);
-        if(consultation.getAge().compareTo("18")==-1){
+        String age = consultation.getAge();
+        int a = Integer.parseInt(age);
+        if(a<18){
             for (CategorieQuestionEnfant category : CategorieQuestionEnfant.values()) {
                 Qcategorie.getItems().add(category.name());
             }
@@ -328,8 +383,10 @@ public class DashboardController implements Initializable {
         String question = Qtext.getText();
         String answer = Qanswer.getText();
         String category = Qcategorie.getValue();
+        String age = consultation.getAge();
+        int a = Integer.parseInt(age);
         if(event.getSource()==AddQuestion) {
-            if (consultation.getAge().compareTo("18") == -1) {
+            if (a<18) {
                 QuestionAnamneseEnfant Q = new QuestionAnamneseEnfant(String.valueOf(QuestionsE.size() + 1), question, CategorieQuestionEnfant.valueOf(category));
                 QuestionsE.add(Q);
                 Answers.add(answer);
@@ -344,24 +401,29 @@ public class DashboardController implements Initializable {
     }
 
     Set<Anamnese> Anamneses = Orthophoniste.getAnamneses();
+    CRAnamnese compterendu ;
     @FXML
     public void CreateAnamnese(ActionEvent event){
         if (event.getSource()==SaveAnamnese){
             Anamnese A = new Anamnese(String.valueOf(Anamneses.size() + 1));
-            if (consultation.getAge().compareTo("18") == -1) {
+            String age = consultation.getAge();
+            int a = Integer.parseInt(age);
+            if (a<18) {
                 A.setQuestionsEnfant(QuestionsE);
                 Orthophoniste.ajouterAnamnese(A);
                 CRAnamnese CRA = new CRAnamnese(A,consultation,Answers);
                 System.out.println("ok");
                 Winfo.setText("Succesfully created anamnesis");
-
+                compterendu =CRA;
             } else {
                 A.setQuestionsAdult(QuestionsA);
                 Orthophoniste.ajouterAnamnese(A);
                 CRAnamnese CRA = new CRAnamnese(A,consultation,Answers);
                 System.out.println("ok");
                 Winfo.setText("Succesfully created anamnesis");
+                compterendu =CRA;
             }
+            initializeBOAnamnese();
 
         }
     }
@@ -371,19 +433,43 @@ public class DashboardController implements Initializable {
         BoAnamneseLayput.setVisible(false);
         Anamnese.setVisible(false);
         BOAnamnese.setVisible(true);
-        for (CategorieQuestionEnfant category : CategorieQuestionEnfant.values()) {
+        for (CategorieTrouble category : CategorieTrouble.values()) {
             TroubleType.getItems().add(category.name());
         }
     }
 
 
-    private Trouble[] troubles ;
+    private ArrayList<Trouble> troubles = new ArrayList<>();
     @FXML
     public void HandleADDTrouble(ActionEvent event){
-        String type = TroubleType.getValue();
-        String trouble = Trouble.getText();
-        Trouble T = new Trouble(trouble,CategorieTrouble.valueOf(type));
-        troubles[troubles.length - 1] = T;
+        if(event.getSource()==AddTrouble) {
+            String type = TroubleType.getValue();
+            String trouble = Trouble.getText();
+            Trouble T = new Trouble(trouble, CategorieTrouble.valueOf(type));
+
+            troubles.add(T);
+            Trouble.clear();
+        }
     }
+    @FXML
+    public void CreateBOAnamnese(ActionEvent event){
+        if(event.getSource()==SaveBOAnamnese) {
+            String Projet = TherapyProject.getText();
+            ProjetTh projet = new ProjetTh(Projet);
+            Diagnostic D = new Diagnostic(troubles);
+            BilanO_Anamnese BOA = new BilanO_Anamnese(projet, D, compterendu);
+            Dossier folder = Orthophoniste.getDossierByPatient(currentpatient);
+            folder.ajouterBO(BOA);
+            System.out.println("ok");
+        }
+        TherapyProject.clear();
+        Orthophoniste.DeleteConsultation(consultation);
+        Dashboardmain.setVisible(true);
+        BoAnamneseLayput.setVisible(false);
+        Anamnese.setVisible(false);
+        BOAnamnese.setVisible(false);
+
+    }
+
 
 }

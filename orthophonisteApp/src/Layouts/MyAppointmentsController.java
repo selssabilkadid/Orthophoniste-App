@@ -194,6 +194,8 @@ public class MyAppointmentsController {
             if (folder != null) {
                 patientsids.add(number);
                 alerteinfo.setText("Patient added successfully.");
+                ids.clear();
+                alerteinfo.setText("");
             } else {
                 alerteinfo.setText("Patient with ID " + patientid + " does not exist.");
             }
@@ -213,6 +215,12 @@ public class MyAppointmentsController {
         // Validate input fields
         if (selectedDate == null || heured.isEmpty() || heuref.isEmpty() || note.isEmpty() || choice == null) {
             alerteinfo.setText("Please fill all required fields.");
+            return;
+        }
+
+        // Validate date
+        if (selectedDate.isBefore(LocalDate.now())) {
+            alerteinfo.setText("Selected date cannot be before today's date.");
             return;
         }
 
@@ -306,12 +314,12 @@ public class MyAppointmentsController {
                 Online.setOnAction(e -> {
                     if (Online.isSelected()) {
                         System.out.println("Online");
-                        SeanceSuivi seance = new SeanceSuivi(selectedDate, heured, heuref, note, number,true);
+                        SeanceSuivi seance = new SeanceSuivi(selectedDate, heured, heuref, note, number, true);
                         Orthophoniste.ajouterRDV(folder, seance);
                         alerteinfo.setText("Personal Session added successfully.");
                     } else {
                         System.out.println("Offline");
-                        SeanceSuivi seance = new SeanceSuivi(selectedDate, heured, heuref, note, number,false);
+                        SeanceSuivi seance = new SeanceSuivi(selectedDate, heured, heuref, note, number, false);
                         Orthophoniste.ajouterRDV(folder, seance);
                         alerteinfo.setText("Personal Session added successfully.");
                     }
@@ -321,6 +329,7 @@ public class MyAppointmentsController {
             }
         }
     }
+
 
     // Method to validate time format
     private boolean isValidTimeFormat(String time) {

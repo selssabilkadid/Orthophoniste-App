@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -20,7 +21,7 @@
         <String fx:value="white-bg" />
     </styleClass>
         <children>
-      <AnchorPane fx:id="Dashboardmain" layoutX="56.0" layoutY="40.0" prefHeight="560.0" prefWidth="890.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="Dashboardmain" layoutX="56.0" layoutY="40.0" prefHeight="560.0" prefWidth="890.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
          <children>
                   <Text layoutX="24.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Have a nice day and a great work">
                       <font>
@@ -107,14 +108,14 @@
                           </AnchorPane>
                       </children>
                   </AnchorPane>
-                  <AnchorPane layoutY="159.3333282470703" prefHeight="387.0" prefWidth="891.0">
+                  <AnchorPane layoutY="159.3333282470703" prefHeight="387.0" prefWidth="891.0" AnchorPane.bottomAnchor="-5.684341886080802E-14" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="159.3333282470703">
                       <children>
-                            <Label layoutX="31.0" layoutY="22.0" text="Consultations" AnchorPane.topAnchor="22.0">
+                            <Label layoutX="30.0" layoutY="11.0" text="Consultations" AnchorPane.topAnchor="11.0">
                                 <font>
                                     <Font name="Product Sans" size="14.0" />
                                 </font>
                             </Label>
-                  <TableView fx:id="Consultations" layoutX="23.0" layoutY="55.0" prefHeight="312.0" prefWidth="435.0">
+                  <TableView fx:id="Consultations" layoutX="30.0" layoutY="36.0" prefHeight="312.0" prefWidth="435.0">
                     <columns>
                       <TableColumn fx:id="ConsDate" prefWidth="119.9999942779541" text="Date" />
                       <TableColumn fx:id="SHour" prefWidth="79.99996948242188" text="Start" />
@@ -123,6 +124,12 @@
                         <TableColumn fx:id="CBegin" minWidth="7.99993896484375" prefWidth="74.00003051757812" text="Begin" />
                     </columns>
                   </TableView>
+                  <PieChart fx:id="STATISTICS" layoutX="513.0" layoutY="20.0" prefHeight="351.0" prefWidth="357.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="513.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="20.0" />
+                  <Label layoutX="495.0" layoutY="11.0" text="Patients' statistics">
+                     <font>
+                        <Font name="Product Sans" size="14.0" />
+                     </font>
+                  </Label>
                       </children>
                   </AnchorPane>
             <Label fx:id="welcometext" layoutX="24.0" layoutY="4.0" text="Welcome Dr. Assia">
@@ -132,7 +139,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="BoAnamneseLayput" layoutX="56.0" layoutY="40.0" prefHeight="560.0" prefWidth="890.0" style="-fx-background-color: white; -fx-background-radius: 20;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="BoAnamneseLayput" layoutX="56.0" layoutY="40.0" prefHeight="560.0" prefWidth="890.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Text layoutX="54.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Informations ">
                <font>
@@ -225,7 +232,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="Anamnese" layoutX="10.0" layoutY="10.0" prefHeight="560.0" prefWidth="890.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false">
+      <AnchorPane fx:id="Anamnese" layoutX="10.0" layoutY="10.0" prefHeight="560.0" prefWidth="890.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
          <children>
             <Text layoutX="54.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anamnesis">
                <font>
@@ -272,7 +279,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="BOAnamnese" layoutX="20.0" layoutY="20.0" prefHeight="560.0" prefWidth="890.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+      <AnchorPane fx:id="BOAnamnese" layoutX="20.0" layoutY="20.0" prefHeight="560.0" prefWidth="890.0" style="-fx-background-color: white; -fx-background-radius: 20;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
          <children>
             <Text layoutX="53.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Diagnosis">
                <font>
@@ -284,7 +291,7 @@
                   <Font name="Product Sans Light" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="SaveBOAnamnese" layoutX="770.0" layoutY="502.0" mnemonicParsing="false" onAction="#CreateAnamnese" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #FF5363; -fx-background-radius: 7;" text="Next" textFill="WHITE">
+            <Button fx:id="SaveBOAnamnese" layoutX="770.0" layoutY="502.0" mnemonicParsing="false" onAction="#CreateBOAnamnese" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #FF5363; -fx-background-radius: 7;" text="Next" textFill="WHITE">
                <font>
                   <Font name="Product Sans" size="13.0" />
                </font>
@@ -296,7 +303,7 @@
             </Label>
             <ComboBox fx:id="TroubleType" layoutX="53.0" layoutY="91.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
             <TextArea fx:id="TherapyProject" layoutX="53.0" layoutY="280.0" prefHeight="139.0" prefWidth="442.0" promptText="Enter Therapy Project" style="-fx-background-color: #EBEFF2; -fx-background-radius: 7;" />
-            <Button fx:id="AddTrouble" layoutX="433.0" layoutY="165.0" mnemonicParsing="false" onAction="#HandleAddQuestion" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #24A8FA; -fx-background-radius: 7;" text="ADD" textFill="WHITE">
+            <Button fx:id="AddTrouble" layoutX="433.0" layoutY="165.0" mnemonicParsing="false" onAction="#HandleADDTrouble" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #24A8FA; -fx-background-radius: 7;" text="ADD" textFill="WHITE">
                <font>
                   <Font name="Product Sans" size="13.0" />
                </font>

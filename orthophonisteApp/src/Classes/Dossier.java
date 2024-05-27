@@ -6,12 +6,11 @@ import java.util.Set;
 
 public class Dossier implements Serializable {
     private static final long serialVersionUID = 1L;
-     static int  id;
-     Patient patient;
-     Set<FichedeSuivi> fichedeSuivis = new HashSet<FichedeSuivi>();
-
-     Set<RendezVous> rendezvous = new HashSet<RendezVous>();
-     Set<BilanO> Bilans = new HashSet<BilanO>();
+    private int  id;
+    private Patient patient;
+    private Set<FichedeSuivi> fichedeSuivis = new HashSet<FichedeSuivi>();
+    private  Set<RendezVous> rendezvous = new HashSet<RendezVous>();
+    private Set<BilanO> Bilans = new HashSet<BilanO>();
     Dossier(Patient patient){
         this.patient = patient;
         id ++;
@@ -38,11 +37,13 @@ public class Dossier implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
-    public static int getId() {
-        return id;
+    public String getId() {
+        Integer i = id;
+
+        return i.toString();
     }
-    public static void setId(int id) {
-        Dossier.id = id;
+    public void setId(int id) {
+        this.id = id;
     }
     public Patient getPatient() {
         return patient;

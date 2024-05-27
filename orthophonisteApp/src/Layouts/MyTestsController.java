@@ -298,12 +298,13 @@ public class MyTestsController {
             confirmquest.setOnAction(saveEvent -> {
                 if (selectedChoice.equals("QCM")) {
                     QuestionQCM qcm = new QuestionQCM(id, enonce, propositions);
+                    propositions = new ArrayList<>();
                     Orthophoniste.ajouterquestion(qcm);
                     System.out.println(qcm.getenonce());
                 } else if (selectedChoice.equals("QCU")) {
                     QuestionQCU qcu = new QuestionQCU(id, enonce, propositions);
+                    propositions = new ArrayList<>();
                     Orthophoniste.ajouterquestion(qcu);
-
                     System.out.println(qcu.getenonce());
                 }
                 idquestfield.clear();
@@ -376,6 +377,7 @@ public class MyTestsController {
         if (event.getSource() == savetest) {
             if (selectedChoice.equals("Quiz")) {
                 TestQuestionnaire test = new TestQuestionnaire(id, capacite, questions);
+                questions = new HashSet<>();
                 Orthophoniste.ajouterTest(test);
                 Orthophoniste.ajouterTestQuestionnaire(test);
                 TestQuestionnaire Q = Orthophoniste.getTestQuestionnaireByName(test.getNom());

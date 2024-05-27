@@ -78,7 +78,7 @@
             </Button>
             <Label fx:id="wrongInfo" layoutX="78.0" layoutY="525.0" textFill="#ff0303">
                <font>
-                  <Font name="Product Sans Bold" size="20.0" />
+                  <Font name="Product Sans Light Italic" size="12.0" />
                </font></Label>
          </children>
       </AnchorPane>

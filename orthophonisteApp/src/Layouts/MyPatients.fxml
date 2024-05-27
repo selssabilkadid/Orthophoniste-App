@@ -23,7 +23,7 @@
                 <TableColumn fx:id="datenaissance" prefWidth="140.666" text="Date of Birth" />
                 <TableColumn fx:id="lieunaissance" prefWidth="140.666" text="Place of Birth" />
                 <TableColumn fx:id="numtel" prefWidth="140.666" text="Contact Number" />
-                <TableColumn fx:id="adresse" prefWidth="179.333" text="Address" />
+                <TableColumn fx:id="adresse" prefWidth="179.333" text="Delete" />
             </columns>
         </TableView>
     </children>

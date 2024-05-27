@@ -15,14 +15,14 @@
             <top>
                 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="1100.0" styleClass="bg-color-3" stylesheets="@../Design/MainFormDesign.css" BorderPane.alignment="CENTER">
                     <children>
-                        <AnchorPane id="titlebar" fx:id="logobar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="210.0" style="-fx-background-color: #7A6EFE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="890.0" AnchorPane.topAnchor="0.0">
-                            <children>
-                                <Label layoutX="4.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-font-size: 14;" text="Cabinet Management System" textFill="WHITE">
-                                    <font>
-                                        <Font name="Product Sans Black" size="12.0" />
-                                    </font>
-                                </Label>
-                            </children>
+                        <AnchorPane id="titlebar" fx:id="logobar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="210.0" style="-fx-background-color: #24A8FA;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="890.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label layoutX="37.0" layoutY="8.0" text="OrthoCare" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
                         </AnchorPane>
                         <ImageView id="helpicon" fx:id="helpicon" fitHeight="24.0" fitWidth="24.0" layoutX="1042.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="1042.0" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="8.0">
                             <image>

@@ -59,15 +59,17 @@ public class SignUpController {
             wrongInfo.setText("Please enter a valid Gmail address.");
         } else if (phone.length() != 10 || !phone.matches("\\d+")) { // Check if phone number has exactly 10 digits
             wrongInfo.setText("Please enter a valid 10-digit phone number.");
+        } else if (password.length() < 8 || !password.matches(".*\\d.*")) { // Check if password is at least 8 characters long and contains a digit
+            wrongInfo.setText("Password must be at least 8 characters long and contain at least one digit.");
         } else {
             UserAccount account = new UserAccount(fName, lName, email, phone, address, password);
             AccountManager.addAccount(account);
             wrongInfo.setText("Success!");
             AccountManager.setcurrentuser(account);
             m.changeScene("/Layouts/HomePage.fxml");
-
         }
     }
+
 
     @FXML
     private void goToSignIn(ActionEvent event) throws IOException {

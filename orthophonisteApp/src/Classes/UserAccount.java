@@ -1,6 +1,7 @@
 package Classes;
 
 import java.io.Serializable;
+import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -51,13 +52,26 @@ public class UserAccount implements Serializable {
     }
     public void ajouterBilan (Dossier folder, BilanO bilan) {
         folder.ajouterBO(bilan);
+        if(bilans!= null){
         bilans.add(bilan);
+        }
     }
 
     public void creerdossier(Patient P) {
         Dossier folder = new Dossier(P);
-        dossierMap.put(folder.id, folder);
+        SecureRandom secureRandom = new SecureRandom();
+        int max = 9999;
+        int id;
+
+        // Generate a unique ID
+        do {
+            id = secureRandom.nextInt(max); // You can limit the range if needed
+        } while (dossierMap.containsKey(id));
+        folder.setId(id);
+
+        dossierMap.put(id, folder);
     }
+
 
     public void ajouterRDV(Dossier folder, RendezVous RDV) {
         folder.ajouterRDV(RDV);
@@ -254,4 +268,35 @@ public class UserAccount implements Serializable {
     }
 
 
+    public double Childrenstat() {
+        int i= 0;
+        if(!patients.isEmpty()) {
+            for (Patient p : patients) {
+                if(p.getAge()<18){
+                    i++;
+                }
+            }
+            return ((double) i /patients.size())*100;
+        }
+        return i;
+    }
+
+    public double AdultsStat() {
+        int i= 0;
+        if(!patients.isEmpty()) {
+            for (Patient p : patients) {
+                if(p.getAge() >= 18){
+                    i++;
+                }
+            }
+            return ((double) i /patients.size())*100;
+        }
+        return i;
+    }
+
+    public void supprimerPatient(Patient patient) {
+        patients.remove(patient);
+        Dossier folder = getDossierByPatient(patient);
+        dossierMap.remove(folder.getId());
+    }
 }

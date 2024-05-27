@@ -5,6 +5,7 @@ import Controllers.DossierPatientController;
 import Controllers.HomePageController;
 import Controllers.Main;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,11 +13,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -48,6 +48,7 @@ public class MyPatientsController {
 
     @FXML
     private TableColumn<Patient, String> adresse;
+
     private UserAccount currentUser = AccountManager.getCurrentuser();
     private HomePageController homePageController;
 
@@ -57,15 +58,15 @@ public class MyPatientsController {
 
     @FXML
     public void initialize() {
-        numdossier.setCellValueFactory(new PropertyValueFactory<>(""));
+        numdossier.setCellValueFactory(cellData -> new SimpleObjectProperty<>(currentUser.getDossierByPatient(cellData.getValue()).getId()));
         fullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
         groupe.setCellValueFactory(cellData -> {
-            Patient patient = cellData.getValue();
-            if (patient.getAge() >= 18) {
-                System.out.println(patient.getFullname() + " is an Adult");
-                return new SimpleStringProperty("Adult");
-            } else  {
+            if (cellData.getValue() instanceof Adulte) {
+                return new SimpleStringProperty("Adulte");
+            } else if (cellData.getValue() instanceof Enfant) {
                 return new SimpleStringProperty("Child");
+            } else {
+                return new SimpleStringProperty("");
             }
         });
         datenaissance.setCellValueFactory(new PropertyValueFactory<>("DateNaissanceString"));
@@ -73,45 +74,47 @@ public class MyPatientsController {
         numtel.setCellValueFactory(cellData -> {
             Patient patient = cellData.getValue();
             if (patient instanceof Enfant) {
-
                 return new SimpleStringProperty(((Enfant) patient).getTelpere());
             } else if (patient instanceof Adulte) {
-
                 return new SimpleStringProperty(((Adulte) patient).getNumTel());
             } else {
                 return new SimpleStringProperty("");
             }
         });
-        adresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
 
+        setButtonCellFactory(adresse, "Delete", this::DeletePatient);
 
         patientliste.setItems(getPatients());
         patientliste.setRowFactory(tableView -> new CustomPatientRow());
     }
 
+    private Void DeletePatient(Patient patient) {
+        currentUser.supprimerPatient(patient);
+        initialize();
+        return null;
+    }
+
+    private void setButtonCellFactory(TableColumn<Patient, String> column, String buttonText, Callback<Patient, Void> action) {
+        column.setCellFactory(col -> new TableCell<>() {
+            private final Button button = new Button(buttonText);
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    button.setStyle("-fx-background-color: #FF5363; -fx-background-radius: 7; -fx-text-color: #FFFFFF;");
+                    button.setOnAction(event -> action.call(getTableView().getItems().get(getIndex())));
+                    setGraphic(button);
+                }
+                setText(null);
+            }
+        });
+    }
 
     private ObservableList<Patient> getPatients() {
-        ObservableList<Patient> patients = FXCollections.observableArrayList();
-
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-
-            Date adultDateOfBirth = sdf.parse("01/01/1980");
-            Date childDateOfBirth = sdf.parse("15/07/2010");
-
-
-            patients.add(new Adulte("Kheddia", "Assia", "Chlef", adultDateOfBirth, "Algeria", "Masters", "Engineer", "123456789"));
-            patients.add(new Enfant("Kadid", "Selssabil", "Medea", childDateOfBirth, "Algeria", "5th Grade", "987654321", "123456789"));
-            patients = FXCollections.observableArrayList(currentUser.getPatients());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        for (Patient patient : patients) {
-            currentUser.creerdossier(patient);
-        }
-        return patients;
-
+        return FXCollections.observableArrayList(currentUser.getPatients());
     }
 
     public class CustomPatientRow extends TableRow<Patient> {
@@ -132,7 +135,6 @@ public class MyPatientsController {
             }
         }
 
-
         private void handleMouseClicked(MouseEvent event) {
             if (!isEmpty() && event.getClickCount() == 1) {
                 Patient patient = getItem();
@@ -143,12 +145,10 @@ public class MyPatientsController {
                         Parent root = loader.load();
                         DossierPatientController dossierPatientController = loader.getController();
 
-
                         Dossier dossier = currentUser.getDossierByPatient(patient);
 
                         System.out.println(dossier);
                         dossierPatientController.setPatientAndDossier(patient, dossier);
-
 
                         Main.changerScene(root);
                     } catch (IOException e) {
@@ -157,7 +157,5 @@ public class MyPatientsController {
                 }
             }
         }
-
     }
-
-    }
+}

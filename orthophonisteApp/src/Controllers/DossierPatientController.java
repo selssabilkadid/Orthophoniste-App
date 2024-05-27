@@ -50,8 +50,8 @@ public class DossierPatientController {
     private Label patientDate;
     @FXML
     private Label patientAge;
-    @FXML
-    private Label troubles;
+//    @FXML
+//    private Label troubles;
     @FXML
     private Label contactNumber;
     @FXML
@@ -60,8 +60,8 @@ public class DossierPatientController {
     private Label profession;
     @FXML
     private Label profType;
-    @FXML
-    private VBox troublesVBox;
+//    @FXML
+//    private VBox troublesVBox;
     @FXML
     private Button createBo;
     @FXML Button gotoFichesBtn;
@@ -110,20 +110,20 @@ public class DossierPatientController {
         patientPlace.setText(patient.getLieuNaissance());
         patientAdress.setText(patient.getAdresse());
 
-        troublesVBox.getChildren().clear();
-        if (patient.getTroubles() == null || patient.getTroubles().isEmpty()) {
-            ArrayList<Trouble> dummyTroubles = new ArrayList<>();
-            dummyTroubles.add(new Trouble("Trouble 1", CategorieTrouble.deglutition));
-            dummyTroubles.add(new Trouble("Trouble 2", CategorieTrouble.cognitifs));
-            dummyTroubles.add(new Trouble("Trouble 3", CategorieTrouble.neuro_developpementaux));
-            patient.setTroubles(dummyTroubles);
-        }
-
-        for (Trouble trouble : patient.getTroubles()) {
-            Text troubleText = new Text(trouble.getNom());
-            troubleText.setStyle("-fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 14;");
-            troublesVBox.getChildren().add(troubleText);
-        }
+//        troublesVBox.getChildren().clear();
+//        if (patient.getTroubles() == null || patient.getTroubles().isEmpty()) {
+//            ArrayList<Trouble> dummyTroubles = new ArrayList<>();
+//            dummyTroubles.add(new Trouble("Trouble 1", CategorieTrouble.deglutition));
+//            dummyTroubles.add(new Trouble("Trouble 2", CategorieTrouble.cognitifs));
+//            dummyTroubles.add(new Trouble("Trouble 3", CategorieTrouble.neuro_developpementaux));
+//            patient.setTroubles(dummyTroubles);
+//        }
+//
+//        for (Trouble trouble : patient.getTroubles()) {
+//            Text troubleText = new Text(trouble.getNom());
+//            troubleText.setStyle("-fx-font-family: 'Arial Rounded MT Bold'; -fx-font-size: 14;");
+//            troublesVBox.getChildren().add(troubleText);
+//        }
         if (patient instanceof Adulte adulte) {
             contactNumber.setText(adulte.getNumTel());
             patientGrp.setText("Adulte");
